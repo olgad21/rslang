@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import renderHeader from '../components/header';
 import renderSidebar from '../components/sidebar';
 import renderFooter from '../components/footer';

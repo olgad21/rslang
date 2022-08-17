@@ -1,5 +1,5 @@
 import createElement from '../helpers';
-import './sidebar.css';
+import './sidebar.scss';
 
 const navItems = [{
   navName: 'Главная',
@@ -29,8 +29,9 @@ const createNavItem = (navIcon: string, navName: string) => {
   return navItem;
 };
 
-// eslint-disable-next-line max-len
-const renderNavigation = () => navItems.map(({ navIcon, navName }) => createNavItem(navIcon, navName));
+const renderNavigation = () => (
+  navItems.map(({ navIcon, navName }) => createNavItem(navIcon, navName))
+);
 
 const renderSidebar = () => {
   const sidebar = createElement('div', ['sidebar', 'd-flex', 'flex-column', 'flex-shrink-0']);

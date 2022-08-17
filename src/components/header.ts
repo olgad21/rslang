@@ -1,5 +1,5 @@
 import createElement from '../helpers';
-import './header.css';
+import './header.scss';
 
 const renderHeader = () => {
   const header = createElement('header', 'header');

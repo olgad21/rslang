@@ -1,5 +1,5 @@
 import createElement from '../helpers';
-import './footer.css';
+import './footer.scss';
 
 const creatorsData = [{
   link: 'https://github.com/irynakolh',
