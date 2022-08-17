@@ -1,9 +1,29 @@
-footer {
+.footer {
   background-color: #EAD6CD;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #4A5FC1;
   height: 5rem;
   width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #9CF6FB;
+  padding: 1rem 10rem;
+}
+
+.footer__link {
+  text-decoration: none;
+}
+
+.footer__link:hover{
+  cursor: pointer;
+} 
+
+.footer__year{
+  margin: 0;
+}
+
+.footer__logo {
+  display: block;
+  height: 3rem;
+  width: 9rem;
+  background: url(https://rs.school/images/rs_school_js.svg) no-repeat;
 }

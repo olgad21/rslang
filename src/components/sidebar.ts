@@ -26,7 +26,6 @@ const createNavItem = (navIcon: string, navName: string) => {
   navLink.textContent = navName;
 
   navItem.append(icon, navLink);
-  // navLink.append(icon);
   return navItem;
 };
 
