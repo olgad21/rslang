@@ -3,7 +3,7 @@ import renderSidebar from '../components/sidebar';
 import renderFooter from '../components/footer';
 import createElement from '../helpers';
 import './main-page.scss';
-import strings, { creatorsDescriptions, mainDescriptions } from '../constants';
+import strings, { CreatorDescription, creatorsDescriptions, mainDescriptions } from '../constants';
 
 const createMainMessage = (img: string, message: string) => {
   const mainMessage = createElement('div', ['main__message']);
@@ -19,13 +19,10 @@ const renderMainMessages = () => (
   mainDescriptions.map(({ img, message }) => createMainMessage(img, message))
 );
 
-const createCreatorDescription = (
-  img: string,
-  name: string,
-  role: string,
-  githubLink: string,
-  description: string,
-) => {
+const createCreatorDescription = (creator: CreatorDescription) => {
+  const {
+    img, name, role, githubLink, description,
+  } = creator;
   const creatorDescription = createElement('div', ['creators__item']);
   const creatorText = createElement('div', 'creator-text');
   creatorText.textContent = description;
@@ -42,11 +39,7 @@ const createCreatorDescription = (
 };
 
 const renderCreatorDescriptions = () => (
-  creatorsDescriptions.map(({
-    img, name, role, githubLink, description,
-  }) => (
-    createCreatorDescription(img, name, role, githubLink, description)
-  ))
+  creatorsDescriptions.map(createCreatorDescription)
 );
 
 const renderMainContent = () => {
@@ -58,7 +51,7 @@ const renderMainContent = () => {
   const mainLogo = createElement('h1', 'main__logo');
   mainLogo.textContent = 'RS Lang';
   const mainBtn = createElement('button', ['main__button', 'btn', 'btn-dark']) as HTMLButtonElement;
-  mainBtn.innerText = strings.registration;
+  mainBtn.textContent = strings.registration;
   imageWrapper.append(mainLogo, mainBtn);
 
   const textWrapper = createElement('div', 'text__wrapper');

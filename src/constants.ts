@@ -30,7 +30,7 @@ export const mainDescriptions: MainDescription[] = [
   },
 ];
 
-interface CreatorDescription {
+export interface CreatorDescription {
   img: string,
   name: string,
   role: string,
