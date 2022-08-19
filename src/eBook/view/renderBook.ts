@@ -43,7 +43,8 @@ const renderEBook = () => {
       const wordItem = document.createElement('div');
       wordItem.classList.add('word-item');
       wordsContainer.appendChild(wordItem);
-      return wordItem.insertAdjacentHTML('beforeend', renderWord(word));
+      wordItem.append(renderWord(word));
+      return wordItem;
     });
   });
 };
