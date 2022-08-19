@@ -1,19 +1,27 @@
-// <nav aria-label="Page navigation example">
-//   <ul class="pagination">
-//     <li class="page-item">
-//       <a class="page-link" href="#" aria-label="Previous">
-//         <span aria-hidden="true">&laquo;</span>
-//         <span class="sr-only">Previous</span>
-//       </a>
-//     </li>
-//     <li class="page-item"><a class="page-link" href="#">1</a></li>
-//     <li class="page-item"><a class="page-link" href="#">2</a></li>
-//     <li class="page-item"><a class="page-link" href="#">3</a></li>
-//     <li class="page-item">
-//       <a class="page-link" href="#" aria-label="Next">
-//         <span aria-hidden="true">&raquo;</span>
-//         <span class="sr-only">Next</span>
-//       </a>
-//     </li>
-//   </ul>
-// </nav>
+const renderPagination = () => {
+  const ul = document.createElement('ul');
+  ul.classList.add('pagination-list');
+  const mainWrapper = document.querySelector('.main__wrapper') as HTMLDivElement;
+  mainWrapper.appendChild(ul);
+  const current = 4;
+  const pageArr = ['prev', 1, current - 2, current - 1, current, current + 1, current + 2, current + 3, '...', 30, 'next'];
+  let count = 0;
+  pageArr.map((page) => {
+    const pageLiElem = document.createElement('li');
+    const pageBtn = document.createElement('button');
+    pageBtn.setAttribute('class', `${page.toString()}Btn page-btn`);
+    pageBtn.setAttribute('data-id', count.toString());
+    pageBtn.textContent = page.toString();
+    if (page === 1) {
+      pageBtn.classList.add('active-btn');
+    } else if (page === 'prev') {
+      pageBtn.disabled = true;
+    }
+    count += 1;
+    pageLiElem.appendChild(pageBtn);
+    return ul.appendChild(pageLiElem);
+  });
+  return ul;
+};
+
+export default renderPagination;

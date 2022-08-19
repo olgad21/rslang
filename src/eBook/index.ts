@@ -1,4 +1,4 @@
-import { renderEBook } from './view/renderBook';
+import renderEBook from './view/renderBook';
 
 const listen = () => {
   const eBookBtn = document.querySelector('.bi-book') as HTMLDivElement;

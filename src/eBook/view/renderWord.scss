@@ -31,6 +31,42 @@
   background-color: lightgrey;
 }
 
+.pagination {
+  margin: auto;
+}
+
+.pagination-list {  
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;  
+  margin: 0;
+}
+
+.page-btn {
+  border: 1px solid #474747;
+  padding: 3px 10px;
+  border-radius: 50%;
+}
+
+.page-btn:hover {
+  background-color: #474747;
+  color: white;
+}
+
+.active-btn {
+  background-color: #838ac2;
+}
+
+.page-btn:disabled {
+  background-color: lightgrey;
+}
+
+.page-btn:disabled:hover {
+  background-color: lightgrey;
+  color: black;
+}
+
 .words-container{
   display: flex;
   flex-direction: column;
