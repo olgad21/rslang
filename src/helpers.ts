@@ -10,3 +10,21 @@ const createElement = (tag: string, classNames?: string | string[]) => {
 };
 
 export default createElement;
+
+export const userPosition = () => {
+  let userLevel = {
+    group: 1,
+    page: 1,
+  };
+
+  const isLSExist = (localStorage.getItem('userLevel'));
+  if (isLSExist) {
+    userLevel = JSON.parse(isLSExist);
+  } else {
+    userLevel = {
+      group: 1,
+      page: 1,
+    };
+  }
+  return userLevel;
+};

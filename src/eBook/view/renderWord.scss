@@ -1,17 +1,45 @@
 .e-book-container {
-  max-width: 60%;
   margin: 1rem auto; 
   font-size: 1rem;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .title {
   color: #838ac2; 
   font-style: italic;
+  font-size: 3rem;
 }
 
-.chapter-container {
+.game {
+ border: #838ac2 2px solid; 
+ border-radius: 10px;
+ color: #838ac2; 
+ background-color: #dde1f9;
+ cursor: pointer;
+ padding: 5px;
+}
+
+.game:hover {
+  background-color: #838ac2;
+  color: white;
+}
+
+.game-box {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chapter-container, .pagination {
   width: 90%;
-  margin: 0 auto;
+  margin: 10px auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,10 +57,6 @@
 
 .level-btn:hover {
   background-color: lightgrey;
-}
-
-.pagination {
-  margin: auto;
 }
 
 .pagination-list {  
@@ -54,17 +78,19 @@
   color: white;
 }
 
-.active-btn {
-  background-color: #838ac2;
+.active-element {
+  background-color: #dde1f9;
+  cursor: pointer;
 }
 
 .page-btn:disabled {
-  background-color: lightgrey;
+  border: 2px solid #CDCDCD;
+  color: #CDCDCD;
 }
 
-.page-btn:disabled:hover {
-  background-color: lightgrey;
-  color: black;
+.active-element:hover {
+  background-color: #838ac2;
+  color: white;
 }
 
 .words-container{
