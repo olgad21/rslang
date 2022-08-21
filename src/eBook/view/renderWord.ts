@@ -17,19 +17,22 @@ const renderWord = (word: Word) => {
 
   const sound = document.createElement('button');
   sound.classList.add('sound-image');
-  const audio1 = document.createElement('audio');
-  audio1.id = 'audio-player';
-  audio1.controls = false;
-  audio1.src = `${API_URL}/${word.audio}`;
-  const audio2 = document.createElement('audio');
-  audio1.id = 'audio-player';
-  audio1.controls = false;
-  audio1.src = `${API_URL}/${word.audioMeaning}`;
-  const audio3 = document.createElement('audio');
-  audio1.id = 'audio-player';
-  audio1.controls = false;
-  audio1.src = `${API_URL}/${word.audioExample}`;
-  sound.append(audio1, audio2, audio3);
+  sound.setAttribute('data-audio', `${API_URL}/${word.audio}`);
+  sound.setAttribute('data-audioMeaning', `${API_URL}/${word.audioMeaning}`);
+  sound.setAttribute('data-audioExample', `${API_URL}/${word.audioExample}`);
+  // const audio1 = document.createElement('audio');
+  // audio1.id = 'audio-player';
+  // audio1.controls = false;
+  // audio1.src = `${API_URL}/${word.audio}`;
+  // const audio2 = document.createElement('audio');
+  // audio1.id = 'audio-player';
+  // audio1.controls = false;
+  // audio1.src = `${API_URL}/${word.audioMeaning}`;
+  // const audio3 = document.createElement('audio');
+  // audio1.id = 'audio-player';
+  // audio1.controls = false;
+  // audio1.src = `${API_URL}/${word.audioExample}`;
+  // sound.append(audio1, audio2, audio3);
 
   const wordInfo = document.createElement('div');
   wordInfo.classList.add('word-info');

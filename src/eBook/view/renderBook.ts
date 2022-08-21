@@ -6,6 +6,7 @@ import renderPagination from './pagination';
 // eslint-disable-next-line import/no-cycle
 import { chooseLevel, choosePage } from '../controller/listenController';
 import { userPosition } from '../../helpers';
+import playSound from '../controller/musicController';
 
 export const renderEBookPage = () => {
   const eBook = document.createElement('div');
@@ -43,7 +44,7 @@ export const renderEBookPage = () => {
     levelBtn.classList.add('level-btn');
 
     const userLevel = userPosition();
-    const currentLevel = +userLevel.group;
+    const currentLevel = userLevel.group;
     if (level === currentLevel) {
       levelBtn.classList.add('active-element');
     }
@@ -80,5 +81,6 @@ export const renderEBook = () => {
       wordItem.append(renderWord(word));
       return wordItem;
     });
+    playSound();
   });
 };
