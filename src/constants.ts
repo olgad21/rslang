@@ -5,9 +5,18 @@ import irynaAvatar from './assets/Iryna.png';
 import olgaAvatar from './assets/Olga.png';
 import alexeiAvatar from './assets/Alexei.png';
 
-// Iryna datas
-export const API_URL = 'https://rslang-team-68.herokuapp.com';
-export const WORDS_URL = 'https://rslang-team-68.herokuapp.com/words';
+export const host = 'https://rslang-team-68.herokuapp.com';
+
+export const path = {
+  users: '/users',
+  tokens: '/tokens',
+  words: '/words',
+  aggregatedWords: '/aggregatedWords',
+  statistics: '/statistics',
+  settings: '/settings',
+  signin: '/signin',
+};
+
 export const WORDS_OF_PAGE = 20;
 export const PAGES_NUMBER = 30;
 
@@ -32,10 +41,12 @@ export interface Words {
   items: Word[]
 }
 
-// Olha datas
 const strings = {
   registration: 'Начать обучение',
   creatorsTitle: 'Наша команда',
+  chapterEBook: 'Электронный учебник',
+  savana: 'Саванна',
+  audioCall: 'Аудио вызов',
 };
 
 interface MainDescription {

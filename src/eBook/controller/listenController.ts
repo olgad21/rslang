@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 // eslint-disable-next-line import/no-cycle
 import { renderEBook } from '../view/renderBook';
 import { PAGES_NUMBER } from '../../constants';
@@ -19,7 +18,7 @@ function moveRight() {
     prevBtn.classList.add('active-element');
   }
   storage.page += 1;
-  currentBtn.innerHTML = storage.page.toString();
+  currentBtn.textContent = storage.page.toString();
   localStorage.setItem('userLevel', JSON.stringify(storage));
   if (storage.page === PAGES_NUMBER) {
     nextBtn.disabled = true;
@@ -43,7 +42,7 @@ function moveLeft() {
     prevBtn.classList.remove('active-element');
   }
   storage.page -= 1;
-  currentBtn.innerHTML = storage.page.toString();
+  currentBtn.textContent = storage.page.toString();
   localStorage.setItem('userLevel', JSON.stringify(storage));
   if (storage.page === PAGES_NUMBER - 1) {
     nextBtn.disabled = false;
@@ -67,7 +66,7 @@ function moveRightMax() {
     prevBtn.classList.add('active-element');
   }
   storage.page = PAGES_NUMBER;
-  currentBtn.innerHTML = storage.page.toString();
+  currentBtn.textContent = storage.page.toString();
   localStorage.setItem('userLevel', JSON.stringify(storage));
   nextBtn.disabled = true;
   nextBtn.classList.remove('active-element');
@@ -88,7 +87,7 @@ function moveLeftMax() {
     prevBtn.classList.remove('active-element');
   }
   storage.page = 1;
-  currentBtn.innerHTML = storage.page.toString();
+  currentBtn.textContent = storage.page.toString();
   localStorage.setItem('userLevel', JSON.stringify(storage));
   nextBtn.disabled = false;
   nextBtn.classList.add('active-element');
@@ -114,7 +113,7 @@ export const chooseLevel = () => {
         const currentBtn = document.querySelector('.current-btn') as HTMLButtonElement;
         const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
         const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
-        currentBtn.innerText = '1';
+        currentBtn.textContent = '1';
         startBtn.disabled = true;
         startBtn.classList.remove('active-element');
         prevBtn.disabled = true;
