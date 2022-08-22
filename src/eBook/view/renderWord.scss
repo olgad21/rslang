@@ -59,6 +59,30 @@
   background-color: lightgrey;
 }
 
+.level-btn0 {
+  background-color: green;
+}
+
+.level-btn1 {
+  background-color: lawngreen;
+}
+
+.level-btn2 {
+  background-color: yellow;
+}
+
+.level-btn3 {
+  background-color: orange;
+}
+
+.level-btn4 {
+  background-color: orangered;
+}
+
+.level-btn5 {
+  background-color: red;
+}
+
 .pagination-list {  
   list-style: none;
   display: flex;
@@ -101,9 +125,8 @@
 
 .word-item {
   border: 1px solid lightgrey;
-  border-radius: 10px;
   padding: 1rem;
-  box-shadow: 5px 5px 5px 5px lightgrey;
+  background-color: white;
 }
 
 .word-container {

@@ -50,6 +50,7 @@ export const renderEBookPage = () => {
     }
 
     levelBtn.setAttribute('data-id', `${count}`);
+    levelBtn.classList.add(`level-btn${count}`);
     levelBtn.innerText = `${level}`;
     count += 1;
     return chapters.appendChild(levelBtn);
@@ -77,6 +78,19 @@ export const renderEBook = () => {
     response.map((word: Word) => {
       const wordItem = document.createElement('div');
       wordItem.classList.add('word-item');
+      if (userLevel.group === 1) {
+        wordsContainer.style.backgroundColor = 'green';
+      } else if (userLevel.group === 2) {
+        wordsContainer.style.backgroundColor = 'lawngreen';
+      } else if (userLevel.group === 3) {
+        wordsContainer.style.backgroundColor = 'yellow';
+      } else if (userLevel.group === 4) {
+        wordsContainer.style.backgroundColor = 'orange';
+      } else if (userLevel.group === 5) {
+        wordsContainer.style.backgroundColor = 'orangered';
+      } else if (userLevel.group === 6) {
+        wordsContainer.style.backgroundColor = 'red';
+      }
       wordsContainer?.appendChild(wordItem);
       wordItem.append(renderWord(word));
       return wordItem;
