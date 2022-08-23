@@ -1,28 +1,21 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import createUser from '../API/createUser.api';
 import loginUser from '../API/loginUser.api';
 import strings from '../constants';
 import createElement from '../helpers';
-import UserAuthData from '../Interfaces/UserAuthData';
-import UserCredentials from '../Interfaces/UserCredentials';
-import UserData from '../Interfaces/UserData';
 import './authorization.scss';
-
-type SendUserDataType = (obj: UserCredentials) => Promise <UserData> | Promise <UserAuthData>;
-
-const sendUserData = () => {
-
-};
 
 const inputData = [
   {
+    id: 'name-form',
+    labelName: 'Имя ',
+  },
+  {
     id: 'email-form',
-    labelName: 'Email: ',
+    labelName: 'Электронная почта ',
   },
   {
     id: 'password-form',
-    labelName: 'Password: ',
+    labelName: 'Пароль ',
   },
 ];
 
@@ -33,12 +26,19 @@ const createInput = (id: string, labelName: string) => {
   label.textContent = labelName;
   const input = createElement('input', 'form-control') as HTMLInputElement;
   input.id = id;
-  input.type = 'text';
   input.required = true;
-  const validationFeedback = createElement('div', 'valid-feedback');
-  validationFeedback.textContent = 'Отлично!';
+  if (id === 'password-form') {
+    input.type = 'password';
+    input.minLength = 8;
+    input.autocomplete = 'on';
+  } else if (id === 'email-form') {
+    input.type = 'email';
+  } else {
+    input.type = 'text';
+    input.required = false;
+  }
 
-  inputWrapper.append(label, input, validationFeedback);
+  inputWrapper.append(label, input);
   return inputWrapper;
 };
 
@@ -46,61 +46,106 @@ const renderInputs = () => (
   inputData.map(({ id, labelName }) => createInput(id, labelName))
 );
 
-const validateForm = () => {
-  const form = document.querySelector('.needs-validation') as HTMLSelectElement;
-  form.addEventListener('submit', (event) => {
-    if (!form.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    form.classList.add('was-validated');
-  }, false);
-};
-
-const renderForm = (title: string, btnName: string, callback?: SendUserDataType) => {
+const renderForm = (title: string, btnName: string) => {
   const authPopup = createElement('div', ['auth__popup']);
   document.body.append(authPopup);
 
-  const authPopupContent = createElement('div', ['auth__popup-content']);
+  const authPopupInner = createElement('div', ['auth__popup-content']);
   const authTitle = createElement('h2', 'auth__title');
 
   authTitle.textContent = title;
 
-  const inputForm = createElement('form', ['needs-validation', 'auth__form']);
+  const inputForm = createElement('form', ['auth__form']);
   const inputs = renderInputs();
-  inputForm.append(...inputs);
 
-  const authBtn = createElement('button', ['btn', 'btn-dark', 'auth__button']);
+  const authBtn = createElement('button', ['btn', 'btn-dark', 'auth__button']) as HTMLButtonElement;
   authBtn.textContent = btnName;
+  authBtn.type = 'submit';
 
-  authBtn.addEventListener('click', async () => createUser({ name: 'olya', email: 'olya@gmail.com', password: 'Gfhjkm_123' }));
+  inputForm.append(...inputs, authBtn);
 
   const authAccountMsg = createElement('p', 'auth__message-text');
   const authAccountMsgBtn = createElement('button', ['btn', 'btn-light', 'auth__message-button']);
 
+  const closeBtn = createElement('button', ['auth__btn-close', 'btn-close']);
+
+  closeBtn.addEventListener('click', () => {
+    authPopup.classList.add('auth__popup--inactive');
+  });
+
+  authPopupInner.append(closeBtn, authTitle, inputForm, authAccountMsg, authAccountMsgBtn);
+  authPopup.append(authPopupInner);
+
   if (title === strings.loginForm) {
     authAccountMsg.textContent = strings.loginQuestion;
     authAccountMsgBtn.textContent = strings.regSubmit;
+    authPopup.setAttribute('data-form', 'login');
+    const nameInput = document.getElementById('name-form') as HTMLInputElement;
+    if (nameInput.parentElement) {
+      nameInput.parentElement.style.display = 'none';
+    }
+    inputForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (document.getElementById('email-form') as HTMLInputElement)?.value;
+      const password = (document.getElementById('password-form') as HTMLInputElement)?.value;
+      try {
+        await loginUser({ email, password });
+      } catch (error) {
+        const errMessageText = error instanceof Error ? error.message : error;
+        const errorMessage = createElement('div', 'auth__error-message');
+        if (typeof errMessageText === 'string') {
+          errorMessage.textContent = errMessageText;
+          authPopupInner.append(errorMessage);
+        }
+      }
+    });
   } else {
     authAccountMsg.textContent = strings.regQuestion;
     authAccountMsgBtn.textContent = strings.loginSubmit;
+    authPopup.setAttribute('data-form', 'registration');
+    authBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      let name = (document.getElementById('name-form') as HTMLInputElement)?.value;
+      if (!name) {
+        name = ' ';
+      }
+      const email = (document.getElementById('email-form') as HTMLInputElement)?.value;
+      const password = (document.getElementById('password-form') as HTMLInputElement)?.value;
+      try {
+        await createUser({ name, email, password });
+        await loginUser({ email, password });
+      } catch (error) {
+        const errorMessage = createElement('div', 'auth__error-message');
+        if (typeof error === 'string') {
+          errorMessage.textContent = error;
+          authPopupInner.append(errorMessage);
+        }
+      }
+    });
   }
-
-  authPopupContent.append(authTitle, inputForm, authBtn, authAccountMsg, authAccountMsgBtn);
-  authPopup.append(authPopupContent);
-
-  authPopup.addEventListener('click', () => {
-    authPopup.classList.add('auth__popup--inactive');
-  });
 };
-
-// TODO: дописать валидацию, исправить отправку данных на сервер, переключение между формами
 
 export const renderAuthorizationForm = () => {
   renderForm(strings.loginForm, strings.loginSubmit);
 };
 const renderRegistrationForm = () => {
   renderForm(strings.regForm, strings.regSubmit);
+};
+
+export const handleToggleForms = () => {
+  const authFormToggle = document.querySelector('.auth__message-button');
+  authFormToggle?.addEventListener('click', () => {
+    const currForm = document.querySelector('.auth__popup') as HTMLElement | null;
+    if (currForm?.dataset.form === 'login') {
+      currForm.remove();
+      renderRegistrationForm();
+      handleToggleForms();
+    } else {
+      currForm?.remove();
+      renderAuthorizationForm();
+      handleToggleForms();
+    }
+  });
 };
 
 export default renderRegistrationForm;

@@ -15,6 +15,7 @@
 }
 
 .auth__popup-content {
+  position: relative;
   background-color: white;
   width: 50%;
   margin: auto;
@@ -23,9 +24,45 @@
   font-size: 2rem;
   line-height: 1.2;
   color: var(--bs-heading-color);
+  border-radius: 0.4rem;
 }
 
 .auth__popup--inactive {
   opacity: 0; 
   visibility: hidden;
+}
+
+.auth__btn-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.form-control:invalid {
+  background-color: ivory;
+  border: none;
+  outline: 1px solid red;
+  border-radius: 5px;
+}
+
+.auth__error-message {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.auth__title{
+  text-align: center;
+}
+
+label {
+  font-size: 1.2rem;
+}
+
+.auth__message-text {
+  font-size: 1.5rem;
+  color: #4A5FC1;
+}
+
+button {
+  margin: 1rem 0;
 }
