@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { renderEBook } from '../view/renderBook';
 import { PAGES_NUMBER } from '../../constants';
 import { userPosition } from '../../helpers';
@@ -26,7 +25,6 @@ function moveRight() {
     endBtn.disabled = true;
     endBtn.classList.remove('active-element');
   }
-  renderEBook();
 }
 
 function moveLeft() {
@@ -50,7 +48,6 @@ function moveLeft() {
     endBtn.disabled = false;
     endBtn.classList.add('active-element');
   }
-  renderEBook();
 }
 
 function moveRightMax() {
@@ -72,7 +69,6 @@ function moveRightMax() {
   nextBtn.classList.remove('active-element');
   endBtn.disabled = true;
   endBtn.classList.remove('active-element');
-  renderEBook();
 }
 
 function moveLeftMax() {
@@ -93,7 +89,6 @@ function moveLeftMax() {
   nextBtn.classList.add('active-element');
   endBtn.disabled = false;
   endBtn.classList.add('active-element');
-  renderEBook();
 }
 
 export const chooseLevel = () => {
@@ -135,12 +130,16 @@ export const choosePage = () => {
       if (event.target instanceof HTMLButtonElement) {
         if (event.target.classList.contains('start-btn')) {
           moveLeftMax();
+          renderEBook();
         } else if (event.target.classList.contains('prev-btn')) {
           moveLeft();
+          renderEBook();
         } else if (event.target.classList.contains('next-btn')) {
           moveRight();
+          renderEBook();
         } else if (event.target.classList.contains('end-btn')) {
           moveRightMax();
+          renderEBook();
         }
       }
     });

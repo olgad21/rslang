@@ -3,8 +3,6 @@ import strings, { Word } from '../../constants';
 import renderWord from './renderWord';
 import './renderWord.scss';
 import renderPagination from './pagination';
-// eslint-disable-next-line import/no-cycle
-import { chooseLevel, choosePage } from '../controller/listenController';
 import createElement, { removeAllChildNodes, userPosition } from '../../helpers';
 import playSound from '../controller/musicController';
 
@@ -45,7 +43,6 @@ export const renderEBookPage = () => {
     return chapters.appendChild(levelBtn);
   });
   eBook.appendChild(chapters);
-  chooseLevel();
 
   const paginationElem = renderPagination();
   const pagination = createElement('div', 'pagination');
@@ -54,7 +51,6 @@ export const renderEBookPage = () => {
 
   const wordsContainer = createElement('div', 'words-container');
   mainWrapper.appendChild(wordsContainer);
-  choosePage();
 };
 
 export const renderEBook = () => {
