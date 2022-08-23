@@ -47,6 +47,8 @@ const strings = {
   chapterEBook: 'Электронный учебник',
   savana: 'Саванна',
   audioCall: 'Аудио вызов',
+  complicated: 'Сложное',
+  deleted: 'Удалить',
 };
 
 interface MainDescription {

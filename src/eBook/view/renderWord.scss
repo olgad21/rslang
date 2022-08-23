@@ -198,3 +198,18 @@
 .text-examples {
  font-size: larger;
 }
+
+.control-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: end;
+}
+
+.complicated-btn, 
+.deleted-btn {
+  border: #474747 1px solid;
+  padding: 3px 7px;
+  color: #838ac2;
+  border-radius: 5px;
+}
