@@ -5,9 +5,50 @@ import irynaAvatar from './assets/Iryna.png';
 import olgaAvatar from './assets/Olga.png';
 import alexeiAvatar from './assets/Alexei.png';
 
+export const host = 'https://rslang-team-68.herokuapp.com';
+
+export const path = {
+  users: '/users',
+  tokens: '/tokens',
+  words: '/words',
+  aggregatedWords: '/aggregatedWords',
+  statistics: '/statistics',
+  settings: '/settings',
+  signin: '/signin',
+};
+
+export const WORDS_OF_PAGE = 20;
+export const PAGES_NUMBER = 30;
+
+export interface Word {
+  id: string;
+  group: number;
+  page: number;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  wordTranslate: string;
+  textMeaningTranslate: string;
+  textExampleTranslate: string;
+}
+
+export interface Words {
+  items: Word[]
+}
+
 const strings = {
   registration: 'Начать обучение',
   creatorsTitle: 'Наша команда',
+  chapterEBook: 'Электронный учебник',
+  savana: 'Саванна',
+  audioCall: 'Аудио вызов',
+  complicated: 'Сложное',
+  deleted: 'Удалить',
 };
 
 interface MainDescription {
