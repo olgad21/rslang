@@ -1,0 +1,81 @@
+.globe-sprint,
+.globe-sprint-front,
+.globe-sprint-back,
+.globe-sphere,
+.globe-outer-shadow,
+.globe-inner-shadow {
+    position: absolute; 
+    display: block; 
+    margin: 0; 
+}
+
+.globe-sphere,
+.globe-outer-shadow,
+.globe-inner-shadow {
+    left: 0; 
+    top: 0; 
+    width: 200px; 
+    height: 200px;
+    background-position: 0 0; 
+    background-repeat: no-repeat;
+}
+
+.globe-sprint {
+    left: 0; 
+    top: 0; 
+    width: 200px; 
+    height: 200px; 
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.globe-sprint-front,
+.globe-sprint-back {
+    left: 0; 
+    top: 0; 
+    width: 1000px; 
+    height: 200px; 
+    overflow: visible;
+    background-image: url(./../../assets/walk.png);
+    background-repeat: no-repeat;
+}
+
+.globe-outer-shadow { 
+    left: 0; 
+    top: 186px; 
+    width: 200px; 
+    height: 30px;
+    background-image: url(./../../assets/worldShadowUnder.svg);
+}
+
+.globe-inner-shadow { 
+    background-image: url(./../../assets/worldShadowInner.svg);
+}
+ 
+.globe-sprint-front { 
+    background-position: 0px 0px;
+    animation: textureSpinreverse 5s linear infinite;
+}
+
+.globe-sprint-back { 
+    background-position: 0px -220px;
+    animation: textureSpin 5s linear infinite;
+}
+ 
+@keyframes textureSpin {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes textureSpinreverse {
+    from {
+        transform: translateX(-50%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}

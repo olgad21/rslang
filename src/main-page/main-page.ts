@@ -3,21 +3,26 @@ import renderSidebar from '../components/sidebar';
 import renderFooter from '../components/footer';
 import createElement from '../helpers';
 import './main-page.scss';
-import strings, { CreatorDescription, creatorsDescriptions, mainDescriptions } from '../constants';
+import strings, {
+  CreatorDescription,
+  creatorsDescriptions,
+  mainDescriptions,
+} from '../constants';
 
 const createMainMessage = (img: string, message: string) => {
   const mainMessage = createElement('div', ['main__message']);
   const messageText = createElement('div', 'main__message-text');
   messageText.textContent = message;
-  const messageImg = createElement('img', 'main__message-img') as HTMLImageElement;
+  const messageImg = createElement(
+    'img',
+    'main__message-img',
+  ) as HTMLImageElement;
   messageImg.src = img;
   mainMessage.append(messageImg, messageText);
   return mainMessage;
 };
 
-const renderMainMessages = () => (
-  mainDescriptions.map(({ img, message }) => createMainMessage(img, message))
-);
+const renderMainMessages = () => mainDescriptions.map(({ img, message }) => createMainMessage(img, message));
 
 const createCreatorDescription = (creator: CreatorDescription) => {
   const {
@@ -34,13 +39,17 @@ const createCreatorDescription = (creator: CreatorDescription) => {
   creatorImg.src = img;
   const creatorLink = createElement('a', 'creator-link') as HTMLAnchorElement;
   creatorLink.href = githubLink;
-  creatorDescription.append(creatorImg, creatorName, creatorRole, creatorText, creatorLink);
+  creatorDescription.append(
+    creatorImg,
+    creatorName,
+    creatorRole,
+    creatorText,
+    creatorLink,
+  );
   return creatorDescription;
 };
 
-const renderCreatorDescriptions = () => (
-  creatorsDescriptions.map(createCreatorDescription)
-);
+const renderCreatorDescriptions = () => creatorsDescriptions.map(createCreatorDescription);
 
 const renderMainContent = () => {
   const mainPageContent = createElement('div', 'main__wrapper');
@@ -50,7 +59,11 @@ const renderMainContent = () => {
   const imageWrapper = createElement('div', 'image__wrapper');
   const mainLogo = createElement('h1', 'main__logo');
   mainLogo.textContent = 'RS Lang';
-  const mainBtn = createElement('button', ['main__button', 'btn', 'btn-dark']) as HTMLButtonElement;
+  const mainBtn = createElement('button', [
+    'main__button',
+    'btn',
+    'btn-dark',
+  ]) as HTMLButtonElement;
   mainBtn.textContent = strings.registration;
   imageWrapper.append(mainLogo, mainBtn);
 
