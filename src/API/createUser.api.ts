@@ -18,6 +18,7 @@ const createUser = async (user: UserCredentials): Promise <UserData> => {
   }
 
   const userData = await response.json();
+  localStorage.setItem('user_id', userData.id);
   return userData;
 };
 
