@@ -6,7 +6,7 @@ import renderPagination from './pagination';
 import createElement, { removeAllChildNodes, userPosition } from '../../helpers';
 import playSound from '../controller/musicController';
 
-export const renderEBookPage = () => {
+export const renderEBookHeader = () => {
   const eBook = createElement('div', 'e-book-container');
   const mainWrapper = document.querySelector('.main__wrapper') as HTMLDivElement;
   mainWrapper.innerHTML = '';
