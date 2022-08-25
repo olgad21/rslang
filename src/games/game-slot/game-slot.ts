@@ -1,4 +1,4 @@
-import createElement from '../../helpers';
+import { createElement } from '../../helpers';
 import './game-slot.scss';
 
 const createGameSlot = (place: HTMLElement, gameName: string) => {
@@ -22,7 +22,7 @@ const createGameSlot = (place: HTMLElement, gameName: string) => {
     createElement('div', 'globe-worldmap-text')
   );
 
-  globeWorldmapText.innerHTML = gameName;
+  globeWorldmapText.textContent = gameName;
 
   globeWorldmap.append(globeWorldmapBack, globeWorldmapfront);
   globe.append(globeShere, globeOuterShadow, globeWorldmap, globeInnerShadow);

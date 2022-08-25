@@ -56,7 +56,7 @@ interface MainDescription {
   message: string,
 }
 
-export const mainDescriptions: MainDescription[] = [
+export const mainDes: MainDescription[] = [
   {
     img: asset1,
     message: 'Пробуй разные уровни сложности в упражнениях и ставь новые цели',

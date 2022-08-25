@@ -1,8 +1,6 @@
-import renderHeader from '../components/header';
-import renderSidebar from '../components/sidebar';
-import renderFooter from '../components/footer';
-import createElement from '../helpers';
+import { createElement, removeAllChildNodes } from '../helpers';
 import createGameSlot from './game-slot/game-slot';
+import createSprintMenu from './sprint/sprint-menu';
 import './game-menu.scss';
 
 const renderGameBackground = () => {
@@ -14,19 +12,29 @@ const renderGameBackground = () => {
 };
 
 const renderGamePage = () => {
+  const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
   const wrapper = <HTMLElement>createElement('div', 'games__wrapper');
-  document.body.append(wrapper);
-
-  const header = renderHeader();
-  const sidebar = renderSidebar();
-  const footer = renderFooter();
   const game = renderGameBackground();
 
-  createGameSlot(game, 'СПРИНТ');
+  const sprint = createGameSlot(game, 'СПРИНТ');
+  sprint.addEventListener('click', () => {
+    removeAllChildNodes(wrapperMain);
+    createSprintMenu(wrapperMain);
+  });
   createGameSlot(game, 'АУДИОВЫЗОВ');
-  wrapper.append(header, sidebar, game, footer);
+  removeAllChildNodes(wrapperMain);
+
+  wrapperMain.append(wrapper);
+  wrapper.append(game);
 
   return wrapper;
 };
 
-export default renderGamePage;
+const handleGameIconClick = () => {
+  const gameBtn = <HTMLDivElement>document.querySelector('.bi-controller');
+  gameBtn.addEventListener('click', async () => {
+    renderGamePage();
+  });
+};
+
+export default handleGameIconClick;

@@ -3,12 +3,18 @@ import strings, { Word } from '../../constants';
 import renderWord from './renderWord';
 import './renderWord.scss';
 import renderPagination from './pagination';
-import createElement, { removeAllChildNodes, userPosition } from '../../helpers';
+import {
+  createElement,
+  removeAllChildNodes,
+  userPosition,
+} from '../../helpers';
 import playSound from '../controller/musicController';
 
 export const renderEBookPage = () => {
   const eBook = createElement('div', 'e-book-container');
-  const mainWrapper = document.querySelector('.main__wrapper') as HTMLDivElement;
+  const mainWrapper = document.querySelector(
+    '.main__wrapper',
+  ) as HTMLDivElement;
   mainWrapper.innerHTML = '';
   mainWrapper.appendChild(eBook);
 
@@ -55,7 +61,9 @@ export const renderEBookPage = () => {
 
 export const renderEBook = () => {
   const userLevel = userPosition();
-  const wordsContainer = document.querySelector('.words-container') as HTMLDivElement;
+  const wordsContainer = document.querySelector(
+    '.words-container',
+  ) as HTMLDivElement;
   removeAllChildNodes(wordsContainer);
   getWords(userLevel.page - 1, userLevel.group - 1).then((response) => {
     response.map((word: Word) => {

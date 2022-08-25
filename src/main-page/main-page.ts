@@ -1,12 +1,12 @@
 import renderHeader from '../components/header';
 import renderSidebar from '../components/sidebar';
 import renderFooter from '../components/footer';
-import createElement from '../helpers';
+import { createElement } from '../helpers';
 import './main-page.scss';
 import strings, {
   CreatorDescription,
   creatorsDescriptions,
-  mainDescriptions,
+  mainDes,
 } from '../constants';
 
 const createMainMessage = (img: string, message: string) => {
@@ -22,7 +22,7 @@ const createMainMessage = (img: string, message: string) => {
   return mainMessage;
 };
 
-const renderMainMessages = () => mainDescriptions.map(({ img, message }) => createMainMessage(img, message));
+const renderMainMessages = () => mainDes.map(({ img, message }) => createMainMessage(img, message));
 
 const createCreatorDescription = (creator: CreatorDescription) => {
   const {

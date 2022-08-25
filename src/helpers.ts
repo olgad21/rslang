@@ -9,15 +9,13 @@ const createElement = (tag: string, classNames?: string | string[]) => {
   return el;
 };
 
-export default createElement;
-
-export const userPosition = () => {
+const userPosition = () => {
   let userLevel = {
     group: 1,
     page: 1,
   };
 
-  const isLSExist = (localStorage.getItem('userLevel'));
+  const isLSExist = localStorage.getItem('userLevel');
   if (isLSExist) {
     userLevel = JSON.parse(isLSExist);
   } else {
@@ -29,8 +27,10 @@ export const userPosition = () => {
   return userLevel;
 };
 
-export function removeAllChildNodes(parent: HTMLElement) {
+const removeAllChildNodes = (parent: HTMLElement) => {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
-}
+};
+
+export { createElement, removeAllChildNodes, userPosition };

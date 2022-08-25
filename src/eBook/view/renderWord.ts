@@ -1,5 +1,5 @@
 import strings, { host, Word } from '../../constants';
-import createElement from '../../helpers';
+import { createElement } from '../../helpers';
 
 const renderWord = (word: Word) => {
   const english = createElement('p', 'english');
@@ -35,10 +35,16 @@ const renderWord = (word: Word) => {
   wordExamples.append(textExamples, textMeaningExamples);
 
   const controlBtns = createElement('div', 'control-btns');
-  const complicatedBtn = createElement('button', 'complicated-btn') as HTMLButtonElement;
+  const complicatedBtn = createElement(
+    'button',
+    'complicated-btn',
+  ) as HTMLButtonElement;
   complicatedBtn.textContent = strings.complicated;
   complicatedBtn.disabled = true;
-  const deletedBtn = createElement('button', 'deleted-btn') as HTMLButtonElement;
+  const deletedBtn = createElement(
+    'button',
+    'deleted-btn',
+  ) as HTMLButtonElement;
   deletedBtn.textContent = strings.deleted;
   deletedBtn.disabled = true;
   controlBtns.append(complicatedBtn, deletedBtn);

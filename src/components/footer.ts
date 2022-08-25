@@ -1,18 +1,20 @@
-import createElement from '../helpers';
+import { createElement } from '../helpers';
 import './footer.scss';
 
-const creatorsData = [{
-  link: 'https://github.com/irynakolh',
-  name: 'Iryna Kolhanova',
-},
-{
-  link: 'https://github.com/olgad21',
-  name: 'Olga Dashuk',
-},
-{
-  link: 'https://github.com/marusovalexei',
-  name: 'Marusov Alexei',
-}];
+const creatorsData = [
+  {
+    link: 'https://github.com/irynakolh',
+    name: 'Iryna Kolhanova',
+  },
+  {
+    link: 'https://github.com/olgad21',
+    name: 'Olga Dashuk',
+  },
+  {
+    link: 'https://github.com/marusovalexei',
+    name: 'Marusov Alexei',
+  },
+];
 
 const createFooterLink = (link: string, name: string) => {
   const footerLink = createElement('a', ['footer__link']) as HTMLAnchorElement;

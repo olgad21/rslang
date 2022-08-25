@@ -1,9 +1,13 @@
-import createElement from '../helpers';
+import { createElement } from '../helpers';
 import './header.scss';
 
 const renderHeader = () => {
   const header = createElement('header', 'header');
-  const loginIcon = createElement('i', ['login__icon', 'bi', 'bi-box-arrow-in-right']);
+  const loginIcon = createElement('i', [
+    'login__icon',
+    'bi',
+    'bi-box-arrow-in-right',
+  ]);
   header.append(loginIcon);
   return header;
 };

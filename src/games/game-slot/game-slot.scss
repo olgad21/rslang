@@ -15,12 +15,11 @@
 .globe-container:hover {
     transition: 1s;
     transform: scale(1.2);
-}
+   }
 
 .globe-container:hover .globe-worldmap-text {
-    margin: -250px;
-    transition: 0.5s;
-    transform: scale(1.5);
+    transition: 1s;
+    transform: rotate(-35deg) scale(1.1) translateX(65px) translateY(-210px)
 }
 
 .globe {
@@ -98,7 +97,7 @@
 
 .globe-worldmap-text {
     margin-top: 1rem;
-    color: white;
+    color: rgb(158, 150, 74);
     font-weight: bold;
     text-align: center;
     transition: 1s;
