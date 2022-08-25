@@ -1,10 +1,10 @@
 import { chooseLevel, choosePage } from './controller/listenController';
-import { renderEBook, renderEBookPage } from './view/renderBook';
+import { renderEBook, renderEBookHeader } from './view/renderBook';
 
 const handleEbookIconClick = () => {
   const eBookBtn = document.querySelector('.bi-book') as HTMLDivElement;
   eBookBtn.addEventListener('click', async () => {
-    renderEBookPage();
+    renderEBookHeader();
     chooseLevel();
     choosePage();
     renderEBook();

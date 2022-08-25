@@ -1,0 +1,28 @@
+.words-container {
+  min-height: 45vh;
+}
+
+.btn-group button{
+  background-color: #EAD6CD; 
+  border: 1px solid #EAD6CD; 
+  color: #4A5FC1;
+  padding: 10px 24px;
+  cursor: pointer; 
+  float: left; 
+}
+
+
+.btn-group button:not(:last-child) {
+  border-right: none; 
+}
+
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:hover {
+  background-color: #d0bcb2;
+}
+
