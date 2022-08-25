@@ -25,8 +25,13 @@ const createSprintMenu = (place: HTMLElement) => {
 
   sprintMenuBtnStart.addEventListener('click', () => {
     const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
+    const choseLvl = <HTMLElement>(
+      document.querySelector('.menu-btn__complexity-optional')
+    );
+    const levl = choseLvl.getAttribute('value');
+
     removeAllChildNodes(wrapperMain);
-    createSprint(wrapperMain);
+    createSprint(wrapperMain, levl);
   });
 
   sprintMenuTitle.textContent = 'SPRINT';
@@ -38,6 +43,7 @@ const createSprintMenu = (place: HTMLElement) => {
       createElement('option', 'menu-btn__complexity-optional')
     );
     sprintMenuBtnComplexityOptional.textContent = `${i}`;
+    sprintMenuBtnComplexityOptional.setAttribute('value', `${i}`);
     sprintMenuBtnComplexity.append(sprintMenuBtnComplexityOptional);
   }
 
