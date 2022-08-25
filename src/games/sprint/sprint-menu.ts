@@ -1,4 +1,5 @@
-import { createElement } from '../../helpers';
+import { createElement, removeAllChildNodes } from '../../helpers';
+import createSprint from './sprint';
 import './sprint.scss';
 
 const createSprintMenu = (place: HTMLElement) => {
@@ -21,6 +22,12 @@ const createSprintMenu = (place: HTMLElement) => {
   const sprintMenuBtnStart = <HTMLElement>(
     createElement('button', 'menu-btn__start')
   );
+
+  sprintMenuBtnStart.addEventListener('click', () => {
+    const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
+    removeAllChildNodes(wrapperMain);
+    createSprint(wrapperMain);
+  });
 
   sprintMenuTitle.textContent = 'SPRINT';
   sprintMenuDescription.textContent = '«Спринт» - это тренировка';
