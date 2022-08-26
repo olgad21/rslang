@@ -60,6 +60,11 @@ const renderWord = (word: Word) => {
   } else {
     deletedBtn.disabled = true;
   }
+  if (window.location.pathname === '/ebook') {
+    deletedBtn.classList.add('hidden');
+  } else if (window.location.pathname === '/dictionary') {
+    deletedBtn.classList.remove('hidden');
+  }
   controlBtns.append(complicatedBtn, learnedBtn, deletedBtn);
 
   const hardWord = createElement('p', 'hard-word');

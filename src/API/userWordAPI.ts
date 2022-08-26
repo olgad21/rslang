@@ -12,7 +12,7 @@ export const createUserWord = async ({
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ difficulty: `${word}` }),
+    body: JSON.stringify(word),
   });
 
   if (!response.ok) {
@@ -72,9 +72,7 @@ export const updateUserWord = async ({
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      userId, wordId, token, word,
-    }),
+    body: JSON.stringify(word),
   });
 
   if (!response.ok) {
