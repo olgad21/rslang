@@ -1,4 +1,4 @@
-import { handleToggleForms, renderAuthorizationForm } from '../authorization/authorization';
+import { handleToggleForms, renderAuthorizationForm } from './authorization/authorization';
 import createElement from '../helpers';
 import './header.scss';
 

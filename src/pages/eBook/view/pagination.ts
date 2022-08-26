@@ -1,4 +1,4 @@
-import { userPosition } from '../../helpers';
+import { userPosition } from '../../../helpers';
 
 const renderPagination = () => {
   const ul = document.createElement('ul');

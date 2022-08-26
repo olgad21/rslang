@@ -1,15 +1,15 @@
 import { getWords } from '../controller/wordsController';
-import strings, { Word } from '../../constants';
+import strings, { Word } from '../../../constants';
 import renderWord from './renderWord';
 import './renderWord.scss';
 import renderPagination from './pagination';
-import createElement, { removeAllChildNodes, userPosition } from '../../helpers';
+import createElement, { removeAllChildNodes, userPosition } from '../../../helpers';
 import playSound from '../controller/musicController';
 
 export const renderEBookPage = () => {
   const eBook = createElement('div', 'e-book-container');
   const mainWrapper = document.querySelector('.main__wrapper') as HTMLDivElement;
-  mainWrapper.innerHTML = '';
+  removeAllChildNodes(mainWrapper);
   mainWrapper.appendChild(eBook);
 
   const title = createElement('h2', 'title');

@@ -1,6 +1,5 @@
-import UserCredentials from '../Interfaces/UserCredentials';
+import { UserCredentials, UserAuthData } from '../Interfaces';
 import { host, path } from '../constants';
-import UserAuthData from '../Interfaces/UserAuthData';
 
 const closeLoginIconOnSuccess = () => {
   const loginIcon = document.querySelector('.bi-person-circle');

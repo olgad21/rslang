@@ -1,6 +1,6 @@
+import renderApp from './app';
 import './scss/styles.scss';
-import renderMainPage from './main-page/main-page';
-import handleEbookIconClick from './eBook';
 
-renderMainPage();
-handleEbookIconClick();
+renderApp();
+
+window.addEventListener('popstate', () => renderApp());
