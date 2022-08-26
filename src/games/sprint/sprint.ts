@@ -1,5 +1,9 @@
-import { createElement } from '../../helpers';
+import { createElement, fillElement } from '../../helpers';
 import './sprint.scss';
+
+const timer = (place: HTMLElement) => {
+
+};
 
 const createSprint = (place: HTMLElement, levl: string | null) => {
   const globeContainer = <HTMLElement>createElement('div', 'game-container');
@@ -22,22 +26,28 @@ const createSprint = (place: HTMLElement, levl: string | null) => {
     createElement('div', 'game-btn__container')
   );
   const sprintGameBtnFalse = <HTMLElement>(
-    createElement('button', 'game-btn__false')
+    createElement('button', 'game-btn__container-false')
   );
   const sprintGameBtnTrue = <HTMLElement>(
-    createElement('button', 'game-btn__true')
+    createElement('button', 'game-btn__container-true')
   );
 
-  sprintTitle.textContent = 'sprintTitle';
-  sprintLevl.textContent = levl;
-  sprintContainer.textContent = 'sprintContainer';
-  sprintTimer.textContent = 'sprintTimer';
-  sprintViewResults.textContent = 'sprintViewResults';
+  fillElement(
+    sprintViewResults,
+    20,
+    'div',
+    'sprint-container__view-element',
+    'element',
+    false,
+  );
+
+  sprintLevl.textContent = `Уровень: ${levl}`;
+  sprintTitle.textContent = 'Ваш результат:';
+  sprintTimer.textContent = '50';
   sprintWordEn.textContent = 'sprintWordEn';
   sprintWordRu.textContent = 'sprintWordRu';
-  sprintGameBtnContainer.textContent = 'sprintGameBtnContainer';
-  sprintGameBtnFalse.textContent = 'sprintGameBtnFalse';
-  sprintGameBtnTrue.textContent = 'sprintGameBtnTrue';
+  sprintGameBtnFalse.textContent = 'False';
+  sprintGameBtnTrue.textContent = 'True';
 
   sprintGameBtnContainer.append(sprintGameBtnFalse, sprintGameBtnTrue);
   sprintContainer.append(
@@ -45,11 +55,10 @@ const createSprint = (place: HTMLElement, levl: string | null) => {
     sprintViewResults,
     sprintWordEn,
     sprintWordRu,
-    sprintGameBtnContainer
+    sprintGameBtnContainer,
   );
   globeContainer.append(sprintLevl, sprintTitle, sprintContainer);
   place.append(globeContainer);
-
   return place;
 };
 

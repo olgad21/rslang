@@ -2,19 +2,21 @@
     &__container {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 20px;
-        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 80px;
+        width: 600px;
         height: 70vh;
-        padding: 20px;
-        background-color: aqua;
+        padding: 80px;
+        border: 4px solid rgb(13, 10, 198);
+        border-radius: 25px;
+        margin: 0 auto;
     }
 
     &__title {
         width: 100%;
+        font-size: 70px;
         color: rgb(158, 150, 74);
-        font-weight: bold;
         text-align: center;
     }
 
@@ -29,18 +31,160 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         gap: 20px;
         width: 100%;
         height: 10vh;
-        background-color: rgb(171, 238, 238);
-    }
+            }
 
     &__complexity,
     &__start {
-        width: 75px;
-        height: 30px;
-        background-color: rgb(11, 12, 12);
-        color: aliceblue;
+        width: 120px;
+        height: 50px;
+        text-align: center;
+        border-radius: 20px;
+        border: 3px solid black;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        letter-spacing: 0.1rem;
+        transition: 0.5s;
     }
+
+    &__start:hover {
+        transform: rotateZ(20deg);
+        transition: 0.5s;
+        background-color: rgb(197, 241, 197);
+    }
+
+    &__complexity:hover {
+        transform: rotateZ(-20deg);
+        transition: 0.5s;
+        background-color: rgb(197, 241, 197);
+    }
+}
+
+.game-container {
+    width: 600px;
+    height: 70vh;
+    border: 4px solid black;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.sprint {
+    &-title{
+        color: rgb(158, 150, 74);
+        text-align: center;
+        font-size: 30px;
+    }
+
+    &-levl{
+        font-size: 40px;
+        font-weight: bold;
+        color: rgb(158, 150, 74);
+        text-align: center;
+    }
+
+    &-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        &__timer {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgb(181, 5, 5);
+            border-radius: 50px;
+            font-size: 20px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        &__view-results{
+            width: 500px;
+            height: 150px;
+            border: 4px solid black;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        &__view-element{
+            width: 25px;
+            height: 25px;
+            border: 2px solid black;
+            border-radius: 25px;
+            background-color: grey;
+        }
+
+        &__word-en{
+            color: black;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+        }
+
+        &__word-ru{
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+        }
+    }
+}
+
+.game-btn__container {
+    display: flex;
+    gap: 40px;
+
+    &-false,
+    &-true {
+        width: 200px;
+        height: 60px;
+        text-align: center;
+        border: 2px solid black;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 20px;
+        letter-spacing: 0.1rem;
+    }
+
+    &-false {
+        background-color: rgba(255, 70, 70, 0.4);
+    }
+
+    &-true {
+        background-color: rgba(70, 255, 70, 0.4);
+    }
+
+    &-false:hover,
+    &-true:hover {
+        animation: shake 1s;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes shake {
+        0% { transform: translate(1px, 1px) rotate(0deg); }
+        10% { transform: translate(-1px, -2px) rotate(-1deg); }
+        20% { transform: translate(-3px, 0px) rotate(1deg); }
+        30% { transform: translate(3px, 2px) rotate(0deg); }
+        40% { transform: translate(1px, -1px) rotate(1deg); }
+        50% { transform: translate(-1px, 2px) rotate(-1deg); }
+        60% { transform: translate(-3px, 1px) rotate(0deg); }
+        70% { transform: translate(3px, 1px) rotate(-1deg); }
+        80% { transform: translate(-1px, -1px) rotate(1deg); }
+        90% { transform: translate(1px, 2px) rotate(0deg); }
+        100% { transform: translate(1px, -2px) rotate(-1deg); }
+      }
 }

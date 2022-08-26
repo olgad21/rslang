@@ -1,4 +1,4 @@
-import { createElement, removeAllChildNodes } from '../../helpers';
+import { createElement, removeAllChildNodes, fillElement } from '../../helpers';
 import createSprint from './sprint';
 import './sprint.scss';
 
@@ -38,20 +38,20 @@ const createSprintMenu = (place: HTMLElement) => {
   sprintMenuDescription.textContent = '«Спринт» - это тренировка';
   sprintMenuBtnStart.innerHTML = 'Играть';
 
-  for (let i = 1; i <= 6; i++) {
-    let sprintMenuBtnComplexityOptional = <HTMLElement>(
-      createElement('option', 'menu-btn__complexity-optional')
-    );
-    sprintMenuBtnComplexityOptional.textContent = `${i}`;
-    sprintMenuBtnComplexityOptional.setAttribute('value', `${i}`);
-    sprintMenuBtnComplexity.append(sprintMenuBtnComplexityOptional);
-  }
+  fillElement(
+    sprintMenuBtnComplexity,
+    6,
+    'option',
+    'menu-btn__complexity-optional',
+    'value',
+    true,
+  );
 
   sprintMenuBtnContainer.append(sprintMenuBtnComplexity, sprintMenuBtnStart);
   sprintMenuContainer.append(
     sprintMenuTitle,
     sprintMenuDescription,
-    sprintMenuBtnContainer
+    sprintMenuBtnContainer,
   );
   place.append(sprintMenuContainer);
 
