@@ -1,4 +1,4 @@
-import { host, path, Word } from '../../constants';
+import { host, path, Word } from '../../../constants';
 
 export const getWords = async (page: number, group: number) : Promise<Word[]> => {
   const res = await fetch(`${host}${path.words}?page=${page}&group=${group}`);

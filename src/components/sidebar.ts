@@ -1,4 +1,5 @@
 import createElement from '../helpers';
+import renderPageContent from '../renderPageContent';
 import './sidebar.scss';
 
 const navItems = [{
@@ -32,6 +33,14 @@ const createNavItem = (navIcon: string, navName: string, navId: string) => {
 
   navItem.append(icon, navLink);
   navItem.setAttribute('data-nav-id', navId);
+<<<<<<< HEAD
+=======
+
+  navItem.addEventListener('click', () => {
+    window.history.pushState({ id: navId }, navId, `${navId}`);
+    renderPageContent();
+  });
+>>>>>>> develop
   return navItem;
 };
 

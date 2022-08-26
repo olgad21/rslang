@@ -7,7 +7,7 @@ import {
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
 const word : UserWordOptions = {
-  difficulty: 'easy',
+  difficulty: 'hard',
   optional: {
     attemp: 0,
     isNewWord: false,
@@ -32,7 +32,6 @@ const wordOptions = () => {
           complicatedBtn.textContent = 'Простое';
           complicatedBtn.classList.add('easy-word');
           const userWord = getUserWord({ userId, wordId, token });
-          word.difficulty = 'hard';
           if (!userWord) {
             createUserWord({
               userId, wordId, token, word,
@@ -48,10 +47,6 @@ const wordOptions = () => {
           complicatedBtn.classList.remove('easy-word');
           const hardWord = <HTMLElement>document.querySelector(`[data-hard="${wordId}"]`);
           hardWord.textContent = '';
-          word.difficulty = 'easy';
-          updateUserWord({
-            userId, wordId, token, word,
-          });
         } else if (event.target.innerText === strings.learned) {
           const learnedBtn = <HTMLElement>document.querySelector(`[data-id2="${wordId}"]`);
           learnedBtn.style.backgroundColor = 'grey';

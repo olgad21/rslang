@@ -1,5 +1,5 @@
-import strings, { host, Word } from '../../constants';
-import createElement from '../../helpers';
+import strings, { host, Word } from '../../../constants';
+import createElement from '../../../helpers';
 
 const renderWord = (word: Word) => {
   const english = createElement('p', 'english');

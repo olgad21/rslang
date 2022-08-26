@@ -1,9 +1,9 @@
 import { getWords } from '../controller/wordsController';
-import strings, { Word } from '../../constants';
+import strings, { Word } from '../../../constants';
 import renderWord from './renderWord';
 import './renderWord.scss';
 import renderPagination from './pagination';
-import createElement, { removeAllChildNodes, userPosition } from '../../helpers';
+import createElement, { removeAllChildNodes, userPosition } from '../../../helpers';
 import playSound from '../controller/musicController';
 import wordOptions from '../controller/wordOptionsController';
 
