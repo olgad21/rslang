@@ -35,16 +35,38 @@ const renderWord = (word: Word) => {
   wordExamples.append(textExamples, textMeaningExamples);
 
   const controlBtns = createElement('div', 'control-btns');
-  const complicatedBtn = createElement('button', 'complicated-btn') as HTMLButtonElement;
+  const complicatedBtn = createElement('button', ['complicated-btn', 'control-btn']) as HTMLButtonElement;
+  complicatedBtn.setAttribute('data-id1', `${word.id}`);
   complicatedBtn.textContent = strings.complicated;
-  complicatedBtn.disabled = true;
-  const deletedBtn = createElement('button', 'deleted-btn') as HTMLButtonElement;
+  if (localStorage.getItem('user_id')) {
+    complicatedBtn.disabled = false;
+  } else {
+    complicatedBtn.disabled = true;
+  }
+  const learnedBtn = createElement('button', ['learned-btn', 'control-btn']) as HTMLButtonElement;
+  learnedBtn.setAttribute('data-id2', `${word.id}`);
+  learnedBtn.textContent = strings.learned;
+  if (localStorage.getItem('user_id')) {
+    learnedBtn.disabled = false;
+  } else {
+    learnedBtn.disabled = true;
+  }
+  const deletedBtn = createElement('button', ['deleted-btn', 'control-btn']) as HTMLButtonElement;
+  deletedBtn.setAttribute('data-id3', `${word.id}`);
   deletedBtn.textContent = strings.deleted;
-  deletedBtn.disabled = true;
-  controlBtns.append(complicatedBtn, deletedBtn);
+  if (localStorage.getItem('user_id')) {
+    deletedBtn.disabled = false;
+  } else {
+    deletedBtn.disabled = true;
+  }
+  controlBtns.append(complicatedBtn, learnedBtn, deletedBtn);
+
+  const hardWord = createElement('p', 'hard-word');
+  hardWord.setAttribute('data-hard', `${word.id}`);
+  hardWord.textContent = '';
 
   const infoContainer = createElement('div', 'info-container');
-  infoContainer.append(wordInfo, wordMeaning, wordExamples, controlBtns);
+  infoContainer.append(hardWord, wordInfo, wordMeaning, wordExamples, controlBtns);
 
   const wordImg = createElement('div', 'word-img');
   const image = document.createElement('img');
@@ -52,6 +74,7 @@ const renderWord = (word: Word) => {
   wordImg.appendChild(image);
 
   const wordContainer = createElement('div', 'word-container');
+  wordContainer.setAttribute('id', `${word.id}`);
   wordContainer.append(wordImg, infoContainer);
   return wordContainer;
 };

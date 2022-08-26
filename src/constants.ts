@@ -49,6 +49,13 @@ const strings = {
   audioCall: 'Аудио вызов',
   complicated: 'Сложное',
   deleted: 'Удалить',
+  regForm: 'Регистрация',
+  loginForm: 'Войти в аккаунт',
+  regSubmit: 'Зарегистрироватьcя',
+  loginSubmit: 'Войти',
+  loginQuestion: 'Нет аккаунта?',
+  regQuestion: 'Уже есть аккаунт?',
+  learned: 'Изученное',
 };
 
 interface MainDescription {

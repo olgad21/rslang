@@ -149,6 +149,14 @@
   justify-content: space-between;
   margin: 1rem; 
   width: 90%;
+  position: relative;
+}
+
+.hard-word {
+  position: absolute;
+  top: 0;
+  right: 15%;
+  color: orange;
 }
 
 .word-info {
@@ -207,9 +215,58 @@
 }
 
 .complicated-btn, 
+.deleted-btn,
+.learned-btn {  
+  padding: 3px 7px; 
+  border-radius: 5px; 
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.complicated-btn {
+  background-color: orange;
+  border: orange 1px solid;
+}
+
+.easy-word {
+  color: green;
+  background-color: white;
+}
+
+.learned-btn {
+  background-color: green;
+  border: green 1px solid;
+}
+
 .deleted-btn {
+  background-color: red;
+  border: red 1px solid;
+}
+
+.complicated-btn:hover {
+  background-color: desaturate(orange, 30%);
+  color: white;
+}
+
+.learned-btn:hover {
+  background-color: desaturate(green, 30%);
+  color: white;
+
+}
+
+.deleted-btn:hover {
+  background-color: desaturate(red, 30%);
+  color: white;
+
+}
+
+.complicated-btn:disabled, 
+.deleted-btn:disabled,
+.learned-btn:disabled {
   border: #474747 1px solid;
   padding: 3px 7px;
   color: #838ac2;
+  font-weight: normal;
   border-radius: 5px;
+  background-color: lightgrey;
 }

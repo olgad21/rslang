@@ -5,11 +5,12 @@ import './renderWord.scss';
 import renderPagination from './pagination';
 import createElement, { removeAllChildNodes, userPosition } from '../../helpers';
 import playSound from '../controller/musicController';
+import wordOptions from '../controller/wordOptionsController';
 
 export const renderEBookHeader = () => {
   const eBook = createElement('div', 'e-book-container');
   const mainWrapper = document.querySelector('.main__wrapper') as HTMLDivElement;
-  mainWrapper.innerHTML = '';
+  removeAllChildNodes(mainWrapper);
   mainWrapper.appendChild(eBook);
 
   const title = createElement('h2', 'title');
@@ -78,5 +79,6 @@ export const renderEBook = () => {
       return wordItem;
     });
     playSound();
+    wordOptions();
   });
 };

@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { host, path, Word } from '../../constants';
 
-interface UserWordOptions {
+export interface UserWordOptions {
   difficulty: string;
   optional: {
     attemp: number;
@@ -45,7 +46,7 @@ export const createUserWord = async ({
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(word),
+    body: JSON.stringify({ difficulty: `${word}` }),
   });
 
   if (!response.ok) {
