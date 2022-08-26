@@ -135,7 +135,7 @@ const renderRegistrationForm = () => {
 export const handleToggleForms = () => {
   const authFormToggle = document.querySelector('.auth__message-button');
   authFormToggle?.addEventListener('click', () => {
-    const currForm = document.querySelector('.auth__popup') as HTMLElement | null;
+    const currForm = document.querySelector('.auth__popup') as HTMLElement;
     if (currForm?.dataset.form === 'login') {
       currForm.remove();
       renderRegistrationForm();
