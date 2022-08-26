@@ -33,4 +33,28 @@ const removeAllChildNodes = (parent: HTMLElement) => {
   }
 };
 
-export { createElement, removeAllChildNodes, userPosition };
+const fillElement = (
+  place: HTMLElement,
+  howManyEl: number,
+  tag: string,
+  classNames: string,
+  attribute: string,
+  text: boolean,
+) => {
+  for (let i = 1; i <= howManyEl; i += 1) {
+    const elem = <HTMLElement>createElement(tag, classNames);
+    elem.setAttribute(attribute, `${i}`);
+
+    if (text) {
+      elem.textContent = `${i}`;
+    }
+
+    place.append(elem);
+  }
+
+  return place;
+};
+
+export {
+  createElement, removeAllChildNodes, userPosition, fillElement,
+};
