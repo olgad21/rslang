@@ -1,5 +1,6 @@
 import strings from '../../../constants';
 import createElement from '../../../helpers';
+import './dictionary.scss';
 
 const renderDictionary = () => {
   const learnedWords = createElement('button', ['learned-words', 'sort-btn']);

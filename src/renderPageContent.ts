@@ -1,3 +1,4 @@
+import renderDictionary from './pages/dictionary/view/renderDictionary';
 import { chooseLevel, choosePage } from './pages/eBook/controller/listenController';
 import { renderEBookHeader, renderEBook } from './pages/eBook/view/renderBook';
 import renderMainPage from './pages/main-page/main-page';
@@ -15,7 +16,9 @@ const renderPageContent = () => {
       choosePage();
       renderEBook();
       break;
-    case 'dictionary':
+    case '/dictionary':
+      renderEBookHeader();
+      renderDictionary();
       break;
     case 'games':
       break;

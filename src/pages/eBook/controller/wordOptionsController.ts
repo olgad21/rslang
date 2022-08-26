@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import strings from '../../constants';
-import {
-  createUserWord, updateUserWord, getUserWord, UserWordOptions,
-} from '../../dictionary/controller/userWordController';
+import { createUserWord, getUserWord, updateUserWord } from '../../../API/userWordAPI';
+import strings from '../../../constants';
+import { UserWordOptions } from '../../../Interfaces';
 
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
