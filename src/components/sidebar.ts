@@ -1,36 +1,48 @@
 import createElement from '../helpers';
+import renderPageContent from '../renderPageContent';
 import './sidebar.scss';
 
 const navItems = [{
   navName: 'Главная',
   navIcon: 'bi-house',
+  navId: 'main-page',
 }, {
   navName: 'Учебник',
   navIcon: 'bi-book',
+  navId: 'ebook',
 }, {
   navName: 'Словарь',
   navIcon: 'bi-journal-text',
+  navId: 'dictionary',
 },
 {
   navName: 'Игры',
   navIcon: 'bi-controller',
+  navId: 'games',
 }, {
   navName: 'Статистика',
   navIcon: 'bi-bar-chart',
+  navId: 'statistics',
 }];
 
-const createNavItem = (navIcon: string, navName: string) => {
+const createNavItem = (navIcon: string, navName: string, navId: string) => {
   const navItem = createElement('li', 'nav-item');
   const icon = createElement('i', ['bi', navIcon]);
   const navLink = createElement('button', ['nav-link', 'py-3']);
   navLink.textContent = navName;
 
   navItem.append(icon, navLink);
+  navItem.setAttribute('data-nav-id', navId);
+
+  navItem.addEventListener('click', () => {
+    window.history.pushState({ id: navId }, navId, `${navId}`);
+    renderPageContent();
+  });
   return navItem;
 };
 
 const renderNavigation = () => (
-  navItems.map(({ navIcon, navName }) => createNavItem(navIcon, navName))
+  navItems.map(({ navIcon, navName, navId }) => createNavItem(navIcon, navName, navId))
 );
 
 const renderSidebar = () => {
