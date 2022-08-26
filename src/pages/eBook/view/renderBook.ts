@@ -1,11 +1,12 @@
-import { getWords } from '../controller/wordsController';
-import strings, { Word } from '../../../constants';
+import { getWords } from '../../../API/wordsAPI';
+import strings from '../../../constants';
 import renderWord from './renderWord';
 import './renderWord.scss';
 import renderPagination from './pagination';
 import createElement, { removeAllChildNodes, userPosition } from '../../../helpers';
 import playSound from '../controller/musicController';
 import wordOptions from '../controller/wordOptionsController';
+import { Word } from '../../../Interfaces';
 
 export const renderEBookHeader = () => {
   const eBook = createElement('div', 'e-book-container');

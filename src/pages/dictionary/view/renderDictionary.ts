@@ -1,15 +1,16 @@
-import createElement from '../../helpers';
+import strings from '../../../constants';
+import createElement from '../../../helpers';
 
 const renderDictionary = () => {
   const learnedWords = createElement('button', ['learned-words', 'sort-btn']);
-  learnedWords.textContent = 'Изучаемые слова';
-  learnedWords.style.width = '33.3%';
+  learnedWords.textContent = strings.learnedWords;
+  learnedWords.style.width = strings.width;
   const difficultWords = createElement('button', ['difficult-words', 'sort-btn']);
-  difficultWords.textContent = 'Cложные слова';
-  difficultWords.style.width = '33.3%';
+  difficultWords.textContent = strings.complicatedWords;
+  difficultWords.style.width = strings.width;
   const deletedWords = createElement('button', ['deleted-words', 'sort-btn']);
-  deletedWords.textContent = 'Удаленные слова';
-  deletedWords.style.width = '33.3%';
+  deletedWords.textContent = strings.deletedWords;
+  deletedWords.style.width = strings.width;
 
   const dictionaryBtns = createElement('div', ['dictionary-btns', 'btn-group']);
   dictionaryBtns.style.width = '100%';

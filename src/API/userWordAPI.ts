@@ -1,39 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { host, path, Word } from '../../constants';
-
-export interface UserWordOptions {
-  difficulty: string;
-  optional: {
-    attemp: number;
-    isNewWord: boolean;
-    guesses: number;
-    error: number;
-    isLearned: boolean;
-  }
-}
-
-interface ExtendWord extends Word {
-  _id: string;
-  userWord: UserWord;
-}
-
-interface UserWord {
-  userId: string;
-  wordId?: string;
-  token: string;
-  word?: UserWordOptions;
-}
-
-const startWordInfo: UserWordOptions = {
-  difficulty: 'weak',
-  optional: {
-    attemp: 0,
-    isNewWord: false,
-    guesses: 0,
-    error: 0,
-    isLearned: false,
-  },
-};
+import { host, path } from '../constants';
+import { UserWord } from '../Interfaces';
 
 export const createUserWord = async ({
   userId, wordId, token, word,

@@ -18,3 +18,47 @@ interface UserData {
 }
 
 export default UserData;
+
+export interface Word {
+  id: string;
+  group: number;
+  page: number;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  wordTranslate: string;
+  textMeaningTranslate: string;
+  textExampleTranslate: string;
+}
+
+export interface Words {
+  items: Word[]
+}
+
+export interface UserWordOptions {
+  difficulty: string;
+  optional: {
+    attemp: number;
+    isNewWord: boolean;
+    guesses: number;
+    error: number;
+    isLearned: boolean;
+  }
+}
+
+export interface ExtendWord extends Word {
+  _id: string;
+  userWord: UserWord;
+}
+
+export interface UserWord {
+  userId: string;
+  wordId?: string;
+  token: string;
+  word?: UserWordOptions;
+}

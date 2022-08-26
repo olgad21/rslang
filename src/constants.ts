@@ -4,6 +4,7 @@ import asset3 from './assets/22378293_6566143.jpg';
 import irynaAvatar from './assets/Iryna.png';
 import olgaAvatar from './assets/Olga.png';
 import alexeiAvatar from './assets/Alexei.png';
+import { UserWordOptions } from './Interfaces';
 
 export const host = 'https://rslang-team-68.herokuapp.com';
 
@@ -20,26 +21,16 @@ export const path = {
 export const WORDS_OF_PAGE = 20;
 export const PAGES_NUMBER = 30;
 
-export interface Word {
-  id: string;
-  group: number;
-  page: number;
-  word: string;
-  image: string;
-  audio: string;
-  audioMeaning: string;
-  audioExample: string;
-  textMeaning: string;
-  textExample: string;
-  transcription: string;
-  wordTranslate: string;
-  textMeaningTranslate: string;
-  textExampleTranslate: string;
-}
-
-export interface Words {
-  items: Word[]
-}
+export const startWordInfo: UserWordOptions = {
+  difficulty: 'weak',
+  optional: {
+    attemp: 0,
+    isNewWord: false,
+    guesses: 0,
+    error: 0,
+    isLearned: false,
+  },
+};
 
 const strings = {
   registration: 'Начать обучение',
@@ -56,6 +47,10 @@ const strings = {
   loginQuestion: 'Нет аккаунта?',
   regQuestion: 'Уже есть аккаунт?',
   learned: 'Изученное',
+  learnedWords: 'Изучаемые слова',
+  complicatedWords: 'Cложные слова',
+  deletedWords: 'Удаленные слова',
+  width: '33.3%',
 };
 
 interface MainDescription {
