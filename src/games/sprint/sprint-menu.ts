@@ -1,8 +1,8 @@
 import { createElement, removeAllChildNodes, fillElement } from '../../helpers';
+import { SprintMenu } from './sprint-enam';
 import createSprint from './sprint';
-import './sprint.scss';
 
-const createSprintMenu = (place: HTMLElement) => {
+const createAllElementsSprintMenu = () => {
   const sprintMenuContainer = <HTMLElement>(
     createElement('div', 'sprint-menu__container')
   );
@@ -23,20 +23,25 @@ const createSprintMenu = (place: HTMLElement) => {
     createElement('button', 'menu-btn__start')
   );
 
-  sprintMenuBtnStart.addEventListener('click', () => {
-    const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
-    const choseLvl = <HTMLElement>(
-      document.querySelector('.menu-btn__complexity-optional')
-    );
-    const levl = choseLvl.getAttribute('value');
+  return [
+    sprintMenuContainer,
+    sprintMenuTitle,
+    sprintMenuDescription,
+    sprintMenuBtnContainer,
+    sprintMenuBtnComplexity,
+    sprintMenuBtnStart,
+  ];
+};
 
-    removeAllChildNodes(wrapperMain);
-    createSprint(wrapperMain, levl);
-  });
-
-  sprintMenuTitle.textContent = 'SPRINT';
-  sprintMenuDescription.textContent = '«Спринт» - это тренировка';
-  sprintMenuBtnStart.innerHTML = 'Играть';
+const createSprintMenu = (place: HTMLElement) => {
+  const [
+    sprintMenuContainer,
+    sprintMenuTitle,
+    sprintMenuDescription,
+    sprintMenuBtnContainer,
+    sprintMenuBtnComplexity,
+    sprintMenuBtnStart,
+  ] = createAllElementsSprintMenu();
 
   fillElement(
     sprintMenuBtnComplexity,
@@ -44,14 +49,29 @@ const createSprintMenu = (place: HTMLElement) => {
     'option',
     'menu-btn__complexity-optional',
     'value',
-    true,
+    true
   );
+
+  sprintMenuBtnStart.addEventListener('click', () => {
+    const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
+    const choseLvl = <HTMLSelectElement>(
+      document.querySelector('.menu-btn__complexity')
+    );
+    const levl = choseLvl.value;
+
+    removeAllChildNodes(wrapperMain);
+    createSprint(wrapperMain, levl);
+  });
+
+  sprintMenuTitle.textContent = SprintMenu.title;
+  sprintMenuDescription.textContent = SprintMenu.description;
+  sprintMenuBtnStart.innerHTML = SprintMenu.btn;
 
   sprintMenuBtnContainer.append(sprintMenuBtnComplexity, sprintMenuBtnStart);
   sprintMenuContainer.append(
     sprintMenuTitle,
     sprintMenuDescription,
-    sprintMenuBtnContainer,
+    sprintMenuBtnContainer
   );
   place.append(sprintMenuContainer);
 
