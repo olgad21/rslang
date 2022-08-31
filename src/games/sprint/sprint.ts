@@ -65,15 +65,19 @@ const findAllElementsSprint = () => {
   return [useElem, useElemTrue, useElemFalse];
 };
 
+const randomNumber = (num: number) => {
+  return Math.floor(Math.random() * num);
+};
+
 async function getWordToSprint(
   page: number,
   group: number,
   enWord: HTMLElement,
   ruWord: HTMLElement
 ) {
-  const randomChoise = Math.floor(Math.random() * 2);
-  const randomNum1 = Math.floor(Math.random() * 21);
-  const randomNum2 = Math.floor(Math.random() * 21);
+  const randomChoise = randomNumber(2);
+  const randomNum1 = randomNumber(21);
+  const randomNum2 = randomNumber(21);
 
   if (randomChoise === 0) {
     getWords(page, group).then((response) => {
@@ -166,6 +170,8 @@ const createSprint = (place: HTMLElement, lev: string | null) => {
     sprintScore,
     sprintScoreNum,
   ] = createAllElementsSprint();
+  const randomPage = randomNumber(31);
+  const gameLevl = Number(lev);
 
   fillElement(
     sprintViewResults,
@@ -183,13 +189,13 @@ const createSprint = (place: HTMLElement, lev: string | null) => {
   sprintGameBtnTrue.textContent = Sprint.btnTrue;
 
   sprintGameBtnTrue.addEventListener('click', () => {
-    sprintGameBtn('true', 1, 1, sprintWordEn, sprintWordRu);
+    sprintGameBtn('true', randomPage, gameLevl, sprintWordEn, sprintWordRu);
   });
   sprintGameBtnFalse.addEventListener('click', () => {
-    sprintGameBtn('false', 1, 1, sprintWordEn, sprintWordRu);
+    sprintGameBtn('false', randomPage, gameLevl, sprintWordEn, sprintWordRu);
   });
 
-  getWordToSprint(1, 1, sprintWordEn, sprintWordRu);
+  getWordToSprint(randomPage, gameLevl, sprintWordEn, sprintWordRu);
   getNewValue(sprintTimer);
 
   sprintGameBtnContainer.append(sprintGameBtnFalse, sprintGameBtnTrue);
