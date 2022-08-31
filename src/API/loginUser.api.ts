@@ -1,5 +1,6 @@
 import { UserCredentials, UserAuthData } from '../Interfaces';
 import { host, path } from '../constants';
+import renderPageContent from '../renderPageContent';
 
 const closeLoginIconOnSuccess = () => {
   const loginIcon = document.querySelector('.bi-person-circle');
@@ -8,13 +9,12 @@ const closeLoginIconOnSuccess = () => {
   authPopup?.classList.add('auth__popup--inactive');
 };
 
-const handleLogoutUser = () => {
-  const logoutIcon = document.querySelector('.bi-box-arrow-right');
-  logoutIcon?.addEventListener('click', () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user_id');
-    logoutIcon?.classList.replace('bi-box-arrow-right', 'bi-person-circle');
-  });
+export const handleLogoutUser = (e: Event) => {
+  const logoutIcon = e.target as HTMLElement;
+  localStorage.removeItem('token');
+  localStorage.removeItem('user_id');
+  logoutIcon?.classList.replace('bi-box-arrow-right', 'bi-person-circle');
+  renderPageContent();
 };
 
 const loginUser = async (user: UserCredentials): Promise <UserAuthData> => {
@@ -34,7 +34,7 @@ const loginUser = async (user: UserCredentials): Promise <UserAuthData> => {
   localStorage.setItem('token', userAuthData.token);
   localStorage.setItem('user_id', userAuthData.userId);
   closeLoginIconOnSuccess();
-  handleLogoutUser();
+  renderPageContent();
   return userAuthData;
 };
 

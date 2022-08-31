@@ -1,6 +1,7 @@
 import { chooseLevel, choosePage } from './pages/eBook/controller/listenController';
 import { renderEBookPage, renderEBook } from './pages/eBook/view/renderBook';
 import renderMainPage from './pages/main-page/main-page';
+import renderStatisticsPage from './pages/statistics/statistics';
 
 const renderPageContent = () => {
   const currentPage = window.location.pathname;
@@ -15,11 +16,12 @@ const renderPageContent = () => {
       choosePage();
       renderEBook();
       break;
-    case 'dictionary':
+    case '/dictionary':
       break;
-    case 'games':
+    case '/games':
       break;
-    case 'statistics':
+    case '/statistics':
+      renderStatisticsPage();
       break;
     default:
       renderMainPage();
