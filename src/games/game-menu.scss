@@ -12,3 +12,93 @@
     padding: 40px;
      }
 }
+
+.modal__container {
+  
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 20px;
+  background: #000000b3;
+    
+  &-window {
+    width: 50vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #fff;
+    border-radius: 25px;
+  }
+
+  &-title {
+    width: 70%;
+    min-height: 10%;
+    font-weight: bold;
+    font-size: 50px;
+    color: rgb(158, 150, 74);
+    text-align: center;
+  }
+
+  &-content {
+    border: 2px solid rgb(0, 0, 59);
+    border-radius: 25px;
+
+    padding: 20px;
+    width: 70%;
+
+    &-correct,
+    &-wrong {
+      font-size: 30px;
+    }
+
+    &-correct {
+      color: green;
+    }
+
+    &-wrong {
+      color: red;
+    }
+  }
+
+  &-footer {
+    width: 70%;
+    min-height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+  }
+
+  &-btn-reapet,
+  &-btn-menu {
+    width: 70%;
+    min-height: 10%;
+    text-align: center;
+    border-radius: 20px;
+    border: 3px solid black;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    transition: 0.5s;
+    z-index: 15;
+  }
+
+  &-btn-reapet:hover,
+  &-btn-menu:hover {
+    transition: 0.5s;
+    background-color: rgb(169, 248, 169);
+  }
+
+ 
+}

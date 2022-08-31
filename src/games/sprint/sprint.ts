@@ -1,7 +1,7 @@
 import { createElement, fillElement } from '../../helpers';
 import { getWords } from '../../eBook/controller/wordsController';
 import getNewValue from './timer/timer';
-import { Sprint } from './sprint-enam';
+import { Sprint } from './sprint-enum';
 import createModal from '../modal/modal';
 import './sprint.scss';
 

@@ -56,5 +56,9 @@ const fillElement = (
 };
 
 export {
-  createElement, removeAllChildNodes, userPosition, fillElement,
+  createElement,
+  removeAllChildNodes,
+  userPosition,
+  fillElement,
+
 };

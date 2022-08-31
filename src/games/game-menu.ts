@@ -37,4 +37,4 @@ const handleGameIconClick = () => {
   });
 };
 
-export default handleGameIconClick;
+export { handleGameIconClick, renderGamePage };
