@@ -4,6 +4,8 @@ import createElement, { removeAllChildNodes } from '../../../helpers';
 import { Word } from '../../../Interfaces';
 import renderWord from './renderWord';
 import playSound from '../controller/musicController';
+// eslint-disable-next-line import/no-cycle
+import removeFromHard from '../controller/removeWordsController';
 
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
@@ -30,6 +32,7 @@ const renderHardLevel = () => {
       return wordItem;
     });
     playSound();
+    removeFromHard();
   });
 };
 

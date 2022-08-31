@@ -1,5 +1,7 @@
 import { updateUserWord } from '../../../API/userWordAPI';
 import strings, { wordBase } from '../../../constants';
+// eslint-disable-next-line import/no-cycle
+import renderHardLevel from '../view/renderHardLevel';
 
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
@@ -15,6 +17,7 @@ const removeFromHard = () => {
           updateUserWord({
             userId, wordId, token, wordBase,
           });
+          renderHardLevel();
         }
       }
     });

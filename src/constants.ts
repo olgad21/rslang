@@ -32,9 +32,14 @@ export const wordBase : UserWordOptions = {
   optional: {
     attemp: 0,
     isNewWord: false,
+    sprintNew: false,
+    audioNew: false,
     guesses: 0,
     error: 0,
     isLearned: false,
+    sprintLearned: false,
+    audioLearned: false,
+    date: String(Date.now()),
   },
 };
 

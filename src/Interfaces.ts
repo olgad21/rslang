@@ -46,9 +46,14 @@ export interface UserWordOptions {
   optional: {
     attemp: number;
     isNewWord: boolean;
+    sprintNew: boolean;
+    audioNew: boolean;
     guesses: number;
     error: number;
     isLearned: boolean;
+    sprintLearned: boolean;
+    audioLearned: boolean;
+    date: string;
   }
 }
 
