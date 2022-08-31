@@ -57,6 +57,48 @@ const strings = {
   regQuestion: 'Уже есть аккаунт?',
 };
 
+export const statsStrings = {
+  numberLearnedWords: 'Количество изученных слов',
+  percentageRightWords: '% правильных ответов',
+  numberNewWords: 'Количество новых слов',
+  seriesRightWords: 'Количество правильных ответов подряд',
+  dayStats: 'Статистика за сегодня',
+  allStats: 'Статистика за всё время',
+};
+
+export const gameIndicators = [
+  {
+    iconStyle: 'bi-patch-check',
+    description: statsStrings.numberNewWords,
+    id: 'new-words',
+  },
+  {
+    iconStyle: 'bi-check2',
+    description: statsStrings.numberLearnedWords,
+    id: 'learned-words',
+  },
+  {
+    iconStyle: 'bi-check2-all',
+    description: statsStrings.seriesRightWords,
+    id: 'right-words',
+  },
+];
+
+export const dailyIndicators = [
+  {
+    description: statsStrings.numberNewWords,
+    id: 'daily-new-words',
+  },
+  {
+    description: statsStrings.numberLearnedWords,
+    id: 'daily-learned-words',
+  },
+  {
+    description: statsStrings.percentageRightWords,
+    id: 'daily-right-words',
+  },
+];
+
 interface MainDescription {
   img: string,
   message: string,
