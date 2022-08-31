@@ -1,6 +1,6 @@
 import { createElement, removeAllChildNodes } from '../../helpers';
 import createSprintMenu from '../sprint/sprint-menu';
-import { Modal } from '../sprint/sprint-enam';
+import { Modal } from '../sprint/sprint-enum';
 import { renderGamePage } from '../game-menu';
 
 const createAllElementsModal = () => {
