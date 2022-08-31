@@ -22,6 +22,7 @@
   ],
   "ignorePatterns": ["webpack.config.js", "webpack.dev.config.js", "webpack.prod.config.js"],
   "rules": {
-      "@typescript-eslint/no-explicit-any": ["error"]
+      "@typescript-eslint/no-explicit-any": ["error"],
+      "no-underscore-dangle": ["error", { "allow": ["_id"] }]
     }
 }

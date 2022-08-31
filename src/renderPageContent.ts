@@ -1,5 +1,5 @@
 import { chooseLevel, choosePage } from './pages/eBook/controller/listenController';
-import { renderEBookPage, renderEBook } from './pages/eBook/view/renderBook';
+import { renderEBookHeader, renderEBook } from './pages/eBook/view/renderBook';
 import renderMainPage from './pages/main-page/main-page';
 import renderStatisticsPage from './pages/statistics/statistics';
 
@@ -11,12 +11,10 @@ const renderPageContent = () => {
       renderMainPage();
       break;
     case '/ebook':
-      renderEBookPage();
+      renderEBookHeader();
       chooseLevel();
       choosePage();
       renderEBook();
-      break;
-    case '/dictionary':
       break;
     case '/games':
       break;
