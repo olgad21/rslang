@@ -120,6 +120,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-height: 54vh;
 }
 
 .word-item {
@@ -273,4 +274,24 @@
 
 .hidden {
   display: none;
+}
+
+.statistic {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 2rem;
+}
+
+.progress-block {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;  
+  align-items: center;
+}
+
+.progress-block p {
+  margin: 0;
+  color: #474747;
+  font-style: italic;
 }

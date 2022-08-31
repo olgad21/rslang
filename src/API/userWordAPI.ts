@@ -2,7 +2,7 @@ import { host, path } from '../constants';
 import { UserWord } from '../Interfaces';
 
 export const createUserWord = async ({
-  userId, wordId, token, word,
+  userId, wordId, token, wordBase,
 }: UserWord) => {
   const response = await fetch(`${host}${path.users}/${userId}${path.words}/${wordId}`, {
     method: 'POST',
@@ -12,7 +12,7 @@ export const createUserWord = async ({
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(word),
+    body: JSON.stringify(wordBase),
   });
 
   if (!response.ok) {
@@ -62,7 +62,7 @@ export const getUserWord = async ({ userId, wordId, token }: UserWord) => {
 };
 
 export const updateUserWord = async ({
-  userId, wordId, token, word,
+  userId, wordId, token, wordBase,
 }: UserWord) => {
   const response = await fetch(`${host}${path.users}/${userId}${path.words}/${wordId}`, {
     method: 'PUT',
@@ -72,7 +72,7 @@ export const updateUserWord = async ({
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(word),
+    body: JSON.stringify(wordBase),
   });
 
   if (!response.ok) {

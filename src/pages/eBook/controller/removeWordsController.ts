@@ -1,15 +1,13 @@
-import {
-  createUserWord, getUserWord, updateUserWord,
-} from '../../../API/userWordAPI';
+import { updateUserWord } from '../../../API/userWordAPI';
 import strings, { wordBase } from '../../../constants';
 
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
 
-const wordOptions = () => {
+const removeFromHard = () => {
   const controlBtns = document.querySelectorAll('.control-btn');
   controlBtns?.forEach((btn) => {
-    btn.addEventListener('click', async (event) => {
+    btn.addEventListener('click', (event) => {
       if (event.target instanceof HTMLButtonElement) {
         if (event.target.innerText === strings.complicated) {
           const wordId = event.target.dataset.id1;
@@ -23,16 +21,9 @@ const wordOptions = () => {
           complicatedBtn.classList.add('easy-word');
           wordBase.difficulty = 'hard';
           wordBase.optional.isLearned = false;
-          const userWord = await getUserWord({ userId, wordId, token });
-          if (userWord.status === 404) {
-            createUserWord({
-              userId, wordId, token, wordBase,
-            });
-          } else {
-            updateUserWord({
-              userId, wordId, token, wordBase,
-            });
-          }
+          updateUserWord({
+            userId, wordId, token, wordBase,
+          });
         } else if (event.target.innerText === strings.easy) {
           const wordId = event.target.dataset.id1;
           const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${wordId}"]`);
@@ -56,16 +47,9 @@ const wordOptions = () => {
           const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${wordId}"]`);
           complicatedBtn.textContent = strings.complicated;
           complicatedBtn.classList.remove('easy-word');
-          const userWord = await getUserWord({ userId, wordId, token });
-          if (userWord.status === 404) {
-            createUserWord({
-              userId, wordId, token, wordBase,
-            });
-          } else {
-            updateUserWord({
-              userId, wordId, token, wordBase,
-            });
-          }
+          updateUserWord({
+            userId, wordId, token, wordBase,
+          });
         } else if (event.target.innerText === strings.learnedWords) {
           const wordId = event.target.dataset.id2;
           const learnedBtn = <HTMLElement>document.querySelector(`[data-id2="${wordId}"]`);
@@ -74,7 +58,7 @@ const wordOptions = () => {
           const hardWord = <HTMLElement>document.querySelector(`[data-hard="${wordId}"]`);
           hardWord.textContent = '';
           wordBase.optional.isLearned = false;
-          wordBase.difficulty = 'hard';
+          wordBase.difficulty = 'easy';
           updateUserWord({
             userId, wordId, token, wordBase,
           });
@@ -84,4 +68,4 @@ const wordOptions = () => {
   });
 };
 
-export default wordOptions;
+export default removeFromHard;

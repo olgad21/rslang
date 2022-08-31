@@ -18,11 +18,17 @@ export const path = {
   signin: '/signin',
 };
 
+export const filterAggregate = {
+  isLearned: '{"$and":[{"userWord.difficulty":"easy", "userWord.optional.isLearned":true}]}',
+  hard: '{"$and":[{"userWord.difficulty":"hard"}]}',
+  isNewWord: '{"$and":[{"userWord.optional.isNewWord":true}]}',
+};
+
 export const WORDS_OF_PAGE = 20;
 export const PAGES_NUMBER = 30;
 
-export const startWordInfo: UserWordOptions = {
-  difficulty: 'weak',
+export const wordBase : UserWordOptions = {
+  difficulty: 'easy',
   optional: {
     attemp: 0,
     isNewWord: false,
@@ -47,10 +53,14 @@ const strings = {
   loginQuestion: 'Нет аккаунта?',
   regQuestion: 'Уже есть аккаунт?',
   learned: 'Изученное',
-  learnedWords: 'Изучаемые слова',
-  complicatedWords: 'Cложные слова',
+  learnedWords: 'Изученные слова',
+  complicatedWords: 'Cложные',
   deletedWords: 'Удаленные слова',
+  easy: 'Простое',
   width: '33.3%',
+  needLogin: 'Доступно только зарегистрированным пользователям.',
+  guesses: 'Правильных ответов:',
+  error: 'Не правильных ответов:',
 };
 
 interface MainDescription {

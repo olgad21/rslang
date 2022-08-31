@@ -20,7 +20,8 @@ interface UserData {
 export default UserData;
 
 export interface Word {
-  id: string;
+  id?: string;
+  _id?: string;
   group: number;
   page: number;
   word: string;
@@ -60,5 +61,20 @@ export interface UserWord {
   userId: string;
   wordId?: string;
   token: string;
-  word?: UserWordOptions;
+  wordBase?: UserWordOptions;
 }
+
+export interface Aggregation {
+  userId: string;
+  wordId?: string;
+  token?: string;
+  group?: number;
+  page?: number;
+  wordsPerPage?: number;
+  filter?: string;
+}
+
+export type UserLevel = {
+  group: number;
+  page: number;
+};
