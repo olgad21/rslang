@@ -81,6 +81,21 @@
         color: rgb(158, 150, 74);
         text-align: center;
         font-size: 30px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    &-score {
+        color: rgb(158, 150, 74);
+        text-align: center;
+        font-size: 30px;
+    }
+
+    &-score-num {
+        color: rgb(0, 0, 0);
+        text-align: center;
+        font-size: 30px;
     }
 
     &-levl{
@@ -104,6 +119,7 @@
             font-size: 20px;
             padding: 5px;
             text-align: center;
+            animation: blink 1s linear infinite;
         }
 
         &__view-results{
@@ -128,6 +144,22 @@
             background-color: grey;
         }
 
+        &__view-element-true{
+            width: 25px;
+            height: 25px;
+            border: 2px solid black;
+            border-radius: 25px;
+            background-color: rgb(0, 255, 60);
+        }
+
+        &__view-element-false{
+            width: 25px;
+            height: 25px;
+            border: 2px solid black;
+            border-radius: 25px;
+            background-color: rgb(255, 0, 0);
+        }
+
         &__word-en{
             color: black;
             font-size: 30px;
@@ -141,6 +173,15 @@
             font-weight: bold;
             letter-spacing: 0.1rem;
         }
+
+        @keyframes blink {
+            0%, 20% {
+              background: rgb(244, 118, 118);
+            }
+            10% {
+              background: rgb(224, 31, 31);
+            }
+          }
     }
 }
 

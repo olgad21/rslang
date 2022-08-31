@@ -1,13 +1,15 @@
 import { createElement, fillElement } from '../../helpers';
+import { getWords } from '../../eBook/controller/wordsController';
+import getNewValue from './timer/timer';
+import { Sprint } from './sprint-enam';
+import createModal from '../modal/modal';
 import './sprint.scss';
 
-const timer = (place: HTMLElement) => {
-
-};
-
-const createSprint = (place: HTMLElement, levl: string | null) => {
+const createAllElementsSprint = () => {
   const globeContainer = <HTMLElement>createElement('div', 'game-container');
   const sprintTitle = <HTMLElement>createElement('div', 'sprint-title');
+  const sprintScore = <HTMLElement>createElement('div', 'sprint-score');
+  const sprintScoreNum = <HTMLElement>createElement('div', 'sprint-score-num');
   const sprintLevl = <HTMLElement>createElement('div', 'sprint-levl');
   const sprintContainer = <HTMLElement>createElement('div', 'sprint-container');
   const sprintTimer = <HTMLElement>(
@@ -32,22 +34,163 @@ const createSprint = (place: HTMLElement, levl: string | null) => {
     createElement('button', 'game-btn__container-true')
   );
 
+  return [
+    globeContainer,
+    sprintTitle,
+    sprintLevl,
+    sprintContainer,
+    sprintTimer,
+    sprintViewResults,
+    sprintWordEn,
+    sprintWordRu,
+    sprintGameBtnContainer,
+    sprintGameBtnFalse,
+    sprintGameBtnTrue,
+    sprintScore,
+    sprintScoreNum,
+  ];
+};
+
+const findAllElementsSprint = () => {
+  const useElem = <HTMLElement>(
+    document.querySelector('.sprint-container__view-element')
+  );
+  const useElemTrue = <NodeListOf<Element>>(
+    document.querySelectorAll('.sprint-container__view-element-true')
+  );
+  const useElemFalse = <NodeListOf<Element>>(
+    document.querySelectorAll('.sprint-container__view-element-false')
+  );
+
+  return [useElem, useElemTrue, useElemFalse];
+};
+
+async function getWordToSprint(
+  page: number,
+  group: number,
+  enWord: HTMLElement,
+  ruWord: HTMLElement
+) {
+  const randomChoise = Math.floor(Math.random() * 2);
+  const randomNum1 = Math.floor(Math.random() * 21);
+  const randomNum2 = Math.floor(Math.random() * 21);
+
+  if (randomChoise === 0) {
+    getWords(page, group).then((response) => {
+      enWord.textContent = response[randomNum1].word;
+      ruWord.textContent = response[randomNum1].wordTranslate;
+    });
+  } else if (randomChoise === 1) {
+    getWords(page, group).then((response) => {
+      enWord.textContent = response[randomNum1].word;
+      ruWord.textContent = response[randomNum2].wordTranslate;
+    });
+  }
+}
+
+const getResultOfGame = () => {
+  const placeResult = <HTMLElement>document.querySelector('.sprint-score-num');
+  const results: number = Number(placeResult.textContent) + 10;
+  placeResult.textContent = `${results}`;
+};
+
+const sprintGameBtn = (
+  choise: string,
+  page: number,
+  group: number,
+  enWord: HTMLElement,
+  ruWord: HTMLElement
+) => {
+  const [useElem, useElemTrue, useElemFalse] = findAllElementsSprint();
+
+  getWords(page, group).then((response) => {
+    let flag = false;
+
+    for (let i = 0; i < response.length; i += 1) {
+      if (
+        (enWord.textContent === response[i].word &&
+          ruWord.textContent === response[i].wordTranslate &&
+          choise === 'true') ||
+        (enWord.textContent === response[i].word &&
+          ruWord.textContent !== response[i].wordTranslate &&
+          choise === 'false')
+      ) {
+        (<HTMLElement>useElem).classList.remove(
+          'sprint-container__view-element'
+        );
+        (<HTMLElement>useElem).classList.add(
+          'sprint-container__view-element-true'
+        );
+        flag = true;
+        getResultOfGame();
+      }
+    }
+
+    if (flag) {
+      (<HTMLElement>useElem).classList.remove('sprint-container__view-element');
+      (<HTMLElement>useElem).classList.add(
+        'sprint-container__view-element-true'
+      );
+    } else if (!flag) {
+      (<HTMLElement>useElem).classList.remove('sprint-container__view-element');
+      (<HTMLElement>useElem).classList.add(
+        'sprint-container__view-element-false'
+      );
+    }
+  });
+
+  if (
+    (<NodeListOf<Element>>useElemTrue).length +
+      (<NodeListOf<Element>>useElemFalse).length ===
+    19
+  ) {
+    createModal();
+  } else {
+    getWordToSprint(page, group, enWord, ruWord);
+  }
+};
+
+const createSprint = (place: HTMLElement, lev: string | null) => {
+  const [
+    globeContainer,
+    sprintTitle,
+    sprintLevl,
+    sprintContainer,
+    sprintTimer,
+    sprintViewResults,
+    sprintWordEn,
+    sprintWordRu,
+    sprintGameBtnContainer,
+    sprintGameBtnFalse,
+    sprintGameBtnTrue,
+    sprintScore,
+    sprintScoreNum,
+  ] = createAllElementsSprint();
+
   fillElement(
     sprintViewResults,
     20,
     'div',
     'sprint-container__view-element',
     'element',
-    false,
+    false
   );
 
-  sprintLevl.textContent = `Уровень: ${levl}`;
-  sprintTitle.textContent = 'Ваш результат:';
-  sprintTimer.textContent = '50';
-  sprintWordEn.textContent = 'sprintWordEn';
-  sprintWordRu.textContent = 'sprintWordRu';
-  sprintGameBtnFalse.textContent = 'False';
-  sprintGameBtnTrue.textContent = 'True';
+  sprintLevl.textContent = Sprint.levl + lev;
+  sprintScore.textContent = Sprint.title;
+  sprintTimer.textContent = Sprint.timer;
+  sprintGameBtnFalse.textContent = Sprint.btnFalse;
+  sprintGameBtnTrue.textContent = Sprint.btnTrue;
+
+  sprintGameBtnTrue.addEventListener('click', () => {
+    sprintGameBtn('true', 1, 1, sprintWordEn, sprintWordRu);
+  });
+  sprintGameBtnFalse.addEventListener('click', () => {
+    sprintGameBtn('false', 1, 1, sprintWordEn, sprintWordRu);
+  });
+
+  getWordToSprint(1, 1, sprintWordEn, sprintWordRu);
+  getNewValue(sprintTimer);
 
   sprintGameBtnContainer.append(sprintGameBtnFalse, sprintGameBtnTrue);
   sprintContainer.append(
@@ -55,10 +198,12 @@ const createSprint = (place: HTMLElement, levl: string | null) => {
     sprintViewResults,
     sprintWordEn,
     sprintWordRu,
-    sprintGameBtnContainer,
+    sprintGameBtnContainer
   );
+  sprintTitle.append(sprintScore, sprintScoreNum);
   globeContainer.append(sprintLevl, sprintTitle, sprintContainer);
   place.append(globeContainer);
+
   return place;
 };
 
