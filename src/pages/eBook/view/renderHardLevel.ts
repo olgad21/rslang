@@ -1,19 +1,17 @@
 import { getAggregatedWords } from '../../../API/aggregatedWordsAPI';
 import strings, { filterAggregate } from '../../../constants';
-import createElement from '../../../helpers';
+import createElement, { removeAllChildNodes } from '../../../helpers';
 import { Word } from '../../../Interfaces';
-import renderWord from '../view/renderWord';
-import playSound from './musicController';
-import removeFromHard from './removeWordsController';
+import renderWord from './renderWord';
+import playSound from '../controller/musicController';
 
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
 
-const isHardLevel = () => {
+const renderHardLevel = () => {
   const filter = filterAggregate.hard;
   const wordsContainer = document.querySelector('.words-container') as HTMLDivElement;
-  const pagination = document.querySelector('.pagination') as HTMLDivElement;
-  pagination.style.display = 'none';
+  removeAllChildNodes(wordsContainer);
 
   const hardWordsList = getAggregatedWords({ userId, token, filter });
   hardWordsList.then((response) => {
@@ -24,14 +22,15 @@ const isHardLevel = () => {
 
       const hardWord = <HTMLElement>document.querySelector(`[data-hard="${word._id}"]`);
       hardWord.textContent = String(strings.complicated);
+      const learnedBtn = <HTMLButtonElement>document.querySelector(`[data-id2="${word._id}"]`);
+      learnedBtn.style.display = 'none';
       const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${word._id}"]`);
       complicatedBtn.textContent = strings.easy;
       complicatedBtn.classList.add('easy-word');
       return wordItem;
     });
     playSound();
-    removeFromHard();
   });
 };
 
-export default isHardLevel;
+export default renderHardLevel;

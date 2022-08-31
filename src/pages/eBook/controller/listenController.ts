@@ -1,7 +1,7 @@
 import { renderEBook } from '../view/renderBook';
 import strings, { PAGES_NUMBER } from '../../../constants';
 import { removeAllChildNodes, userPosition } from '../../../helpers';
-import isHardLevel from './hardLevelController';
+import renderHardLevel from '../view/renderHardLevel';
 
 const storage = userPosition();
 
@@ -120,14 +120,14 @@ export const chooseLevel = () => {
         endBtn.disabled = false;
         endBtn.classList.add('active-element');
         if (storage.group === 7) {
+          const pagination = document.querySelector('.pagination') as HTMLDivElement;
+          pagination.style.display = 'none';
           const wordsContainer = document.querySelector('.words-container') as HTMLDivElement;
           wordsContainer.style.backgroundColor = 'white';
           removeAllChildNodes(wordsContainer);
           if (localStorage.getItem('user_id')) {
-            isHardLevel();
+            renderHardLevel();
           } else {
-            const pagination = document.querySelector('.pagination') as HTMLDivElement;
-            pagination.style.display = 'none';
             wordsContainer.textContent = strings.needLogin;
           }
         } else {
