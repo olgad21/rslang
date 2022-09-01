@@ -6,7 +6,6 @@ export const createUserWord = async ({
 }: UserWord) => {
   const response = await fetch(`${host}${path.users}/${userId}${path.words}/${wordId}`, {
     method: 'POST',
-    // credentials: 'include',
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',
@@ -29,7 +28,6 @@ export const createUserWord = async ({
 export const getAllUserWords = async ({ userId, token }: UserWord) => {
   const response = await fetch(`${host}${path.users}/${userId}${path.words}`, {
     method: 'GET',
-    // credentials: 'include',
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',
@@ -45,19 +43,11 @@ export const getAllUserWords = async ({ userId, token }: UserWord) => {
 export const getUserWord = async ({ userId, wordId, token }: UserWord) => {
   const response = await fetch(`${host}${path.users}/${userId}${path.words}/${wordId}`, {
     method: 'GET',
-    // credentials: 'include',
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',
     },
   });
-  // if (!response.ok) {
-  //   if (response.status === 401) {
-  //     return 'Access token is missing or invalid';
-  //   } if (response.status === 404) {
-  //     return 'User\'s word not found';
-  //   }
-  // }
   return response;
 };
 
@@ -66,7 +56,6 @@ export const updateUserWord = async ({
 }: UserWord) => {
   const response = await fetch(`${host}${path.users}/${userId}${path.words}/${wordId}`, {
     method: 'PUT',
-    // credentials: 'include',
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',
@@ -89,7 +78,6 @@ export const updateUserWord = async ({
 export const deleteUserWord = async ({ userId, wordId, token }: UserWord) => {
   const response = await fetch(`${host}${path.users}/${userId}${path.words}/${wordId}`, {
     method: 'DELETE',
-    // credentials: 'include',
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',

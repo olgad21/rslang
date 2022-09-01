@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { filterAggregate, host, path } from '../constants';
+import { host, path } from '../constants';
 import { Aggregation } from '../Interfaces';
 
 export const getAggregatedWords = async ({
@@ -16,7 +15,7 @@ export const getAggregatedWords = async ({
 };
 
 export const getAggregatedWord = async ({
-  userId, wordId, token, group, page, wordsPerPage, filter,
+  userId, wordId, token,
 } : Aggregation) => {
   const response = await fetch(`${host}${path.users}/${userId}${path.aggregatedWords}/${wordId}`, {
     method: 'GET',
@@ -24,10 +23,6 @@ export const getAggregatedWord = async ({
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',
     },
-    // params: {
-    //   filter,
-    //   wordsPerPage: '20',
-    // },
   });
   return response.json();
 };
