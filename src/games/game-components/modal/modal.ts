@@ -1,7 +1,7 @@
-import { createElement, removeAllChildNodes } from '../../helpers';
-import createSprintMenu from '../sprint/sprint-menu';
-import { Modal } from '../sprint/sprint-enum';
-import { renderGamePage } from '../game-menu';
+import { createElement, removeAllChildNodes } from '../../../helpers';
+import createSprintMenu from '../../sprint/sprint-menu/sprint-menu';
+import { Modal } from '../../sprint/sprint-enum';
+import { renderGamePage } from '../../game-menu/game-menu';
 
 const createAllElementsModal = () => {
   const modalContainer = createElement('div', 'modal__container');
@@ -30,7 +30,7 @@ const createAllElementsModal = () => {
 const findAllElemntsModal = () => {
   const wrapper = <HTMLElement>document.querySelector('.wrapper');
   const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
-  const results: number = Number(
+  const results = Number(
     (<HTMLElement>document.querySelector('.sprint-score-num')).textContent
   );
   const resultsTrue: number = (<NodeListOf<Element>>(
@@ -61,8 +61,8 @@ const createModal = () => {
     findAllElemntsModal();
 
   modalTitle.textContent = Modal.yourResults + results;
-  wordsCorrect.textContent = Modal.correctAnswer + `${resultsTrue}`;
-  wordsWrong.textContent = Modal.incorrectAnswer + `${resultsFalse}`;
+  wordsCorrect.textContent = `${Modal.correctAnswer}${resultsTrue}`;
+  wordsWrong.textContent = `${Modal.incorrectAnswer}${resultsFalse}`;
   modalBtnReapet.textContent = Modal.return;
   modalBtnMenu.textContent = Modal.menu;
 

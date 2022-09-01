@@ -1,4 +1,4 @@
-import createModal from '../../modal/modal';
+import createModal from '../../game-components/modal/modal';
 
 const getNewValue = (place: HTMLElement) => {
   const prevValue: number = parseInt(<string>place.textContent, 10);

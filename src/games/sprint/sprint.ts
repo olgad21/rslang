@@ -2,7 +2,7 @@ import { createElement, fillElement } from '../../helpers';
 import { getWords } from '../../eBook/controller/wordsController';
 import getNewValue from './timer/timer';
 import { Sprint } from './sprint-enum';
-import createModal from '../modal/modal';
+import createModal from '../game-components/modal/modal';
 import './sprint.scss';
 
 const createAllElementsSprint = () => {
@@ -65,9 +65,7 @@ const findAllElementsSprint = () => {
   return [useElem, useElemTrue, useElemFalse];
 };
 
-const randomNumber = (num: number) => {
-  return Math.floor(Math.random() * num);
-};
+const randomNumber = (num: number) => Math.floor(Math.random() * num);
 
 async function getWordToSprint(
   page: number,
@@ -98,6 +96,16 @@ const getResultOfGame = () => {
   placeResult.textContent = `${results}`;
 };
 
+const getResultView = (flag: boolean, useElem: HTMLElement) => {
+  if (flag) {
+    useElem.classList.remove('sprint-container__view-element');
+    useElem.classList.add('sprint-container__view-element-true');
+  } else if (!flag) {
+    useElem.classList.remove('sprint-container__view-element');
+    useElem.classList.add('sprint-container__view-element-false');
+  }
+};
+
 const sprintGameBtn = (
   choise: string,
   page: number,
@@ -109,7 +117,6 @@ const sprintGameBtn = (
 
   getWords(page, group).then((response) => {
     let flag = false;
-
     for (let i = 0; i < response.length; i += 1) {
       if (
         (enWord.textContent === response[i].word &&
@@ -130,17 +137,7 @@ const sprintGameBtn = (
       }
     }
 
-    if (flag) {
-      (<HTMLElement>useElem).classList.remove('sprint-container__view-element');
-      (<HTMLElement>useElem).classList.add(
-        'sprint-container__view-element-true'
-      );
-    } else if (!flag) {
-      (<HTMLElement>useElem).classList.remove('sprint-container__view-element');
-      (<HTMLElement>useElem).classList.add(
-        'sprint-container__view-element-false'
-      );
-    }
+    getResultView(flag, <HTMLElement>useElem);
   });
 
   if (
