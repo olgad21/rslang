@@ -5,9 +5,9 @@ import irynaAvatar from './assets/Iryna.png';
 import olgaAvatar from './assets/Olga.png';
 import alexeiAvatar from './assets/Alexei.png';
 
-export const host = 'https://rslang-team-68.herokuapp.com';
+const host = 'https://rslang-team-68.herokuapp.com';
 
-export const path = {
+const path = {
   users: '/users',
   tokens: '/tokens',
   words: '/words',
@@ -17,10 +17,10 @@ export const path = {
   signin: '/signin',
 };
 
-export const WORDS_OF_PAGE = 20;
-export const PAGES_NUMBER = 30;
+const WORDS_OF_PAGE = 20;
+const PAGES_NUMBER = 30;
 
-export interface Word {
+interface Word {
   id: string;
   group: number;
   page: number;
@@ -37,8 +37,8 @@ export interface Word {
   textExampleTranslate: string;
 }
 
-export interface Words {
-  items: Word[]
+interface Words {
+  items: Word[];
 }
 
 const strings = {
@@ -49,21 +49,70 @@ const strings = {
   audioCall: 'Аудио вызов',
   complicated: 'Сложное',
   deleted: 'Удалить',
+  regForm: 'Регистрация',
+  loginForm: 'Войти в аккаунт',
+  regSubmit: 'Зарегистрироватьcя',
+  loginSubmit: 'Войти',
+  loginQuestion: 'Нет аккаунта?',
+  regQuestion: 'Уже есть аккаунт?',
 };
 
+const statsStrings = {
+  numberLearnedWords: 'Количество изученных слов',
+  percentageRightWords: '% правильных ответов',
+  numberNewWords: 'Количество новых слов',
+  seriesRightWords: 'Количество правильных ответов подряд',
+  dayStats: 'Статистика за сегодня',
+  allStats: 'Статистика за всё время',
+};
+
+const gameIndicators = [
+  {
+    iconStyle: 'bi-patch-check',
+    description: statsStrings.numberNewWords,
+    id: 'new-words',
+  },
+  {
+    iconStyle: 'bi-check2',
+    description: statsStrings.numberLearnedWords,
+    id: 'learned-words',
+  },
+  {
+    iconStyle: 'bi-check2-all',
+    description: statsStrings.seriesRightWords,
+    id: 'right-words',
+  },
+];
+
+const dailyIndicators = [
+  {
+    description: statsStrings.numberNewWords,
+    id: 'daily-new-words',
+  },
+  {
+    description: statsStrings.numberLearnedWords,
+    id: 'daily-learned-words',
+  },
+  {
+    description: statsStrings.percentageRightWords,
+    id: 'daily-right-words',
+  },
+];
+
 interface MainDescription {
-  img: string,
-  message: string,
+  img: string;
+  message: string;
 }
 
-export const mainDes: MainDescription[] = [
+const mainDescriptions: MainDescription[] = [
   {
     img: asset1,
     message: 'Пробуй разные уровни сложности в упражнениях и ставь новые цели',
   },
   {
     img: asset2,
-    message: 'Следи за своим прогрессом в реальном времени на странице статистики',
+    message:
+      'Следи за своим прогрессом в реальном времени на странице статистики',
   },
   {
     img: asset3,
@@ -71,36 +120,54 @@ export const mainDes: MainDescription[] = [
   },
 ];
 
-export interface CreatorDescription {
-  img: string,
-  name: string,
-  role: string,
-  githubLink: string,
-  description: string,
+interface CreatorDescription {
+  img: string;
+  name: string;
+  role: string;
+  githubLink: string;
+  description: string;
 }
 
-export const creatorsDescriptions: CreatorDescription[] = [
+const creatorsDescriptions: CreatorDescription[] = [
   {
     img: irynaAvatar,
     name: 'Ирина',
     role: 'Frontend Developer',
     githubLink: 'https://github.com/irynakolh',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
   },
   {
     img: olgaAvatar,
     name: 'Ольга',
     role: 'Frontend Developer',
     githubLink: 'https://github.com/olgad21',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
   },
   {
     img: alexeiAvatar,
     name: 'Алексей',
     role: 'Frontend Developer',
     githubLink: 'https://github.com/marusovalexei',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
   },
 ];
 
-export default strings;
+export {
+  CreatorDescription,
+  MainDescription,
+  Words,
+  Word,
+  PAGES_NUMBER,
+  WORDS_OF_PAGE,
+  strings,
+  creatorsDescriptions,
+  mainDescriptions,
+  dailyIndicators,
+  gameIndicators,
+  statsStrings,
+  path,
+  host,
+};

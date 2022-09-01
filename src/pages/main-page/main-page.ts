@@ -1,13 +1,11 @@
-import renderHeader from '../components/header';
-import renderSidebar from '../components/sidebar';
-import renderFooter from '../components/footer';
-import { createElement } from '../helpers';
+import { createElement, removeAllChildNodes } from '../../helpers';
 import './main-page.scss';
-import strings, {
+import {
+  strings,
   CreatorDescription,
   creatorsDescriptions,
-  mainDes,
-} from '../constants';
+  mainDescriptions,
+} from '../../constants';
 
 const createMainMessage = (img: string, message: string) => {
   const mainMessage = createElement('div', ['main__message']);
@@ -15,19 +13,18 @@ const createMainMessage = (img: string, message: string) => {
   messageText.textContent = message;
   const messageImg = createElement(
     'img',
-    'main__message-img',
+    'main__message-img'
   ) as HTMLImageElement;
   messageImg.src = img;
   mainMessage.append(messageImg, messageText);
   return mainMessage;
 };
 
-const renderMainMessages = () => mainDes.map(({ img, message }) => createMainMessage(img, message));
+const renderMainMessages = () =>
+  mainDescriptions.map(({ img, message }) => createMainMessage(img, message));
 
 const createCreatorDescription = (creator: CreatorDescription) => {
-  const {
-    img, name, role, githubLink, description,
-  } = creator;
+  const { img, name, role, githubLink, description } = creator;
   const creatorDescription = createElement('div', ['creators__item']);
   const creatorText = createElement('div', 'creator-text');
   creatorText.textContent = description;
@@ -44,15 +41,16 @@ const createCreatorDescription = (creator: CreatorDescription) => {
     creatorName,
     creatorRole,
     creatorText,
-    creatorLink,
+    creatorLink
   );
   return creatorDescription;
 };
 
-const renderCreatorDescriptions = () => creatorsDescriptions.map(createCreatorDescription);
+const renderCreatorDescriptions = () =>
+  creatorsDescriptions.map(createCreatorDescription);
 
-const renderMainContent = () => {
-  const mainPageContent = createElement('div', 'main__wrapper');
+export const renderMainContent = () => {
+  const mainPageContent = createElement('div', 'main-container');
 
   const mainContent = createElement('div', 'main-content__wrapper');
 
@@ -88,18 +86,10 @@ const renderMainContent = () => {
 };
 
 const renderMainPage = () => {
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('wrapper');
-  document.body.append(wrapper);
-
-  const header = renderHeader();
-  const sidebar = renderSidebar();
-  const footer = renderFooter();
+  const mainWrapper = document.querySelector('.main__wrapper') as HTMLElement;
   const mainContent = renderMainContent();
-
-  wrapper.append(header, sidebar, mainContent, footer);
-
-  return wrapper;
+  removeAllChildNodes(mainWrapper);
+  mainWrapper?.append(mainContent);
 };
 
 export default renderMainPage;

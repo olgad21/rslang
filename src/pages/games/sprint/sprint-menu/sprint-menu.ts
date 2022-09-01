@@ -1,4 +1,4 @@
-import { createElement, removeAllChildNodes, fillElement } from '../../../helpers';
+import { createElement, removeAllChildNodes, fillElement } from '../../../../helpers';
 import { SprintMenu } from '../sprint-enum';
 import createSprint from '../sprint';
 

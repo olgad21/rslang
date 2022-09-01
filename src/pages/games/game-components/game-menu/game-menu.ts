@@ -1,6 +1,6 @@
-import { createElement, removeAllChildNodes } from '../../helpers';
-import createGameSlot from '../game-components/game-slot/game-slot';
-import createSprintMenu from '../sprint/sprint-menu/sprint-menu';
+import { createElement, removeAllChildNodes } from '../../../../helpers';
+import createGameSlot from '../game-slot/game-slot';
+import createSprintMenu from '../../sprint/sprint-menu/sprint-menu';
 import './game-menu.scss';
 
 const renderGameBackground = () => {

@@ -58,12 +58,17 @@ const baseConfig = {
             { test: /\.ts?$/, loader: "babel-loader" },
         ],
     },
+    devServer: {
+      historyApiFallback: true,
+    },
+
     resolve: {
         extensions: ['.ts', '.js', '.json'],
     },
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, './dist'),
+        publicPath: '/',
         //assetModuleFilename: 'assets/[name][ext]',
     },
     plugins: [

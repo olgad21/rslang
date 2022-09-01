@@ -1,0 +1,34 @@
+h2 {
+  text-align: center;
+  font-weight: bold;
+} 
+
+.daily-numbers-container,
+.game-stats-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem;
+}
+
+.daily-indicator__container {
+  width: 15%;
+}
+
+.daily-indicator__number {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.game-data {
+  background-color: #9CF6FB;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.stats__game-indicator {
+  display: flex;
+}
+
+.stats-icon {
+  margin-right: 1rem;
+}

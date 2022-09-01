@@ -1,6 +1,6 @@
 import { renderEBook } from '../view/renderBook';
-import { PAGES_NUMBER } from '../../constants';
-import { userPosition } from '../../helpers';
+import { PAGES_NUMBER } from '../../../constants';
+import { userPosition } from '../../../helpers';
 
 const storage = userPosition();
 
