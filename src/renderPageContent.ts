@@ -16,7 +16,7 @@ const renderPageContent = () => {
       choosePage();
       renderEBook();
       break;
-    case '/games':
+    case 'dictionary':
       break;
     case '/statistics':
       renderStatisticsPage();

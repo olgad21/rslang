@@ -4,7 +4,6 @@ import asset3 from './assets/22378293_6566143.jpg';
 import irynaAvatar from './assets/Iryna.png';
 import olgaAvatar from './assets/Olga.png';
 import alexeiAvatar from './assets/Alexei.png';
-import { UserWordOptions } from './Interfaces';
 
 export const host = 'https://rslang-team-68.herokuapp.com';
 
@@ -16,12 +15,6 @@ export const path = {
   statistics: '/statistics',
   settings: '/settings',
   signin: '/signin',
-};
-
-export const filterAggregate = {
-  isLearned: '{"$and":[{"userWord.difficulty":"easy", "userWord.optional.isLearned":true}]}',
-  hard: '{"$and":[{"userWord.difficulty":"hard"}]}',
-  isNewWord: '{"$and":[{"userWord.optional.isNewWord":true}]}',
 };
 
 export const WORDS_OF_PAGE = 20;
@@ -62,58 +55,7 @@ const strings = {
   loginSubmit: 'Войти',
   loginQuestion: 'Нет аккаунта?',
   regQuestion: 'Уже есть аккаунт?',
-  learned: 'Изученное',
-  learnedWords: 'Изученные слова',
-  complicatedWords: 'Cложные',
-  deletedWords: 'Удаленные слова',
-  easy: 'Простое',
-  width: '33.3%',
-  needLogin: 'Доступно только зарегистрированным пользователям.',
-  guesses: 'Правильных ответов:',
-  error: 'Не правильных ответов:',
 };
-
-export const statsStrings = {
-  numberLearnedWords: 'Количество изученных слов',
-  percentageRightWords: '% правильных ответов',
-  numberNewWords: 'Количество новых слов',
-  seriesRightWords: 'Количество правильных ответов подряд',
-  dayStats: 'Статистика за сегодня',
-  allStats: 'Статистика за всё время',
-};
-
-export const gameIndicators = [
-  {
-    iconStyle: 'bi-patch-check',
-    description: statsStrings.numberNewWords,
-    id: 'new-words',
-  },
-  {
-    iconStyle: 'bi-check2',
-    description: statsStrings.numberLearnedWords,
-    id: 'learned-words',
-  },
-  {
-    iconStyle: 'bi-check2-all',
-    description: statsStrings.seriesRightWords,
-    id: 'right-words',
-  },
-];
-
-export const dailyIndicators = [
-  {
-    description: statsStrings.numberNewWords,
-    id: 'daily-new-words',
-  },
-  {
-    description: statsStrings.numberLearnedWords,
-    id: 'daily-learned-words',
-  },
-  {
-    description: statsStrings.percentageRightWords,
-    id: 'daily-right-words',
-  },
-];
 
 interface MainDescription {
   img: string,

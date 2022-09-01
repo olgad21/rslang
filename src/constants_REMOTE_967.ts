@@ -27,26 +27,16 @@ export const filterAggregate = {
 export const WORDS_OF_PAGE = 20;
 export const PAGES_NUMBER = 30;
 
-export interface Word {
-  id: string;
-  group: number;
-  page: number;
-  word: string;
-  image: string;
-  audio: string;
-  audioMeaning: string;
-  audioExample: string;
-  textMeaning: string;
-  textExample: string;
-  transcription: string;
-  wordTranslate: string;
-  textMeaningTranslate: string;
-  textExampleTranslate: string;
-}
-
-export interface Words {
-  items: Word[]
-}
+export const wordBase : UserWordOptions = {
+  difficulty: 'easy',
+  optional: {
+    attemp: 0,
+    isNewWord: false,
+    guesses: 0,
+    error: 0,
+    isLearned: false,
+  },
+};
 
 const strings = {
   registration: 'Начать обучение',
@@ -72,48 +62,6 @@ const strings = {
   guesses: 'Правильных ответов:',
   error: 'Не правильных ответов:',
 };
-
-export const statsStrings = {
-  numberLearnedWords: 'Количество изученных слов',
-  percentageRightWords: '% правильных ответов',
-  numberNewWords: 'Количество новых слов',
-  seriesRightWords: 'Количество правильных ответов подряд',
-  dayStats: 'Статистика за сегодня',
-  allStats: 'Статистика за всё время',
-};
-
-export const gameIndicators = [
-  {
-    iconStyle: 'bi-patch-check',
-    description: statsStrings.numberNewWords,
-    id: 'new-words',
-  },
-  {
-    iconStyle: 'bi-check2',
-    description: statsStrings.numberLearnedWords,
-    id: 'learned-words',
-  },
-  {
-    iconStyle: 'bi-check2-all',
-    description: statsStrings.seriesRightWords,
-    id: 'right-words',
-  },
-];
-
-export const dailyIndicators = [
-  {
-    description: statsStrings.numberNewWords,
-    id: 'daily-new-words',
-  },
-  {
-    description: statsStrings.numberLearnedWords,
-    id: 'daily-learned-words',
-  },
-  {
-    description: statsStrings.percentageRightWords,
-    id: 'daily-right-words',
-  },
-];
 
 interface MainDescription {
   img: string,

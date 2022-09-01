@@ -1,3 +1,5 @@
+import { UserLevel } from './Interfaces';
+
 const createElement = (tag: string, classNames?: string | string[]) => {
   const el = document.createElement(tag);
 
@@ -12,7 +14,7 @@ const createElement = (tag: string, classNames?: string | string[]) => {
 export default createElement;
 
 export const userPosition = () => {
-  let userLevel = {
+  let userLevel: UserLevel = {
     group: 1,
     page: 1,
   };

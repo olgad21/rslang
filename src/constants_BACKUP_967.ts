@@ -27,26 +27,37 @@ export const filterAggregate = {
 export const WORDS_OF_PAGE = 20;
 export const PAGES_NUMBER = 30;
 
-export interface Word {
-  id: string;
-  group: number;
-  page: number;
-  word: string;
-  image: string;
-  audio: string;
-  audioMeaning: string;
-  audioExample: string;
-  textMeaning: string;
-  textExample: string;
-  transcription: string;
-  wordTranslate: string;
-  textMeaningTranslate: string;
-  textExampleTranslate: string;
+<<<<<<< HEAD
+export enum Hard {
+  easy = 'easy',
+  hard = 'hard',
 }
 
-export interface Words {
-  items: Word[]
-}
+export const wordBase : UserWordOptions = {
+  difficulty: Hard.easy,
+  optional: {
+    attemp: 0,
+    isNewWord: false,
+    sprintNew: false,
+    audioNew: false,
+    guesses: 0,
+    error: 0,
+    isLearned: false,
+    sprintLearned: false,
+    audioLearned: false,
+    date: String(Date.now()),
+=======
+export const wordBase : UserWordOptions = {
+  difficulty: 'easy',
+  optional: {
+    attemp: 0,
+    isNewWord: false,
+    guesses: 0,
+    error: 0,
+    isLearned: false,
+>>>>>>> db632de45143b77df4959241e2dbc700c2309fd4
+  },
+};
 
 const strings = {
   registration: 'Начать обучение',

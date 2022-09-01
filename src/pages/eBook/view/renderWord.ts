@@ -1,8 +1,10 @@
 import strings, { host } from '../../../constants';
 import createElement from '../../../helpers';
 import { Word } from '../../../Interfaces';
+import { Word } from '../../../Interfaces';
 
 const renderWord = (word: Word) => {
+  const dataId = (word.id) ? word.id : word._id;
   const dataId = (word.id) ? word.id : word._id;
   const english = createElement('p', 'english');
   english.textContent = `${word.word}`;
@@ -37,7 +39,8 @@ const renderWord = (word: Word) => {
   wordExamples.append(textExamples, textMeaningExamples);
 
   const controlBtns = createElement('div', 'control-btns');
-  const complicatedBtn = createElement('button', ['complicated-btn', 'control-btn']) as HTMLButtonElement;
+  const complicatedBtn = createElement('button', [['complicated-btn', 'control-btn'], 'control-btn']) as HTMLButtonElement;
+  complicatedBtn.setAttribute('data-id1', `${dataId}`);
   complicatedBtn.setAttribute('data-id1', `${dataId}`);
   complicatedBtn.textContent = strings.complicated;
   if (localStorage.getItem('user_id')) {
