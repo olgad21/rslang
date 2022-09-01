@@ -69,7 +69,7 @@
     width: 1000px; 
     height: 200px; 
     overflow: visible;
-    background-image: url(./../../assets/worldmap-1.svg);
+    background-image: url(./../../../assets/worldmap-1.svg);
     background-repeat: no-repeat;
 }
 
@@ -78,11 +78,11 @@
     top: 186px; 
     width: 200px; 
     height: 30px;
-    background-image: url(./../../assets/worldShadowUnder.svg);
+    background-image: url(./../../../assets/worldShadowUnder.svg);
 }
 
 .globe-inner-shadow { 
-    background-image: url(./../../assets/worldShadowInner.svg);
+    background-image: url(./../../../assets/worldShadowInner.svg);
 }
  
 .globe-worldmap-front { 

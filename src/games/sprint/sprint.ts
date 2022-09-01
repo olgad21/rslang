@@ -71,7 +71,7 @@ async function getWordToSprint(
   page: number,
   group: number,
   enWord: HTMLElement,
-  ruWord: HTMLElement
+  ruWord: HTMLElement,
 ) {
   const randomChoise = randomNumber(2);
   const randomNum1 = randomNumber(21);
@@ -111,7 +111,7 @@ const sprintGameBtn = (
   page: number,
   group: number,
   enWord: HTMLElement,
-  ruWord: HTMLElement
+  ruWord: HTMLElement,
 ) => {
   const [useElem, useElemTrue, useElemFalse] = findAllElementsSprint();
 
@@ -119,18 +119,18 @@ const sprintGameBtn = (
     let flag = false;
     for (let i = 0; i < response.length; i += 1) {
       if (
-        (enWord.textContent === response[i].word &&
-          ruWord.textContent === response[i].wordTranslate &&
-          choise === 'true') ||
-        (enWord.textContent === response[i].word &&
-          ruWord.textContent !== response[i].wordTranslate &&
-          choise === 'false')
+        (enWord.textContent === response[i].word
+          && ruWord.textContent === response[i].wordTranslate
+          && choise === 'true')
+        || (enWord.textContent === response[i].word
+          && ruWord.textContent !== response[i].wordTranslate
+          && choise === 'false')
       ) {
         (<HTMLElement>useElem).classList.remove(
-          'sprint-container__view-element'
+          'sprint-container__view-element',
         );
         (<HTMLElement>useElem).classList.add(
-          'sprint-container__view-element-true'
+          'sprint-container__view-element-true',
         );
         flag = true;
         getResultOfGame();
@@ -141,9 +141,9 @@ const sprintGameBtn = (
   });
 
   if (
-    (<NodeListOf<Element>>useElemTrue).length +
-      (<NodeListOf<Element>>useElemFalse).length ===
-    19
+    (<NodeListOf<Element>>useElemTrue).length
+      + (<NodeListOf<Element>>useElemFalse).length
+    === 19
   ) {
     createModal();
   } else {
@@ -176,7 +176,7 @@ const createSprint = (place: HTMLElement, lev: string | null) => {
     'div',
     'sprint-container__view-element',
     'element',
-    false
+    false,
   );
 
   sprintLevl.textContent = Sprint.levl + lev;
@@ -201,7 +201,7 @@ const createSprint = (place: HTMLElement, lev: string | null) => {
     sprintViewResults,
     sprintWordEn,
     sprintWordRu,
-    sprintGameBtnContainer
+    sprintGameBtnContainer,
   );
   sprintTitle.append(sprintScore, sprintScoreNum);
   globeContainer.append(sprintLevl, sprintTitle, sprintContainer);
