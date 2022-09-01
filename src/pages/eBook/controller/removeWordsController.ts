@@ -1,5 +1,5 @@
 import { updateUserWord } from '../../../API/userWordAPI';
-import strings, { wordBase } from '../../../constants';
+import strings, { Hard, wordBase } from '../../../constants';
 // eslint-disable-next-line import/no-cycle
 import renderHardLevel from '../view/renderHardLevel';
 
@@ -13,7 +13,7 @@ const removeFromHard = () => {
       if (event.target instanceof HTMLButtonElement) {
         if (event.target.innerText === strings.easy) {
           const wordId = event.target.dataset.id1;
-          wordBase.difficulty = 'easy';
+          wordBase.difficulty = Hard.easy;
           updateUserWord({
             userId, wordId, token, wordBase,
           });

@@ -27,8 +27,13 @@ export const filterAggregate = {
 export const WORDS_OF_PAGE = 20;
 export const PAGES_NUMBER = 30;
 
+export enum Hard {
+  easy = 'easy',
+  hard = 'hard',
+}
+
 export const wordBase : UserWordOptions = {
-  difficulty: 'easy',
+  difficulty: Hard.easy,
   optional: {
     attemp: 0,
     isNewWord: false,

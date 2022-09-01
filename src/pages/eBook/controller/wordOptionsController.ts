@@ -1,7 +1,7 @@
 import {
   createUserWord, getUserWord, updateUserWord,
 } from '../../../API/userWordAPI';
-import strings, { wordBase } from '../../../constants';
+import strings, { Hard, wordBase } from '../../../constants';
 
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
@@ -21,7 +21,7 @@ const wordOptions = () => {
           const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${wordId}"]`);
           complicatedBtn.textContent = strings.easy;
           complicatedBtn.classList.add('easy-word');
-          wordBase.difficulty = 'hard';
+          wordBase.difficulty = Hard.hard;
           wordBase.optional.isLearned = false;
           const userWord = await getUserWord({ userId, wordId, token });
           if (userWord.status === 404) {
@@ -40,7 +40,7 @@ const wordOptions = () => {
           complicatedBtn.classList.remove('easy-word');
           const hardWord = <HTMLElement>document.querySelector(`[data-hard="${wordId}"]`);
           hardWord.textContent = '';
-          wordBase.difficulty = 'easy';
+          wordBase.difficulty = Hard.easy;
           updateUserWord({
             userId, wordId, token, wordBase,
           });
@@ -52,7 +52,7 @@ const wordOptions = () => {
           const hardWord = <HTMLElement>document.querySelector(`[data-hard="${wordId}"]`);
           hardWord.textContent = strings.learned;
           wordBase.optional.isLearned = true;
-          wordBase.difficulty = 'easy';
+          wordBase.difficulty = Hard.easy;
           const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${wordId}"]`);
           complicatedBtn.textContent = strings.complicated;
           complicatedBtn.classList.remove('easy-word');
@@ -74,7 +74,7 @@ const wordOptions = () => {
           const hardWord = <HTMLElement>document.querySelector(`[data-hard="${wordId}"]`);
           hardWord.textContent = '';
           wordBase.optional.isLearned = false;
-          wordBase.difficulty = 'hard';
+          wordBase.difficulty = Hard.hard;
           updateUserWord({
             userId, wordId, token, wordBase,
           });
