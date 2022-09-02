@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 import { chooseLevel, choosePage } from './pages/eBook/controller/listenController';
 import { renderEBookHeader, renderEBook } from './pages/eBook/view/renderBook';
 import renderMainPage from './pages/main-page/main-page';
 import renderStatisticsPage from './pages/statistics/statistics';
 
-const renderPageContent = () => {
+const renderPageContent = async () => {
   const currentPage = window.location.pathname;
   switch (currentPage) {
     case '/':

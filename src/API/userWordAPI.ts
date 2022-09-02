@@ -1,5 +1,5 @@
 import { host, path } from '../constants';
-import { UserWord } from '../Interfaces';
+import { ExtendUserWord, UserWord } from '../Interfaces';
 
 export const createUserWord = async ({
   userId, wordId, token, wordBase,
@@ -25,7 +25,7 @@ export const createUserWord = async ({
   return content;
 };
 
-export const getAllUserWords = async ({ userId, token }: UserWord) => {
+export const getAllUserWords = async ({ userId, token }: UserWord): Promise<ExtendUserWord[]> => {
   const response = await fetch(`${host}${path.users}/${userId}${path.words}`, {
     method: 'GET',
     headers: {
@@ -34,7 +34,7 @@ export const getAllUserWords = async ({ userId, token }: UserWord) => {
     },
   });
   if (!response.ok) {
-    return 'Access token is missing or invalid';
+    throw new Error('Access token is missing or invalid');
   }
   const content = await response.json();
   return content;

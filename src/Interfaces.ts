@@ -83,3 +83,8 @@ export type UserLevel = {
   group: number;
   page: number;
 };
+
+export interface ExtendUserWord extends UserWordOptions {
+  id: string;
+  userWord: UserWord;
+}
