@@ -1,8 +1,8 @@
-import { createElement, fillElement } from './../../../helpers';
-import { getWords } from './../../eBook/controller/wordsController';
-import getNewValue from './timer/timer';
+import { createElement, fillElement } from '../../../helpers';
+import { getWords } from '../../eBook/controller/wordsController';
+import getNewValue from '../game-components/timer/timer';
 import { Sprint } from './sprint-enum';
-import createModal from './../game-components/modal/modal';
+import createModal from '../game-components/modal/modal';
 import './sprint.scss';
 
 const createAllElementsSprint = () => {
@@ -106,51 +106,6 @@ const getResultView = (flag: boolean, useElem: HTMLElement) => {
   }
 };
 
-const sprintGameBtn = (
-  choise: string,
-  page: number,
-  group: number,
-  enWord: HTMLElement,
-  ruWord: HTMLElement
-) => {
-  const [useElem, useElemTrue, useElemFalse] = findAllElementsSprint();
-
-  getWords(page, group).then((response) => {
-    let flag = false;
-    for (let i = 0; i < response.length; i += 1) {
-      if (
-        (enWord.textContent === response[i].word &&
-          ruWord.textContent === response[i].wordTranslate &&
-          choise === 'true') ||
-        (enWord.textContent === response[i].word &&
-          ruWord.textContent !== response[i].wordTranslate &&
-          choise === 'false')
-      ) {
-        (<HTMLElement>useElem).classList.remove(
-          'sprint-container__view-element'
-        );
-        (<HTMLElement>useElem).classList.add(
-          'sprint-container__view-element-true'
-        );
-        flag = true;
-        getResultOfGame();
-      }
-    }
-
-    getResultView(flag, <HTMLElement>useElem);
-  });
-
-  if (
-    (<NodeListOf<Element>>useElemTrue).length +
-      (<NodeListOf<Element>>useElemFalse).length ===
-    19
-  ) {
-    createModal();
-  } else {
-    getWordToSprint(page, group, enWord, ruWord);
-  }
-};
-
 const createSprint = (place: HTMLElement, lev: string | null) => {
   const [
     globeContainer,
@@ -178,6 +133,88 @@ const createSprint = (place: HTMLElement, lev: string | null) => {
     'element',
     false
   );
+
+  const getBestSeriesAnswer = () => {
+    const allResultsContainer = <HTMLElement>(
+      document.querySelector('.sprint-container__view-results')
+    );
+    const allResultsArray = Array.from(allResultsContainer.children);
+    let flag = false;
+    let count = 1;
+    let bestScore = 0;
+
+    for (let i = 0; i < allResultsArray.length; i += 1) {
+      if (
+        allResultsArray[i].classList.contains(
+          'sprint-container__view-element-true'
+        ) &&
+        flag
+      ) {
+        count += 1;
+      } else if (
+        allResultsArray[i].classList.contains(
+          'sprint-container__view-element-true'
+        ) &&
+        !flag
+      ) {
+        flag = true;
+        count = 1;
+      } else if (
+        allResultsArray[i].classList.contains(
+          'sprint-container__view-element-false'
+        )
+      ) {
+        bestScore = count;
+        flag = false;
+      }
+    }
+  };
+
+  const sprintGameBtn = (
+    choise: string,
+    page: number,
+    group: number,
+    enWord: HTMLElement,
+    ruWord: HTMLElement
+  ) => {
+    const [useElem, useElemTrue, useElemFalse] = findAllElementsSprint();
+
+    getWords(page, group).then((response) => {
+      let flag = false;
+      for (let i = 0; i < response.length; i += 1) {
+        if (
+          (enWord.textContent === response[i].word &&
+            ruWord.textContent === response[i].wordTranslate &&
+            choise === 'true') ||
+          (enWord.textContent === response[i].word &&
+            ruWord.textContent !== response[i].wordTranslate &&
+            choise === 'false')
+        ) {
+          (<HTMLElement>useElem).classList.remove(
+            'sprint-container__view-element'
+          );
+          (<HTMLElement>useElem).classList.add(
+            'sprint-container__view-element-true'
+          );
+          flag = true;
+          getResultOfGame();
+        }
+      }
+
+      getResultView(flag, <HTMLElement>useElem);
+    });
+
+    if (
+      (<NodeListOf<Element>>useElemTrue).length +
+        (<NodeListOf<Element>>useElemFalse).length ===
+      19
+    ) {
+      getBestSeriesAnswer();
+      createModal();
+    } else {
+      getWordToSprint(page, group, enWord, ruWord);
+    }
+  };
 
   sprintLevl.textContent = Sprint.levl + lev;
   sprintScore.textContent = Sprint.title;
