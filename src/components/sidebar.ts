@@ -46,10 +46,7 @@ const createNavItem = (navIcon: string, navName: string, navId: string) => {
   return navItem;
 };
 
-const renderNavigation = () =>
-  navItems.map(({ navIcon, navName, navId }) =>
-    createNavItem(navIcon, navName, navId)
-  );
+const renderNavigation = () => navItems.map(({ navIcon, navName, navId }) => createNavItem(navIcon, navName, navId));
 
 const renderSidebar = () => {
   const sidebar = createElement('div', [

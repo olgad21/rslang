@@ -19,9 +19,7 @@ const renderDailyStatsData = () => {
   const dayStatsTitle = createElement('h2', 'stats__subtitle');
   dayStatsTitle.textContent = statsStrings.dayStats;
 
-  const dailyIndicatorsData = dailyIndicators.map(({ description, id }) =>
-    renderDailyStatsIndicator(description, id)
-  );
+  const dailyIndicatorsData = dailyIndicators.map(({ description, id }) => renderDailyStatsIndicator(description, id));
 
   const dailyNumbersData = createElement('div', 'daily-numbers-container');
   dailyNumbersData.append(...dailyIndicatorsData);
@@ -33,7 +31,7 @@ const renderDailyStatsData = () => {
 const renderGameDataIndicator = (
   iconStyle: string,
   description: string,
-  id: string
+  id: string,
 ) => {
   const stats = createElement('div', 'stats__game-indicator');
   const icon = createElement('i', ['stats-icon', 'bi', `${iconStyle}`]);
@@ -54,8 +52,7 @@ const renderGameData = (name: string) => {
   gameName.textContent = name;
 
   const gameIndicatorsData = gameIndicators.map(
-    ({ iconStyle, description, id }) =>
-      renderGameDataIndicator(iconStyle, description, id)
+    ({ iconStyle, description, id }) => renderGameDataIndicator(iconStyle, description, id),
   );
 
   gameData.append(gameName, ...gameIndicatorsData);
@@ -88,7 +85,7 @@ const renderStatisticsPage = () => {
   mainWrapper?.append(
     statisticsDataDaily,
     statisticsGamesDaily,
-    statisticsDataAll
+    statisticsDataAll,
   );
   updateStatistics();
 };

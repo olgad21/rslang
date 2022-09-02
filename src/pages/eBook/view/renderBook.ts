@@ -13,7 +13,7 @@ import playSound from '../controller/musicController';
 export const renderEBookPage = () => {
   const eBook = createElement('div', 'e-book-container');
   const mainWrapper = document.querySelector(
-    '.main__wrapper'
+    '.main__wrapper',
   ) as HTMLDivElement;
   removeAllChildNodes(mainWrapper);
   mainWrapper.appendChild(eBook);
@@ -62,7 +62,7 @@ export const renderEBookPage = () => {
 export const renderEBook = () => {
   const userLevel = userPosition();
   const wordsContainer = document.querySelector(
-    '.words-container'
+    '.words-container',
   ) as HTMLDivElement;
   removeAllChildNodes(wordsContainer);
   getWords(userLevel.page - 1, userLevel.group - 1).then((response) => {

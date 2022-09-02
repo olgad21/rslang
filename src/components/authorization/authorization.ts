@@ -42,8 +42,7 @@ const createInput = (id: string, labelName: string) => {
   return inputWrapper;
 };
 
-const renderInputs = () =>
-  inputData.map(({ id, labelName }) => createInput(id, labelName));
+const renderInputs = () => inputData.map(({ id, labelName }) => createInput(id, labelName));
 
 const renderForm = (title: string, btnName: string) => {
   const authPopup = createElement('div', ['auth__popup']);
@@ -85,7 +84,7 @@ const renderForm = (title: string, btnName: string) => {
     authTitle,
     inputForm,
     authAccountMsg,
-    authAccountMsgBtn
+    authAccountMsgBtn,
   );
   authPopup.append(authPopupInner);
 
