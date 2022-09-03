@@ -86,5 +86,5 @@ export type UserLevel = {
 
 export interface ExtendUserWord extends UserWordOptions {
   id: string;
-  userWord: UserWord;
+  wordId: string;
 }
