@@ -3,7 +3,6 @@ import {
   choosePage,
 } from './pages/eBook/controller/listenController';
 import { renderEBookHeader, renderEBook } from './pages/eBook/view/renderBook';
-// import renderGamePage from './pages/games/game-menu';
 import renderMainPage from './pages/main-page/main-page';
 import renderStatisticsPage from './pages/statistics/statistics';
 import renderGameMenu from './pages/games';

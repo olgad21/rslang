@@ -156,7 +156,7 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     enWord: HTMLElement,
     ruWord: HTMLElement,
   ) => {
-    const [useElem, useElemTrue, useElemFalse] = findAllElementsSprint();
+    const [useElem] = findAllElementsSprint();
 
     getWords(page, group).then((response) => {
       let flag = false;
@@ -183,16 +183,7 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
       getResultView(flag, <HTMLElement>useElem);
     });
 
-    if (
-      (<NodeListOf<Element>>useElemTrue).length
-        + (<NodeListOf<Element>>useElemFalse).length
-      === 19
-    ) {
-      getBestSeriesAnswer();
-      renderModal();
-    } else {
-      getWordToSprint(page, group, enWord, ruWord);
-    }
+    getWordToSprint(page, group, enWord, ruWord);
   };
 
   (<HTMLElement>sprintGameBtnTrue).addEventListener('click', () => {
@@ -213,6 +204,25 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
       <HTMLElement>sprintWordRu,
     );
   });
+
+  const observer = setInterval(() => {
+    const useElemTrue = <NodeListOf<Element>>(
+      document.querySelectorAll('.sprint-container__view-element-true')
+    );
+    const useElemFalse = <NodeListOf<Element>>(
+      document.querySelectorAll('.sprint-container__view-element-false')
+    );
+
+    if (
+      (<NodeListOf<Element>>useElemTrue).length
+        + (<NodeListOf<Element>>useElemFalse).length
+      === 20
+    ) {
+      clearInterval(observer);
+      getBestSeriesAnswer();
+      renderModal();
+    }
+  }, 1000);
 
   getWordToSprint(
     <number>randomPage,
