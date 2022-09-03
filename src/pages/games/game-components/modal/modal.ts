@@ -1,7 +1,5 @@
-import { createElement, removeAllChildNodes } from '../../../../helpers';
-import createSprintMenu from '../../sprint/sprint-menu/sprint-menu';
+import { createElement } from '../../../../helpers';
 import { Modal } from '../../sprint/sprint-enum';
-import { renderGamePage } from '../game-menu/game-menu';
 
 const createAllElementsModal = () => {
   const modalContainer = createElement('div', 'modal__container');
@@ -31,7 +29,7 @@ const findAllElemntsModal = () => {
   const wrapper = <HTMLElement>document.querySelector('.wrapper');
   const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
   const results = Number(
-    (<HTMLElement>document.querySelector('.sprint-score-num')).textContent
+    (<HTMLElement>document.querySelector('.sprint-score-num')).textContent,
   );
   const resultsTrue: number = (<NodeListOf<Element>>(
     document.querySelectorAll('.sprint-container__view-element-true')
@@ -57,8 +55,7 @@ const createModal = () => {
     modalBtnMenu,
   ] = createAllElementsModal();
 
-  const [wrapper, wrapperMain, results, resultsTrue, resultsFalse] =
-    findAllElemntsModal();
+  const [wrapper, wrapperMain, results, resultsTrue, resultsFalse] = findAllElemntsModal();
 
   modalTitle.textContent = Modal.yourResults + results;
   wordsCorrect.textContent = `${Modal.correctAnswer}${resultsTrue}`;
@@ -66,25 +63,13 @@ const createModal = () => {
   modalBtnReapet.textContent = Modal.return;
   modalBtnMenu.textContent = Modal.menu;
 
-  modalBtnReapet.addEventListener('click', () => {
-    removeAllChildNodes(<HTMLElement>wrapperMain);
-    (<HTMLElement>wrapper).firstChild?.remove();
-    createSprintMenu(<HTMLElement>wrapperMain);
-  });
-
-  modalBtnMenu.addEventListener('click', () => {
-    removeAllChildNodes(<HTMLElement>wrapperMain);
-    (<HTMLElement>wrapper).firstChild?.remove();
-    renderGamePage();
-  });
-
   modalFooter.append(modalBtnReapet, modalBtnMenu);
   modalContent.append(wordsCorrect, wordsWrong);
   modalWindow.append(modalTitle, modalContent, modalFooter);
   modalContainer.append(modalWindow);
   (<HTMLElement>wrapper).prepend(modalContainer);
 
-  return wrapper;
+  return [wrapper, wrapperMain, modalBtnReapet, modalBtnMenu];
 };
 
 export default createModal;

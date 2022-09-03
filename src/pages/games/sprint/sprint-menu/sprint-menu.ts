@@ -1,6 +1,5 @@
-import { createElement, removeAllChildNodes, fillElement } from '../../../../helpers';
+import { createElement, fillElement } from '../../../../helpers';
 import { SprintMenu } from '../sprint-enum';
-import createSprint from '../sprint';
 
 const createAllElementsSprintMenu = () => {
   const sprintMenuContainer = <HTMLElement>(
@@ -52,17 +51,6 @@ const createSprintMenu = (place: HTMLElement) => {
     true,
   );
 
-  sprintMenuBtnStart.addEventListener('click', () => {
-    const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
-    const choseLvl = <HTMLSelectElement>(
-      document.querySelector('.menu-btn__complexity')
-    );
-    const levl = choseLvl.value;
-
-    removeAllChildNodes(wrapperMain);
-    createSprint(wrapperMain, levl);
-  });
-
   sprintMenuTitle.textContent = SprintMenu.title;
   sprintMenuDescription.textContent = SprintMenu.description;
   sprintMenuBtnStart.innerHTML = SprintMenu.btn;
@@ -75,7 +63,7 @@ const createSprintMenu = (place: HTMLElement) => {
   );
   place.append(sprintMenuContainer);
 
-  return place;
+  return sprintMenuBtnStart;
 };
 
 export default createSprintMenu;

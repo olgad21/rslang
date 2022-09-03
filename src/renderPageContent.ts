@@ -5,7 +5,7 @@ import {
 import { renderEBookPage, renderEBook } from './pages/eBook/view/renderBook';
 import renderMainPage from './pages/main-page/main-page';
 import renderStatisticsPage from './pages/statistics/statistics';
-import { renderGamePage } from './pages/games/game-components/game-menu/game-menu';
+import renderGameMenu from './pages/games';
 
 const renderPageContent = () => {
   const currentPage = window.location.pathname;
@@ -23,7 +23,7 @@ const renderPageContent = () => {
     case '/dictionary':
       break;
     case '/games':
-      renderGamePage();
+      renderGameMenu();
       break;
     case '/statistics':
       renderStatisticsPage();
