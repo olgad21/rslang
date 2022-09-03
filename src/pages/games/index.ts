@@ -1,5 +1,5 @@
 import { removeAllChildNodes } from '../../helpers';
-import { getWords } from '../eBook/controller/wordsController';
+import { getWords } from '../../API/wordsAPI';
 import createGameSlot from './game-components/game-slot/game-slot';
 import createSprintMenu from './sprint/sprint-menu/sprint-menu';
 import renderGamePage from './game-components/game-menu/game-menu';
@@ -55,7 +55,7 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     page: number,
     group: number,
     enWord: HTMLElement,
-    ruWord: HTMLElement,
+    ruWord: HTMLElement
   ) {
     const randomChoise = randomNumber(2);
     const randomNum1 = randomNumber(21);
@@ -123,22 +123,22 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     for (let i = 0; i < allResultsArray.length; i += 1) {
       if (
         allResultsArray[i].classList.contains(
-          'sprint-container__view-element-true',
-        )
-        && flag
+          'sprint-container__view-element-true'
+        ) &&
+        flag
       ) {
         count += 1;
       } else if (
         allResultsArray[i].classList.contains(
-          'sprint-container__view-element-true',
-        )
-        && !flag
+          'sprint-container__view-element-true'
+        ) &&
+        !flag
       ) {
         flag = true;
         count = 1;
       } else if (
         allResultsArray[i].classList.contains(
-          'sprint-container__view-element-false',
+          'sprint-container__view-element-false'
         )
       ) {
         bestScore = count;
@@ -146,7 +146,7 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
       }
     }
 
-    localStorage.setItem('theBestSeriesAnswer', `${bestScore}`);
+    localStorage.setItem('bestSeriesSprint', `${bestScore}`);
   };
 
   const sprintGameBtn = (
@@ -154,7 +154,7 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     page: number,
     group: number,
     enWord: HTMLElement,
-    ruWord: HTMLElement,
+    ruWord: HTMLElement
   ) => {
     const [useElem, useElemTrue, useElemFalse] = findAllElementsSprint();
 
@@ -162,18 +162,18 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
       let flag = false;
       for (let i = 0; i < response.length; i += 1) {
         if (
-          (enWord.textContent === response[i].word
-            && ruWord.textContent === response[i].wordTranslate
-            && choise === 'true')
-          || (enWord.textContent === response[i].word
-            && ruWord.textContent !== response[i].wordTranslate
-            && choise === 'false')
+          (enWord.textContent === response[i].word &&
+            ruWord.textContent === response[i].wordTranslate &&
+            choise === 'true') ||
+          (enWord.textContent === response[i].word &&
+            ruWord.textContent !== response[i].wordTranslate &&
+            choise === 'false')
         ) {
           (<HTMLElement>useElem).classList.remove(
-            'sprint-container__view-element',
+            'sprint-container__view-element'
           );
           (<HTMLElement>useElem).classList.add(
-            'sprint-container__view-element-true',
+            'sprint-container__view-element-true'
           );
           flag = true;
           getResultOfGame();
@@ -184,9 +184,9 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     });
 
     if (
-      (<NodeListOf<Element>>useElemTrue).length
-        + (<NodeListOf<Element>>useElemFalse).length
-      === 19
+      (<NodeListOf<Element>>useElemTrue).length +
+        (<NodeListOf<Element>>useElemFalse).length ===
+      19
     ) {
       getBestSeriesAnswer();
       renderModal();
@@ -201,7 +201,7 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
       <number>randomPage,
       <number>gameLevl,
       <HTMLElement>sprintWordEn,
-      <HTMLElement>sprintWordRu,
+      <HTMLElement>sprintWordRu
     );
   });
   (<HTMLElement>sprintGameBtnFalse).addEventListener('click', () => {
@@ -210,7 +210,7 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
       <number>randomPage,
       <number>gameLevl,
       <HTMLElement>sprintWordEn,
-      <HTMLElement>sprintWordRu,
+      <HTMLElement>sprintWordRu
     );
   });
 
@@ -218,7 +218,7 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     <number>randomPage,
     <number>gameLevl,
     <HTMLElement>sprintWordEn,
-    <HTMLElement>sprintWordRu,
+    <HTMLElement>sprintWordRu
   );
   getNewValue(<HTMLElement>sprintTimer);
 };

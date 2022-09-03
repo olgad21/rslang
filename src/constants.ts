@@ -4,6 +4,7 @@ import asset3 from './assets/22378293_6566143.jpg';
 import irynaAvatar from './assets/Iryna.png';
 import olgaAvatar from './assets/Olga.png';
 import alexeiAvatar from './assets/Alexei.png';
+import { UserWordOptions } from './Interfaces';
 
 const host = 'https://rslang-team-68.herokuapp.com';
 
@@ -17,29 +18,39 @@ const path = {
   signin: '/signin',
 };
 
+export const filterAggregate = {
+  isLearned:
+    '{"$and":[{"userWord.difficulty":"easy", "userWord.optional.isLearned":true}]}',
+  hard: '{"$and":[{"userWord.difficulty":"hard"}]}',
+  isNewWord: '{"$and":[{"userWord.optional.isNewWord":true}]}',
+  attemp: '{"$and":[{"userWord.optional.attemp"}]}',
+  guesses: '{"$and":[{"userWord.optional.guesses"}]}',
+  error: '{"$and":[{"userWord.optional.error"}]}',
+};
+
 const WORDS_OF_PAGE = 20;
 const PAGES_NUMBER = 30;
 
-interface Word {
-  id: string;
-  group: number;
-  page: number;
-  word: string;
-  image: string;
-  audio: string;
-  audioMeaning: string;
-  audioExample: string;
-  textMeaning: string;
-  textExample: string;
-  transcription: string;
-  wordTranslate: string;
-  textMeaningTranslate: string;
-  textExampleTranslate: string;
+export enum Hard {
+  easy = 'easy',
+  hard = 'hard',
 }
 
-interface Words {
-  items: Word[];
-}
+export const wordBase: UserWordOptions = {
+  difficulty: Hard.easy,
+  optional: {
+    attemp: 0,
+    isNewWord: false,
+    sprintNew: false,
+    audioNew: false,
+    guesses: 0,
+    error: 0,
+    isLearned: false,
+    sprintLearned: false,
+    audioLearned: false,
+    date: String(Date.now()),
+  },
+};
 
 const strings = {
   registration: 'Начать обучение',
@@ -55,6 +66,15 @@ const strings = {
   loginSubmit: 'Войти',
   loginQuestion: 'Нет аккаунта?',
   regQuestion: 'Уже есть аккаунт?',
+  learned: 'Изученное',
+  learnedWords: 'Изученные слова',
+  complicatedWords: 'Cложные',
+  deletedWords: 'Удаленные слова',
+  easy: 'Простое',
+  width: '33.3%',
+  needLogin: 'Доступно только зарегистрированным пользователям.',
+  guesses: 'Правильных ответов:',
+  error: 'Не правильных ответов:',
 };
 
 const statsStrings = {
@@ -158,8 +178,6 @@ const creatorsDescriptions: CreatorDescription[] = [
 export {
   CreatorDescription,
   MainDescription,
-  Words,
-  Word,
   PAGES_NUMBER,
   WORDS_OF_PAGE,
   strings,

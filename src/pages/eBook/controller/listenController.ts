@@ -1,6 +1,7 @@
 import { renderEBook } from '../view/renderBook';
-import { PAGES_NUMBER } from '../../../constants';
-import { userPosition } from '../../../helpers';
+import strings, { PAGES_NUMBER } from '../../../constants';
+import { removeAllChildNodes, userPosition } from '../../../helpers';
+import renderHardLevel from '../view/renderHardLevel';
 
 const storage = userPosition();
 
@@ -93,6 +94,7 @@ function moveLeftMax() {
 
 export const chooseLevel = () => {
   const levelBtns = document.querySelectorAll('.level-btn');
+
   levelBtns?.forEach((elem) => {
     elem.addEventListener('click', (event) => {
       if (event.target instanceof HTMLButtonElement) {
@@ -100,7 +102,7 @@ export const chooseLevel = () => {
           item.classList.remove('active-element');
         });
         event.target.classList.add('active-element');
-        storage.group = +event.target.innerText;
+        storage.group = Number(event.target.getAttribute('data-id'));
         storage.page = 1;
         localStorage.setItem('userLevel', JSON.stringify(storage));
         const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
@@ -117,7 +119,22 @@ export const chooseLevel = () => {
         nextBtn.classList.add('active-element');
         endBtn.disabled = false;
         endBtn.classList.add('active-element');
-        renderEBook();
+        if (storage.group === 7) {
+          const pagination = document.querySelector('.pagination') as HTMLDivElement;
+          pagination.style.display = 'none';
+          const wordsContainer = document.querySelector('.words-container') as HTMLDivElement;
+          wordsContainer.style.backgroundColor = 'white';
+          removeAllChildNodes(wordsContainer);
+          if (localStorage.getItem('user_id')) {
+            renderHardLevel();
+          } else {
+            wordsContainer.textContent = strings.needLogin;
+          }
+        } else {
+          const pagination = document.querySelector('.pagination') as HTMLDivElement;
+          pagination.style.display = 'flex';
+          renderEBook();
+        }
       }
     });
   });

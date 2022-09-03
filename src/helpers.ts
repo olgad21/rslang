@@ -1,3 +1,5 @@
+import { UserLevel } from './Interfaces';
+
 const createElement = (tag: string, classNames?: string | string[]) => {
   const el = document.createElement(tag);
 
@@ -10,7 +12,7 @@ const createElement = (tag: string, classNames?: string | string[]) => {
 };
 
 const userPosition = () => {
-  let userLevel = {
+  let userLevel: UserLevel = {
     group: 1,
     page: 1,
   };
@@ -39,7 +41,7 @@ const fillElement = (
   tag: string,
   classNames: string,
   attribute: string,
-  text: boolean,
+  text: boolean
 ) => {
   for (let i = 1; i <= howManyEl; i += 1) {
     const elem = <HTMLElement>createElement(tag, classNames);
@@ -55,6 +57,4 @@ const fillElement = (
   return place;
 };
 
-export {
-  createElement, removeAllChildNodes, userPosition, fillElement,
-};
+export { createElement, removeAllChildNodes, userPosition, fillElement };
