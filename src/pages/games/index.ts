@@ -60,16 +60,18 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     const randomChoise = randomNumber(2);
     const randomNum1 = randomNumber(21);
     const randomNum2 = randomNumber(21);
+    const enWordParam = enWord;
+    const ruWordParam = ruWord;
 
     if (randomChoise === 0) {
       getWords(page, group).then((response) => {
-        enWord.textContent = response[randomNum1].word;
-        ruWord.textContent = response[randomNum1].wordTranslate;
+        enWordParam.textContent = response[randomNum1].word;
+        ruWordParam.textContent = response[randomNum1].wordTranslate;
       });
     } else if (randomChoise === 1) {
       getWords(page, group).then((response) => {
-        enWord.textContent = response[randomNum1].word;
-        ruWord.textContent = response[randomNum2].wordTranslate;
+        enWordParam.textContent = response[randomNum1].word;
+        ruWordParam.textContent = response[randomNum2].wordTranslate;
       });
     }
   }
@@ -95,14 +97,15 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
   const getNewValue = (placeTimer: HTMLElement) => {
     const prevValue: number = parseInt(<string>placeTimer.textContent, 10);
     let nextValue: number = prevValue - 1;
+    const placeTimerParam = placeTimer;
 
     const timer = setInterval(() => {
       if (nextValue === 0) {
         clearInterval(timer);
         renderModal();
       } else {
-        placeTimer.textContent = '';
-        placeTimer.textContent = String(<number>nextValue);
+        placeTimerParam.textContent = '';
+        placeTimerParam.textContent = String(<number>nextValue);
         nextValue -= 1;
       }
     }, 1000);
@@ -142,6 +145,8 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
         flag = false;
       }
     }
+
+    localStorage.setItem('theBestSeriesAnswer', `${bestScore}`);
   };
 
   const sprintGameBtn = (
