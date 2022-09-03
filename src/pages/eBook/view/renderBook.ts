@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import { getWords } from '../controller/wordsController';
-import { strings, Word } from '../../../constants';
-=======
 import { getWords } from '../../../API/wordsAPI';
->>>>>>> ab86abbe6f3185aed222fd7054ea314cf96c867b
 import renderWord from './renderWord';
 import './renderWord.scss';
 import renderPagination from './pagination';
@@ -15,7 +10,7 @@ import {
 import playSound from '../controller/musicController';
 import wordOptions from '../controller/wordOptionsController';
 import { ExtendUserWord, UserLevel, Word } from '../../../Interfaces';
-import strings from '../../../constants';
+import { strings } from '../../../constants';
 import { getAllUserWords } from '../../../API/userWordAPI';
 
 export const renderEBookHeader = () => {
@@ -72,7 +67,9 @@ export const renderEBookHeader = () => {
 };
 
 const addLevelStyle = (userLevel: UserLevel) => {
-  const wordsContainer = document.querySelector('.words-container') as HTMLDivElement;
+  const wordsContainer = document.querySelector(
+    '.words-container',
+  ) as HTMLDivElement;
   if (userLevel.group === 1) {
     wordsContainer.style.backgroundColor = 'green';
   } else if (userLevel.group === 2) {
@@ -114,22 +111,30 @@ export const renderEBook = () => {
 
           userWordArray.forEach((elem: ExtendUserWord) => {
             if (word.id === elem.wordId) {
-              const hardWord = <HTMLElement>document.querySelector(`[data-hard="${word.id}"]`);
+              const hardWord = <HTMLElement>(
+                document.querySelector(`[data-hard="${word.id}"]`)
+              );
               if (elem.difficulty === strings.easy) {
                 hardWord.textContent = String(strings.complicated);
               }
-              const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${word.id}"]`);
+              const complicatedBtn = <HTMLButtonElement>(
+                document.querySelector(`[data-id1="${word.id}"]`)
+              );
               if (elem.optional.isLearned === true) {
                 complicatedBtn.textContent = strings.easy;
                 complicatedBtn.classList.add('easy-word');
               }
-              const countGuesses = <HTMLElement>document.querySelector(`[data-guess="${word.id}"]`);
+              const countGuesses = <HTMLElement>(
+                document.querySelector(`[data-guess="${word.id}"]`)
+              );
               if (elem.optional.guesses) {
                 countGuesses.textContent = String(elem.optional.guesses);
               } else {
                 countGuesses.textContent = '0';
               }
-              const countError = <HTMLElement>document.querySelector(`[data-error="${word.id}"]`);
+              const countError = <HTMLElement>(
+                document.querySelector(`[data-error="${word.id}"]`)
+              );
               if (elem.optional.error) {
                 countError.textContent = String(elem.optional.error);
               } else {

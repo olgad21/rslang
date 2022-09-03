@@ -1,5 +1,5 @@
 import { renderEBook } from '../view/renderBook';
-import strings, { PAGES_NUMBER } from '../../../constants';
+import { strings, PAGES_NUMBER } from '../../../constants';
 import { removeAllChildNodes, userPosition } from '../../../helpers';
 import renderHardLevel from '../view/renderHardLevel';
 
@@ -8,7 +8,9 @@ const storage = userPosition();
 function moveRight() {
   const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
   const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
-  const currentBtn = document.querySelector('.current-btn') as HTMLButtonElement;
+  const currentBtn = document.querySelector(
+    '.current-btn',
+  ) as HTMLButtonElement;
   const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
   const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
   if (currentBtn?.innerHTML === '1') {
@@ -31,7 +33,9 @@ function moveRight() {
 function moveLeft() {
   const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
   const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
-  const currentBtn = document.querySelector('.current-btn') as HTMLButtonElement;
+  const currentBtn = document.querySelector(
+    '.current-btn',
+  ) as HTMLButtonElement;
   const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
   const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
   if (currentBtn.innerHTML === '2') {
@@ -54,7 +58,9 @@ function moveLeft() {
 function moveRightMax() {
   const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
   const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
-  const currentBtn = document.querySelector('.current-btn') as HTMLButtonElement;
+  const currentBtn = document.querySelector(
+    '.current-btn',
+  ) as HTMLButtonElement;
   const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
   const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
   if (currentBtn.innerHTML === '1') {
@@ -75,7 +81,9 @@ function moveRightMax() {
 function moveLeftMax() {
   const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
   const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
-  const currentBtn = document.querySelector('.current-btn') as HTMLButtonElement;
+  const currentBtn = document.querySelector(
+    '.current-btn',
+  ) as HTMLButtonElement;
   const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
   const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
   if (storage.page === PAGES_NUMBER) {
@@ -105,10 +113,18 @@ export const chooseLevel = () => {
         storage.group = Number(event.target.getAttribute('data-id'));
         storage.page = 1;
         localStorage.setItem('userLevel', JSON.stringify(storage));
-        const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
-        const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
-        const currentBtn = document.querySelector('.current-btn') as HTMLButtonElement;
-        const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
+        const startBtn = document.querySelector(
+          '.start-btn',
+        ) as HTMLButtonElement;
+        const prevBtn = document.querySelector(
+          '.prev-btn',
+        ) as HTMLButtonElement;
+        const currentBtn = document.querySelector(
+          '.current-btn',
+        ) as HTMLButtonElement;
+        const nextBtn = document.querySelector(
+          '.next-btn',
+        ) as HTMLButtonElement;
         const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
         currentBtn.textContent = '1';
         startBtn.disabled = true;
@@ -120,9 +136,13 @@ export const chooseLevel = () => {
         endBtn.disabled = false;
         endBtn.classList.add('active-element');
         if (storage.group === 7) {
-          const pagination = document.querySelector('.pagination') as HTMLDivElement;
+          const pagination = document.querySelector(
+            '.pagination',
+          ) as HTMLDivElement;
           pagination.style.display = 'none';
-          const wordsContainer = document.querySelector('.words-container') as HTMLDivElement;
+          const wordsContainer = document.querySelector(
+            '.words-container',
+          ) as HTMLDivElement;
           wordsContainer.style.backgroundColor = 'white';
           removeAllChildNodes(wordsContainer);
           if (localStorage.getItem('user_id')) {
@@ -131,7 +151,9 @@ export const chooseLevel = () => {
             wordsContainer.textContent = strings.needLogin;
           }
         } else {
-          const pagination = document.querySelector('.pagination') as HTMLDivElement;
+          const pagination = document.querySelector(
+            '.pagination',
+          ) as HTMLDivElement;
           pagination.style.display = 'flex';
           renderEBook();
         }

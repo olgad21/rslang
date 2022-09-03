@@ -1,6 +1,6 @@
 import { getAggregatedWords } from '../../../API/aggregatedWordsAPI';
-import strings, { filterAggregate } from '../../../constants';
-import createElement, { removeAllChildNodes } from '../../../helpers';
+import { strings, filterAggregate } from '../../../constants';
+import { createElement, removeAllChildNodes } from '../../../helpers';
 import { ExtendWord } from '../../../Interfaces';
 import renderWord from './renderWord';
 import playSound from '../controller/musicController';
@@ -12,7 +12,9 @@ const token = String(localStorage.getItem('token'));
 
 const renderHardLevel = () => {
   const filter = filterAggregate.hard;
-  const wordsContainer = document.querySelector('.words-container') as HTMLDivElement;
+  const wordsContainer = document.querySelector(
+    '.words-container',
+  ) as HTMLDivElement;
   removeAllChildNodes(wordsContainer);
 
   const hardWordsList = getAggregatedWords({ userId, token, filter });
@@ -22,16 +24,26 @@ const renderHardLevel = () => {
       wordsContainer.appendChild(wordItem);
       wordItem.append(renderWord(word));
 
-      const hardWord = <HTMLElement>document.querySelector(`[data-hard="${word._id}"]`);
+      const hardWord = <HTMLElement>(
+        document.querySelector(`[data-hard="${word._id}"]`)
+      );
       hardWord.textContent = String(strings.complicated);
-      const learnedBtn = <HTMLButtonElement>document.querySelector(`[data-id2="${word._id}"]`);
+      const learnedBtn = <HTMLButtonElement>(
+        document.querySelector(`[data-id2="${word._id}"]`)
+      );
       learnedBtn.style.display = 'none';
-      const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${word._id}"]`);
+      const complicatedBtn = <HTMLButtonElement>(
+        document.querySelector(`[data-id1="${word._id}"]`)
+      );
       complicatedBtn.textContent = strings.easy;
       complicatedBtn.classList.add('easy-word');
-      const countGuesses = <HTMLElement>document.querySelector(`[data-guess="${word._id}"]`);
+      const countGuesses = <HTMLElement>(
+        document.querySelector(`[data-guess="${word._id}"]`)
+      );
       countGuesses.textContent = String(word.userWord.optional.guesses);
-      const countError = <HTMLElement>document.querySelector(`[data-error="${word._id}"]`);
+      const countError = <HTMLElement>(
+        document.querySelector(`[data-error="${word._id}"]`)
+      );
       countError.textContent = String(word.userWord.optional.error);
       return wordItem;
     });
