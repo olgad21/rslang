@@ -5,9 +5,9 @@ import renderPagination from './pagination';
 import createElement, { removeAllChildNodes, userPosition } from '../../../helpers';
 import playSound from '../controller/musicController';
 import wordOptions from '../controller/wordOptionsController';
-import { UserLevel, Word } from '../../../Interfaces';
-import strings, { filterAggregate } from '../../../constants';
-import { getAggregatedWords } from '../../../API/aggregatedWordsAPI';
+import { ExtendUserWord, UserLevel, Word } from '../../../Interfaces';
+import strings from '../../../constants';
+import { getAllUserWords } from '../../../API/userWordAPI';
 
 export const renderEBookHeader = () => {
   const eBook = createElement('div', 'e-book-container');
@@ -84,53 +84,51 @@ export const renderEBook = () => {
 
   const userId = String(localStorage.getItem('user_id'));
   const token = String(localStorage.getItem('token'));
-  let filter = filterAggregate.hard;
-  const isHardWord = getAggregatedWords({ userId, token, filter });
 
-  filter = filterAggregate.isLearned;
-  const isLearnedWord = getAggregatedWords({ userId, token, filter });
+  const userWordList = getAllUserWords({ userId, token });
 
   const wordsList = getWords(userLevel.page - 1, userLevel.group - 1);
 
   if (localStorage.getItem('user_id')) {
-    isHardWord.then((res1) => {
-      const hardWordArray = res1;
-      isLearnedWord.then((res2) => {
-        const learnedWordArray = res2;
-        wordsList.then((res3) => {
-          res3.map((word: Word) => {
-            const wordItem = createElement('div', 'word-item');
-            addLevelStyle(userLevel);
-            wordsContainer.appendChild(wordItem);
-            wordItem.append(renderWord(word));
+    userWordList.then((res1) => {
+      const userWordArray = res1;
+      wordsList.then((res2) => {
+        res2.map((word: Word) => {
+          const wordItem = createElement('div', 'word-item');
+          addLevelStyle(userLevel);
+          wordsContainer.appendChild(wordItem);
+          wordItem.append(renderWord(word));
 
-            hardWordArray[0].paginatedResults.forEach((elem: Word) => {
-              if (word.id === elem._id) {
-                const hardWord = <HTMLElement>document.querySelector(`[data-hard="${word.id}"]`);
+          userWordArray.forEach((elem: ExtendUserWord) => {
+            if (word.id === elem.wordId) {
+              const hardWord = <HTMLElement>document.querySelector(`[data-hard="${word.id}"]`);
+              if (elem.difficulty === strings.easy) {
                 hardWord.textContent = String(strings.complicated);
-                const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${word.id}"]`);
+              }
+              const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${word.id}"]`);
+              if (elem.optional.isLearned === true) {
                 complicatedBtn.textContent = strings.easy;
                 complicatedBtn.classList.add('easy-word');
               }
-            });
-
-            learnedWordArray[0].paginatedResults.forEach((elem: Word) => {
-              if (word.id === elem._id) {
-                const learnedBtn = <HTMLElement>document.querySelector(`[data-id2="${word.id}"]`);
-                learnedBtn.style.backgroundColor = 'grey';
-                learnedBtn.textContent = strings.learnedWords;
-                const hardWord = <HTMLElement>document.querySelector(`[data-hard="${word.id}"]`);
-                hardWord.textContent = strings.learned;
-                const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${word.id}"]`);
-                complicatedBtn.textContent = strings.complicated;
-                complicatedBtn.classList.remove('easy-word');
+              const countGuesses = <HTMLElement>document.querySelector(`[data-guess="${word.id}"]`);
+              if (elem.optional.guesses) {
+                countGuesses.textContent = String(elem.optional.guesses);
+              } else {
+                countGuesses.textContent = '0';
               }
-            });
-            return wordItem;
+              const countError = <HTMLElement>document.querySelector(`[data-error="${word.id}"]`);
+              if (elem.optional.error) {
+                countError.textContent = String(elem.optional.error);
+              } else {
+                countGuesses.textContent = '0';
+              }
+            }
           });
-          playSound();
-          wordOptions();
+
+          return wordItem;
         });
+        playSound();
+        wordOptions();
       });
     });
   } else {

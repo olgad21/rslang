@@ -59,7 +59,7 @@ export interface UserWordOptions {
 
 export interface ExtendWord extends Word {
   _id: string;
-  userWord: UserWord;
+  userWord: UserWordOptions;
 }
 
 export interface UserWord {
@@ -83,3 +83,8 @@ export type UserLevel = {
   group: number;
   page: number;
 };
+
+export interface ExtendUserWord extends UserWordOptions {
+  id: string;
+  wordId: string;
+}

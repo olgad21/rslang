@@ -22,6 +22,9 @@ export const filterAggregate = {
   isLearned: '{"$and":[{"userWord.difficulty":"easy", "userWord.optional.isLearned":true}]}',
   hard: '{"$and":[{"userWord.difficulty":"hard"}]}',
   isNewWord: '{"$and":[{"userWord.optional.isNewWord":true}]}',
+  attemp: '{"$and":[{"userWord.optional.attemp"}]}',
+  guesses: '{"$and":[{"userWord.optional.guesses"}]}',
+  error: '{"$and":[{"userWord.optional.error"}]}',
 };
 
 export const WORDS_OF_PAGE = 20;
