@@ -92,7 +92,7 @@ const createSprint = (lev: number | null, group: number) => {
     'div',
     'sprint-container__view-element',
     'element',
-    false
+    false,
   );
 
   sprintLevl.textContent = Sprint.levl + lev;
@@ -107,7 +107,7 @@ const createSprint = (lev: number | null, group: number) => {
     sprintViewResults,
     sprintWordEn,
     sprintWordRu,
-    sprintGameBtnContainer
+    sprintGameBtnContainer,
   );
   sprintTitle.append(sprintScore, sprintScoreNum);
   globeContainer.append(sprintLevl, sprintTitle, sprintContainer);

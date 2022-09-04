@@ -92,7 +92,7 @@ const renderWord = (word: Word | ExtendWord) => {
     wordInfo,
     wordMeaning,
     wordExamples,
-    statistic
+    statistic,
   );
 
   const wordImg = createElement('div', 'word-img');

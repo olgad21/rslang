@@ -9,7 +9,7 @@ function moveRight() {
   const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
   const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
   const currentBtn = document.querySelector(
-    '.current-btn'
+    '.current-btn',
   ) as HTMLButtonElement;
   const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
   const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
@@ -34,7 +34,7 @@ function moveLeft() {
   const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
   const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
   const currentBtn = document.querySelector(
-    '.current-btn'
+    '.current-btn',
   ) as HTMLButtonElement;
   const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
   const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
@@ -59,7 +59,7 @@ function moveRightMax() {
   const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
   const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
   const currentBtn = document.querySelector(
-    '.current-btn'
+    '.current-btn',
   ) as HTMLButtonElement;
   const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
   const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
@@ -82,7 +82,7 @@ function moveLeftMax() {
   const startBtn = document.querySelector('.start-btn') as HTMLButtonElement;
   const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
   const currentBtn = document.querySelector(
-    '.current-btn'
+    '.current-btn',
   ) as HTMLButtonElement;
   const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
   const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
@@ -114,16 +114,16 @@ export const chooseLevel = () => {
         storage.page = 1;
         localStorage.setItem('userLevel', JSON.stringify(storage));
         const startBtn = document.querySelector(
-          '.start-btn'
+          '.start-btn',
         ) as HTMLButtonElement;
         const prevBtn = document.querySelector(
-          '.prev-btn'
+          '.prev-btn',
         ) as HTMLButtonElement;
         const currentBtn = document.querySelector(
-          '.current-btn'
+          '.current-btn',
         ) as HTMLButtonElement;
         const nextBtn = document.querySelector(
-          '.next-btn'
+          '.next-btn',
         ) as HTMLButtonElement;
         const endBtn = document.querySelector('.end-btn') as HTMLButtonElement;
         currentBtn.textContent = '1';
@@ -137,11 +137,11 @@ export const chooseLevel = () => {
         endBtn.classList.add('active-element');
         if (storage.group === 7) {
           const pagination = document.querySelector(
-            '.pagination'
+            '.pagination',
           ) as HTMLDivElement;
           pagination.style.display = 'none';
           const wordsContainer = document.querySelector(
-            '.words-container'
+            '.words-container',
           ) as HTMLDivElement;
           wordsContainer.style.backgroundColor = 'white';
           removeAllChildNodes(wordsContainer);
@@ -153,7 +153,7 @@ export const chooseLevel = () => {
           }
         } else {
           const pagination = document.querySelector(
-            '.pagination'
+            '.pagination',
           ) as HTMLDivElement;
           pagination.style.display = 'flex';
           renderEBook();

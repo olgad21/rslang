@@ -1,7 +1,7 @@
 import createUser from '../../API/createUser.api';
 import loginUser from '../../API/loginUser.api';
-import  strings  from '../../constants';
-import  createElement  from '../../helpers';
+import strings from '../../constants';
+import createElement from '../../helpers';
 import './authorization.scss';
 
 const inputData = [

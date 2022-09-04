@@ -65,7 +65,7 @@ const renderSprint = (group: number, page: number) => {
     pageWord: number,
     groupWord: number,
     enWord: HTMLElement,
-    ruWord: HTMLElement
+    ruWord: HTMLElement,
   ) {
     const randomChoise = randomNumber(2);
     const randomNum1 = randomNumber(20);
@@ -76,7 +76,7 @@ const renderSprint = (group: number, page: number) => {
     const groupParam = groupWord;
 
     if (randomChoise === 0) {
-      getWords(pageParam, groupParam).then((response) => {
+      getWords(pageParam, groupParam).then(async (response) => {
         const wordBaseEn = <string>response[randomNum1].word;
         const wordBaseRu = <string>response[randomNum1].wordTranslate;
 
@@ -89,8 +89,12 @@ const renderSprint = (group: number, page: number) => {
             const userId = <string>localStorage.getItem('user_id');
             const token = <string>localStorage.getItem('token');
             const wordId = response[randomNum1].id;
-            const userWord = getUserWord({ userId, wordId, token });
-            console.log(response);
+            const userWord = getUserWord({
+              userId,
+              wordId,
+              token,
+            });
+
             if (userWord.status === 404) {
               wordBase.optional.attemp = 1;
               wordBase.optional.isNewWord = true;
@@ -154,22 +158,22 @@ const renderSprint = (group: number, page: number) => {
     for (let i = 0; i < allResultsArray.length; i += 1) {
       if (
         allResultsArray[i].classList.contains(
-          'sprint-container__view-element-true'
-        ) &&
-        flag
+          'sprint-container__view-element-true',
+        )
+        && flag
       ) {
         count += 1;
       } else if (
         allResultsArray[i].classList.contains(
-          'sprint-container__view-element-true'
-        ) &&
-        !flag
+          'sprint-container__view-element-true',
+        )
+        && !flag
       ) {
         flag = true;
         count = 1;
       } else if (
         allResultsArray[i].classList.contains(
-          'sprint-container__view-element-false'
+          'sprint-container__view-element-false',
         )
       ) {
         bestScore = count;
@@ -177,7 +181,6 @@ const renderSprint = (group: number, page: number) => {
       }
     }
 
-    // обновлять серию в settings сделать!!!!
     if (localStorage.getItem('user_id')) {
       const userId = <string>localStorage.getItem('user_id');
       const token = <string>localStorage.getItem('token');
@@ -211,7 +214,7 @@ const renderSprint = (group: number, page: number) => {
     pageW: number,
     groupW: number,
     enWord: HTMLElement,
-    ruWord: HTMLElement
+    ruWord: HTMLElement,
   ) => {
     const [useElem] = findAllElementsSprint();
 
@@ -219,18 +222,18 @@ const renderSprint = (group: number, page: number) => {
       let flag = false;
       for (let i = 0; i < response.length; i += 1) {
         if (
-          (enWord.textContent === response[i].word &&
-            ruWord.textContent === response[i].wordTranslate &&
-            choise === 'true') ||
-          (enWord.textContent === response[i].word &&
-            ruWord.textContent !== response[i].wordTranslate &&
-            choise === 'false')
+          (enWord.textContent === response[i].word
+            && ruWord.textContent === response[i].wordTranslate
+            && choise === 'true')
+          || (enWord.textContent === response[i].word
+            && ruWord.textContent !== response[i].wordTranslate
+            && choise === 'false')
         ) {
           (<HTMLElement>useElem).classList.remove(
-            'sprint-container__view-element'
+            'sprint-container__view-element',
           );
           (<HTMLElement>useElem).classList.add(
-            'sprint-container__view-element-true'
+            'sprint-container__view-element-true',
           );
           flag = true;
           getResultOfGame();
@@ -256,11 +259,9 @@ const renderSprint = (group: number, page: number) => {
               if (data.optional.guesses >= 3) {
                 wordBase.optional.dateSprintLearned = String(Date.now());
               } else {
-                wordBase.optional.dateSprintLearned =
-                  data.optional.dateSprintLearned;
+                wordBase.optional.dateSprintLearned = data.optional.dateSprintLearned;
               }
-              wordBase.optional.dateAudioLearned =
-                data.optional.dateAudioLearned;
+              wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
               wordBase.optional.dateSprintNew = String(Date.now());
               wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
               wordBase.optional.dateLearned = data.optional.dateLearned;
@@ -295,8 +296,7 @@ const renderSprint = (group: number, page: number) => {
             wordBase.optional.sprintLearned = data.optional.sprintLearned;
             wordBase.optional.audioLearned = data.optional.audioLearned;
             wordBase.optional.date = data.optional.date;
-            wordBase.optional.dateSprintLearned =
-              data.optional.dateSprintLearned;
+            wordBase.optional.dateSprintLearned = data.optional.dateSprintLearned;
             wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
             wordBase.optional.dateSprintNew = data.optional.dateSprintNew;
             wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
@@ -325,7 +325,7 @@ const renderSprint = (group: number, page: number) => {
       <number>wordsPage,
       <number>gameLevl,
       <HTMLElement>sprintWordEn,
-      <HTMLElement>sprintWordRu
+      <HTMLElement>sprintWordRu,
     );
   });
   (<HTMLElement>sprintGameBtnFalse).addEventListener('click', () => {
@@ -334,7 +334,7 @@ const renderSprint = (group: number, page: number) => {
       <number>wordsPage,
       <number>gameLevl,
       <HTMLElement>sprintWordEn,
-      <HTMLElement>sprintWordRu
+      <HTMLElement>sprintWordRu,
     );
   });
 
@@ -348,9 +348,9 @@ const renderSprint = (group: number, page: number) => {
     );
 
     if (
-      (<NodeListOf<Element>>useElemTrue).length +
-        (<NodeListOf<Element>>useElemFalse).length ===
-      20
+      (<NodeListOf<Element>>useElemTrue).length
+        + (<NodeListOf<Element>>useElemFalse).length
+      === 20
     ) {
       clearInterval(observer);
       getBestSeriesAnswer();
@@ -363,7 +363,7 @@ const renderSprint = (group: number, page: number) => {
     <number>randomPage,
     <number>gameLevl,
     <HTMLElement>sprintWordEn,
-    <HTMLElement>sprintWordRu
+    <HTMLElement>sprintWordRu,
   );
 
   timer(<HTMLElement>sprintTimer);

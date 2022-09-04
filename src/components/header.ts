@@ -3,7 +3,7 @@ import {
   handleToggleForms,
   renderAuthorizationForm,
 } from './authorization/authorization';
-import  createElement  from '../helpers';
+import createElement from '../helpers';
 import './header.scss';
 import { handleLogoutUser } from '../API/loginUser.api';
 

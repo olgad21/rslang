@@ -15,7 +15,7 @@ import { getAllUserWords } from '../../../API/userWordAPI';
 export const renderEBookHeader = () => {
   const eBook = createElement('div', 'e-book-container');
   const mainWrapper = document.querySelector(
-    '.main__wrapper'
+    '.main__wrapper',
   ) as HTMLDivElement;
   removeAllChildNodes(mainWrapper);
   mainWrapper.appendChild(eBook);
@@ -67,7 +67,7 @@ export const renderEBookHeader = () => {
 
 const addLevelStyle = (userLevel: UserLevel) => {
   const wordsContainer = document.querySelector(
-    '.words-container'
+    '.words-container',
   ) as HTMLDivElement;
   if (userLevel.group === 1) {
     wordsContainer.style.backgroundColor = 'green';
@@ -88,7 +88,7 @@ export const renderEBook = () => {
   const userLevel = userPosition();
 
   const wordsContainer = document.querySelector(
-    '.words-container'
+    '.words-container',
   ) as HTMLDivElement;
   wordsContainer.classList.remove('center');
   removeAllChildNodes(wordsContainer);
