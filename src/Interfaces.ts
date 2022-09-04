@@ -54,6 +54,11 @@ export interface UserWordOptions {
     sprintLearned: boolean;
     audioLearned: boolean;
     date: string;
+    dateSprintLearned: string;
+    dateAudioLearned: string;
+    dateSprintNew: string;
+    dateAudioNew: string;
+    dateLearned: string;
   }
 }
 

@@ -40,6 +40,11 @@ const wordOptions = () => {
               wordBase.optional.sprintLearned = data.optional.sprintLearned;
               wordBase.optional.audioLearned = data.optional.audioLearned;
               wordBase.optional.date = data.optional.date;
+              wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
+              wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+              wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
+              wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+              wordBase.optional.dateLearned = data.optional.dateLearned;
               updateUserWord({
                 userId, wordId, token, wordBase,
               });
@@ -65,6 +70,11 @@ const wordOptions = () => {
             wordBase.optional.sprintLearned = data.optional.sprintLearned;
             wordBase.optional.audioLearned = data.optional.audioLearned;
             wordBase.optional.date = data.optional.date;
+            wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
+            wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+            wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
+            wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+            wordBase.optional.dateLearned = data.optional.dateLearned;
             updateUserWord({
               userId, wordId, token, wordBase,
             });
@@ -97,6 +107,11 @@ const wordOptions = () => {
               wordBase.optional.sprintLearned = data.optional.sprintLearned;
               wordBase.optional.audioLearned = data.optional.audioLearned;
               wordBase.optional.date = data.optional.date;
+              wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
+              wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+              wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
+              wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+              wordBase.optional.dateLearned = String(Date.now());
               updateUserWord({
                 userId, wordId, token, wordBase,
               });
@@ -122,6 +137,11 @@ const wordOptions = () => {
             wordBase.optional.sprintLearned = data.optional.sprintLearned;
             wordBase.optional.audioLearned = data.optional.audioLearned;
             wordBase.optional.date = data.optional.date;
+            wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
+            wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+            wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
+            wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+            wordBase.optional.dateLearned = data.optional.date;
             updateUserWord({
               userId, wordId, token, wordBase,
             });

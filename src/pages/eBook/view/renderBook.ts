@@ -18,7 +18,7 @@ export const renderEBookHeader = () => {
   const title = createElement('h2', 'title');
   title.textContent = strings.chapterEBook;
   const savana = createElement('h3', ['game', 'savana']);
-  savana.textContent = strings.savana;
+  savana.textContent = strings.spint;
   const audioCall = createElement('h3', ['game', 'audio-call']);
   audioCall.textContent = strings.audioCall;
 
