@@ -2,7 +2,6 @@
 
 import { removeAllChildNodes } from '../../helpers';
 import { getWords } from '../../API/wordsAPI';
-import createGameSlot from './game-components/game-slot/game-slot';
 import createSprintMenu from './sprint/sprint-menu/sprint-menu';
 import renderGamePage from './game-components/game-menu/game-menu';
 import createModal from './game-components/modal/modal';
@@ -371,7 +370,22 @@ const renderSprint = (group: number, page: number) => {
 
 // SPRINT-MENU
 const renderSprintMenu = (place: HTMLElement) => {
-  const sprintMenuBtnStart = createSprintMenu(place);
+  const sprintMenuBtnStart = createSprintMenu(place, 'sprint');
+
+  sprintMenuBtnStart.addEventListener('click', () => {
+    const choseLvl = <HTMLSelectElement>(
+      document.querySelector('.menu-btn__complexity')
+    );
+    const page: number = randomNumber(31);
+    const levl = Number(choseLvl.value);
+
+    renderSprint(levl, page);
+  });
+};
+
+// AUDIO-MENU
+const renderAudioMenu = (place: HTMLElement) => {
+  const sprintMenuBtnStart = createSprintMenu(place, 'audio');
 
   sprintMenuBtnStart.addEventListener('click', () => {
     const choseLvl = <HTMLSelectElement>(
@@ -393,7 +407,11 @@ const renderGameMenu = () => {
     renderSprintMenu(wrapperMain);
   });
 
-  createGameSlot(game, 'АУДИОВЫЗОВ');
+  sprint.addEventListener('click', () => {
+    removeAllChildNodes(wrapperMain);
+    renderAudioMenu(wrapperMain);
+  });
+
   removeAllChildNodes(wrapperMain);
 
   wrapperMain.append(wrapper);

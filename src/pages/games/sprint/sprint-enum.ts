@@ -20,4 +20,12 @@ const enum SprintMenu {
   btn = 'играть',
 }
 
-export { Sprint, Modal, SprintMenu };
+const enum AudioMenu {
+  title = 'АУДИОВЫЗОВ',
+  description = 'АУДИОВЫЗОВ - игра, где Вы должны выбрать правильный перевод слова, которое можно прослушать. Для прослушивания слова нажмите на изображение динамика. Постарайтесь набрать наибольшее количество баллов!',
+  btn = 'играть',
+}
+
+export {
+  Sprint, Modal, SprintMenu, AudioMenu,
+};

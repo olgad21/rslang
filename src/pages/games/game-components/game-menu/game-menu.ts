@@ -15,8 +15,9 @@ const renderGamePage = () => {
   const wrapper = <HTMLElement>createElement('div', 'games__wrapper');
   const game = renderGameBackground();
   const sprint = createGameSlot(game, 'СПРИНТ');
+  const audio = createGameSlot(game, 'АУДИОВЫЗОВ');
 
-  return [wrapper, game, wrapperMain, sprint];
+  return [wrapper, game, wrapperMain, sprint, audio];
 };
 
 export default renderGamePage;

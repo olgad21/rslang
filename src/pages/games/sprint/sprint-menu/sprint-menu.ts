@@ -1,5 +1,5 @@
 import createElement, { fillElement } from '../../../../helpers';
-import { SprintMenu } from '../sprint-enum';
+import { AudioMenu, SprintMenu } from '../sprint-enum';
 
 const createAllElementsSprintMenu = () => {
   const sprintMenuContainer = <HTMLElement>(
@@ -32,7 +32,7 @@ const createAllElementsSprintMenu = () => {
   ];
 };
 
-const createSprintMenu = (place: HTMLElement) => {
+const createSprintMenu = (place: HTMLElement, game: string) => {
   const [
     sprintMenuContainer,
     sprintMenuTitle,
@@ -51,10 +51,15 @@ const createSprintMenu = (place: HTMLElement) => {
     true,
   );
 
-  sprintMenuTitle.textContent = SprintMenu.title;
-  sprintMenuDescription.textContent = SprintMenu.description;
-  sprintMenuBtnStart.innerHTML = SprintMenu.btn;
-
+  if (game === 'sprint') {
+    sprintMenuTitle.textContent = SprintMenu.title;
+    sprintMenuDescription.textContent = SprintMenu.description;
+    sprintMenuBtnStart.innerHTML = SprintMenu.btn;
+  } else if (game === 'audio') {
+    sprintMenuTitle.textContent = AudioMenu.title;
+    sprintMenuDescription.textContent = AudioMenu.description;
+    sprintMenuBtnStart.innerHTML = AudioMenu.btn;
+  }
   sprintMenuBtnContainer.append(sprintMenuBtnComplexity, sprintMenuBtnStart);
   sprintMenuContainer.append(
     sprintMenuTitle,
