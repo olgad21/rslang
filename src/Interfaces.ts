@@ -54,6 +54,11 @@ export interface UserWordOptions {
     sprintLearned: boolean;
     audioLearned: boolean;
     date: string;
+    dateSprintLearned: string;
+    dateAudioLearned: string;
+    dateSprintNew: string;
+    dateAudioNew: string;
+    dateLearned: string;
   }
 }
 
@@ -67,6 +72,7 @@ export interface UserWord {
   wordId?: string;
   token: string;
   wordBase?: UserWordOptions;
+  wordResult?:UserWordOptions
 }
 
 export interface Aggregation {

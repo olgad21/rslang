@@ -129,6 +129,7 @@ export const chooseLevel = () => {
             renderHardLevel();
           } else {
             wordsContainer.textContent = strings.needLogin;
+            wordsContainer.classList.add('center');
           }
         } else {
           const pagination = document.querySelector('.pagination') as HTMLDivElement;

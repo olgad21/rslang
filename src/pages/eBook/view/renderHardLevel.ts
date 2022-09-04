@@ -1,4 +1,3 @@
-import { getAggregatedWords } from '../../../API/aggregatedWordsAPI';
 import strings, { filterAggregate } from '../../../constants';
 import createElement, { removeAllChildNodes } from '../../../helpers';
 import { ExtendWord } from '../../../Interfaces';
@@ -6,6 +5,7 @@ import renderWord from './renderWord';
 import playSound from '../controller/musicController';
 // eslint-disable-next-line import/no-cycle
 import removeFromHard from '../controller/removeWordsController';
+import { getAggregatedWords } from '../../../API/aggregatedWordsAPI';
 
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
@@ -21,7 +21,6 @@ const renderHardLevel = () => {
       const wordItem = createElement('div', 'word-item');
       wordsContainer.appendChild(wordItem);
       wordItem.append(renderWord(word));
-
       const hardWord = <HTMLElement>document.querySelector(`[data-hard="${word._id}"]`);
       hardWord.textContent = String(strings.complicated);
       const learnedBtn = <HTMLButtonElement>document.querySelector(`[data-id2="${word._id}"]`);
@@ -35,6 +34,10 @@ const renderHardLevel = () => {
       countError.textContent = String(word.userWord.optional.error);
       return wordItem;
     });
+    if (wordsContainer.innerHTML === '') {
+      wordsContainer.textContent = strings.wordList;
+      wordsContainer.classList.add('center');
+    }
     playSound();
     removeFromHard();
   });
