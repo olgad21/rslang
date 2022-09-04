@@ -1,11 +1,11 @@
-import { getAggregatedWords } from '../../../API/aggregatedWordsAPI';
-import { strings, filterAggregate } from '../../../constants';
-import { createElement, removeAllChildNodes } from '../../../helpers';
+import strings, { filterAggregate } from '../../../constants';
+import createElement, { removeAllChildNodes } from '../../../helpers';
 import { ExtendWord } from '../../../Interfaces';
 import renderWord from './renderWord';
 import playSound from '../controller/musicController';
 // eslint-disable-next-line import/no-cycle
 import removeFromHard from '../controller/removeWordsController';
+import { getAggregatedWords } from '../../../API/aggregatedWordsAPI';
 
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
@@ -13,7 +13,7 @@ const token = String(localStorage.getItem('token'));
 const renderHardLevel = () => {
   const filter = filterAggregate.hard;
   const wordsContainer = document.querySelector(
-    '.words-container',
+    '.words-container'
   ) as HTMLDivElement;
   removeAllChildNodes(wordsContainer);
 
@@ -47,6 +47,10 @@ const renderHardLevel = () => {
       countError.textContent = String(word.userWord.optional.error);
       return wordItem;
     });
+    if (wordsContainer.innerHTML === '') {
+      wordsContainer.textContent = strings.wordList;
+      wordsContainer.classList.add('center');
+    }
     playSound();
     removeFromHard();
   });

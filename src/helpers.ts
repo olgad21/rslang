@@ -11,6 +11,8 @@ const createElement = (tag: string, classNames?: string | string[]) => {
   return el;
 };
 
+export default createElement;
+
 const userPosition = () => {
   let userLevel: UserLevel = {
     group: 1,
@@ -41,7 +43,7 @@ const fillElement = (
   tag: string,
   classNames: string,
   attribute: string,
-  text: boolean,
+  text: boolean
 ) => {
   for (let i = 1; i <= howManyEl; i += 1) {
     const elem = <HTMLElement>createElement(tag, classNames);
@@ -57,6 +59,4 @@ const fillElement = (
   return place;
 };
 
-export {
-  createElement, removeAllChildNodes, userPosition, fillElement,
-};
+export { removeAllChildNodes, userPosition, fillElement };

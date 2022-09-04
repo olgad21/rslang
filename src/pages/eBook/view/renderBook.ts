@@ -10,13 +10,13 @@ import {
 import playSound from '../controller/musicController';
 import wordOptions from '../controller/wordOptionsController';
 import { ExtendUserWord, UserLevel, Word } from '../../../Interfaces';
-import { strings } from '../../../constants';
+import strings from '../../../constants';
 import { getAllUserWords } from '../../../API/userWordAPI';
 
 export const renderEBookHeader = () => {
   const eBook = createElement('div', 'e-book-container');
   const mainWrapper = document.querySelector(
-    '.main__wrapper',
+    '.main__wrapper'
   ) as HTMLDivElement;
   removeAllChildNodes(mainWrapper);
   mainWrapper.appendChild(eBook);
@@ -24,7 +24,7 @@ export const renderEBookHeader = () => {
   const title = createElement('h2', 'title');
   title.textContent = strings.chapterEBook;
   const savana = createElement('h3', ['game', 'savana']);
-  savana.textContent = strings.savana;
+  savana.textContent = strings.spint;
   const audioCall = createElement('h3', ['game', 'audio-call']);
   audioCall.textContent = strings.audioCall;
 
@@ -68,7 +68,7 @@ export const renderEBookHeader = () => {
 
 const addLevelStyle = (userLevel: UserLevel) => {
   const wordsContainer = document.querySelector(
-    '.words-container',
+    '.words-container'
   ) as HTMLDivElement;
   if (userLevel.group === 1) {
     wordsContainer.style.backgroundColor = 'green';
@@ -87,9 +87,11 @@ const addLevelStyle = (userLevel: UserLevel) => {
 
 export const renderEBook = () => {
   const userLevel = userPosition();
+
   const wordsContainer = document.querySelector(
-    '.words-container',
+    '.words-container'
   ) as HTMLDivElement;
+  wordsContainer.classList.remove('center');
   removeAllChildNodes(wordsContainer);
 
   const userId = String(localStorage.getItem('user_id'));
@@ -114,16 +116,25 @@ export const renderEBook = () => {
               const hardWord = <HTMLElement>(
                 document.querySelector(`[data-hard="${word.id}"]`)
               );
-              if (elem.difficulty === strings.easy) {
-                hardWord.textContent = String(strings.complicated);
-              }
               const complicatedBtn = <HTMLButtonElement>(
                 document.querySelector(`[data-id1="${word.id}"]`)
               );
-              if (elem.optional.isLearned === true) {
+              const learnedBtn = <HTMLElement>(
+                document.querySelector(`[data-id2="${word.id}"]`)
+              );
+
+              if (elem.difficulty === 'hard') {
+                hardWord.textContent = String(strings.complicated);
                 complicatedBtn.textContent = strings.easy;
                 complicatedBtn.classList.add('easy-word');
               }
+
+              if (elem.optional.isLearned === true) {
+                learnedBtn.textContent = strings.learnedWords;
+                hardWord.textContent = strings.learned;
+                learnedBtn.style.backgroundColor = 'grey';
+              }
+
               const countGuesses = <HTMLElement>(
                 document.querySelector(`[data-guess="${word.id}"]`)
               );
