@@ -74,6 +74,7 @@ const strings = {
   needLogin: 'Доступно только зарегистрированным пользователям.',
   guesses: 'Правильных ответов:',
   error: 'Не правильных ответов:',
+  wordList: 'Список пуст',
 };
 
 export const statsStrings = {

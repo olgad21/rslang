@@ -67,6 +67,7 @@ export interface UserWord {
   wordId?: string;
   token: string;
   wordBase?: UserWordOptions;
+  wordResult?:UserWordOptions
 }
 
 export interface Aggregation {
