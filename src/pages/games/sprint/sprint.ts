@@ -64,7 +64,9 @@ const findAllElementsSprint = () => {
 
 const randomNumber = (num: number) => Math.floor(Math.random() * num);
 
-const createSprint = (place: HTMLElement, lev: string | null) => {
+const createSprint = (lev: number | null, group: number) => {
+  const place = <HTMLElement>document.querySelector('.main__wrapper');
+
   const [
     globeContainer,
     sprintTitle,
@@ -80,8 +82,9 @@ const createSprint = (place: HTMLElement, lev: string | null) => {
     sprintScore,
     sprintScoreNum,
   ] = createAllElementsSprint();
-  const randomPage = randomNumber(31);
-  const gameLevl = Number(lev);
+
+  const randomPage = group;
+  const gameLevl = lev;
 
   fillElement(
     sprintViewResults,

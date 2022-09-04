@@ -4,7 +4,7 @@ import asset3 from './assets/22378293_6566143.jpg';
 import irynaAvatar from './assets/Iryna.png';
 import olgaAvatar from './assets/Olga.png';
 import alexeiAvatar from './assets/Alexei.png';
-import { UserWordOptions } from './Interfaces';
+import { BaseStatistics, UserWordOptions } from './Interfaces';
 
 const host = 'https://rslang-team-68.herokuapp.com';
 
@@ -174,6 +174,14 @@ const creatorsDescriptions: CreatorDescription[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
   },
 ];
+
+export const statisticsBase: BaseStatistics = {
+  learnedWords: 0,
+  optional: {
+    sprintBestScore: 0,
+    audioBestScore: 0,
+  },
+};
 
 export {
   CreatorDescription,

@@ -90,7 +90,15 @@ export interface ExtendUserWord extends UserWordOptions {
 interface UserStatistic {
   userId: string;
   token?: string;
-  item: string;
+  statistics?: BaseStatistics;
+}
+
+export interface BaseStatistics {
+  learnedWords: number;
+  optional: {
+    sprintBestScore: number;
+    audioBestScore: number;
+  };
 }
 
 export {

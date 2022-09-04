@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { removeAllChildNodes } from '../../helpers';
 import { getWords } from '../../API/wordsAPI';
@@ -6,6 +6,17 @@ import createGameSlot from './game-components/game-slot/game-slot';
 import createSprintMenu from './sprint/sprint-menu/sprint-menu';
 import renderGamePage from './game-components/game-menu/game-menu';
 import createModal from './game-components/modal/modal';
+import { statisticsBase, wordBase } from '../../constants';
+import { BaseStatistics } from '../../Interfaces';
+import {
+  getUserStatistics,
+  updateUserStatistics,
+} from '../../API/userStatustics';
+import {
+  getUserWord,
+  updateUserWord,
+  createUserWord,
+} from '../../API/userWordAPI';
 import {
   createSprint,
   getResultView,
@@ -32,7 +43,7 @@ const renderModal = () => {
 };
 
 // SPRINT
-const renderSprint = (lev: string | null, group: number) => {
+const renderSprint = (group: number, page: number) => {
   // все переменные
   const place = <HTMLElement>document.querySelector('.main__wrapper');
   removeAllChildNodes(place);
@@ -45,40 +56,63 @@ const renderSprint = (lev: string | null, group: number) => {
     sprintWordEn,
     sprintWordRu,
     sprintTimer,
-  ] = createSprint(place, lev);
-  let usedWords: string[] = [];
+  ] = createSprint(group, page);
+  const usedWords: string[] = [];
+  const wordsPage = page;
 
   // проверка правильности перевода
   async function getWordToSprint(
-    page: number,
-    group: number,
+    pageWord: number,
+    groupWord: number,
     enWord: HTMLElement,
     ruWord: HTMLElement
   ) {
     const randomChoise = randomNumber(2);
-    const randomNum1 = randomNumber(21);
-    const randomNum2 = randomNumber(21);
+    const randomNum1 = randomNumber(20);
+    const randomNum2 = randomNumber(20);
     const enWordParam = enWord;
     const ruWordParam = ruWord;
-    const pageParam = page;
-    const groupParam = group;
+    const pageParam = pageWord;
+    const groupParam = groupWord;
 
     if (randomChoise === 0) {
-      getWords(page, group).then((response) => {
-        if (!usedWords.includes(<string>response[randomNum1].word)) {
-          enWordParam.textContent = response[randomNum1].word;
-          ruWordParam.textContent = response[randomNum1].wordTranslate;
-          usedWords.push(response[randomNum1].word);
+      getWords(pageParam, groupParam).then((response) => {
+        const wordBaseEn = <string>response[randomNum1].word;
+        const wordBaseRu = <string>response[randomNum1].wordTranslate;
+
+        if (!usedWords.includes(wordBaseEn)) {
+          enWordParam.textContent = wordBaseEn;
+          ruWordParam.textContent = wordBaseRu;
+          usedWords.push(wordBaseEn);
+
+          if (localStorage.getItem('user_id')) {
+            const userId = <string>localStorage.getItem('user_id');
+            const token = <string>localStorage.getItem('token');
+            const wordId = response[randomNum1].id;
+            const userWord = getUserWord({ userId, wordId, token });
+            if (userWord.status === 404) {
+              wordBase.optional.attemp = 1;
+              wordBase.optional.isNewWord = true;
+              createUserWord({
+                userId,
+                wordId,
+                token,
+                wordBase,
+              });
+            }
+          }
         } else {
           getWordToSprint(pageParam, groupParam, enWordParam, ruWordParam);
         }
       });
     } else if (randomChoise === 1) {
       getWords(page, group).then((response) => {
-        if (!usedWords.includes(<string>response[randomNum1].word)) {
-          enWordParam.textContent = response[randomNum1].word;
-          ruWordParam.textContent = response[randomNum2].wordTranslate;
-          usedWords.push(response[randomNum1].word);
+        const wordBaseEn = <string>response[randomNum1].word;
+        const wordBaseRu = <string>response[randomNum2].wordTranslate;
+        if (!usedWords.includes(wordBaseEn)) {
+          enWordParam.textContent = wordBaseEn;
+          ruWordParam.textContent = wordBaseRu;
+          usedWords.push(wordBaseEn);
         } else {
           getWordToSprint(pageParam, groupParam, enWordParam, ruWordParam);
         }
@@ -94,9 +128,9 @@ const renderSprint = (lev: string | null, group: number) => {
     let nextValue: number = prevValue - 1;
     const placeTimerParam = placeTimer;
 
-    const timer = setInterval(() => {
+    const timerNum = setInterval(() => {
       if (nextValue === 0) {
-        clearInterval(timer);
+        clearInterval(timerNum);
         renderModal();
       } else {
         placeTimerParam.textContent = '';
@@ -142,20 +176,45 @@ const renderSprint = (lev: string | null, group: number) => {
       }
     }
 
-    localStorage.setItem('bestSeriesSprint', `${bestScore}`);
+    // обновлять серию в settings сделать!!!!
+    if (localStorage.getItem('user_id')) {
+      const userId = <string>localStorage.getItem('user_id');
+      const token = <string>localStorage.getItem('token');
+      getUserStatistics({ userId, token }).then((response) => {
+        if (response.optional.bestScore.ok) {
+          if (response.optional.bestScore < bestScore) {
+            statisticsBase.optional.sprintBestScore = bestScore;
+            const statistics: BaseStatistics = statisticsBase;
+            updateUserStatistics({
+              userId,
+              token,
+              statistics,
+            });
+          }
+        } else {
+          statisticsBase.optional.sprintBestScore = bestScore;
+          const statistics: BaseStatistics = statisticsBase;
+          updateUserStatistics({
+            userId,
+            token,
+            statistics,
+          });
+        }
+      });
+    }
   };
 
   // вызов по нажатию кнопки
   const sprintGameBtn = (
     choise: string,
-    page: number,
-    group: number,
+    pageW: number,
+    groupW: number,
     enWord: HTMLElement,
     ruWord: HTMLElement
   ) => {
     const [useElem] = findAllElementsSprint();
 
-    getWords(page, group).then((response) => {
+    getWords(pageW, groupW).then(async (response) => {
       let flag = false;
       for (let i = 0; i < response.length; i += 1) {
         if (
@@ -174,6 +233,81 @@ const renderSprint = (lev: string | null, group: number) => {
           );
           flag = true;
           getResultOfGame();
+
+          if (localStorage.getItem('user_id')) {
+            const userId = <string>localStorage.getItem('user_id');
+            const token = <string>localStorage.getItem('token');
+            const wordId = response[i].id;
+            const userWord = await getUserWord({ userId, wordId, token });
+
+            userWord.json().then((data) => {
+              wordBase.difficulty = data.difficulty;
+              wordBase.optional.attemp = data.optional.attemp + 1;
+              wordBase.optional.isNewWord = data.optional.isNewWord;
+              wordBase.optional.sprintNew = data.optional.sprintNew;
+              wordBase.optional.audioNew = data.optional.audioNew;
+              wordBase.optional.guesses = data.optional.guesses + 1;
+              wordBase.optional.error = data.optional.error;
+              wordBase.optional.isLearned = data.optional.isLearned;
+              wordBase.optional.sprintLearned = data.optional.sprintLearned;
+              wordBase.optional.audioLearned = data.optional.audioLearned;
+              wordBase.optional.date = data.optional.date;
+              if (data.optional.guesses >= 3) {
+                wordBase.optional.dateSprintLearned = String(Date.now());
+              } else {
+                wordBase.optional.dateSprintLearned =
+                  data.optional.dateSprintLearned;
+              }
+              wordBase.optional.dateAudioLearned =
+                data.optional.dateAudioLearned;
+              wordBase.optional.dateSprintNew = String(Date.now());
+              wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+              wordBase.optional.dateLearned = data.optional.dateLearned;
+
+              updateUserWord({
+                userId,
+                wordId,
+                token,
+                wordBase,
+              });
+            });
+          }
+        } else if (localStorage.getItem('user_id')) {
+          const userId = <string>localStorage.getItem('user_id');
+          const token = <string>localStorage.getItem('token');
+          const wordId = response[i].id;
+          const userWord = await getUserWord({ userId, wordId, token });
+
+          userWord.json().then((data) => {
+            wordBase.difficulty = data.difficulty;
+            wordBase.optional.attemp = data.optional.attemp + 1;
+            wordBase.optional.isNewWord = data.optional.isNewWord;
+            wordBase.optional.sprintNew = data.optional.sprintNew;
+            wordBase.optional.audioNew = data.optional.audioNew;
+            wordBase.optional.guesses = data.optional.guesses;
+            wordBase.optional.error = data.optional.error + 1;
+            if (data.optional.error > 3) {
+              wordBase.optional.isLearned = false;
+            } else {
+              wordBase.optional.isLearned = data.optional.isLearned;
+            }
+            wordBase.optional.sprintLearned = data.optional.sprintLearned;
+            wordBase.optional.audioLearned = data.optional.audioLearned;
+            wordBase.optional.date = data.optional.date;
+            wordBase.optional.dateSprintLearned =
+              data.optional.dateSprintLearned;
+            wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+            wordBase.optional.dateSprintNew = data.optional.dateSprintNew;
+            wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+            wordBase.optional.dateLearned = data.optional.dateLearned;
+
+            updateUserWord({
+              userId,
+              wordId,
+              token,
+              wordBase,
+            });
+          });
         }
       }
 
@@ -187,7 +321,7 @@ const renderSprint = (lev: string | null, group: number) => {
   (<HTMLElement>sprintGameBtnTrue).addEventListener('click', () => {
     sprintGameBtn(
       'true',
-      <number>randomPage,
+      <number>wordsPage,
       <number>gameLevl,
       <HTMLElement>sprintWordEn,
       <HTMLElement>sprintWordRu
@@ -196,7 +330,7 @@ const renderSprint = (lev: string | null, group: number) => {
   (<HTMLElement>sprintGameBtnFalse).addEventListener('click', () => {
     sprintGameBtn(
       'false',
-      <number>randomPage,
+      <number>wordsPage,
       <number>gameLevl,
       <HTMLElement>sprintWordEn,
       <HTMLElement>sprintWordRu
@@ -243,7 +377,7 @@ const renderSprintMenu = (place: HTMLElement) => {
       document.querySelector('.menu-btn__complexity')
     );
     const page: number = randomNumber(31);
-    const levl = choseLvl.value;
+    const levl = Number(choseLvl.value);
 
     renderSprint(levl, page);
   });

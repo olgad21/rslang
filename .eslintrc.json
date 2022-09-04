@@ -24,7 +24,6 @@
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": ["error"],
-    "comma-dangle": ["error", "only-multiline"],
     "max-len": ["error", { "code": 200 }],
     "no-underscore-dangle": ["error", { "allow": ["_id"] }]
   }

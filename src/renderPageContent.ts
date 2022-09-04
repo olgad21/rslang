@@ -5,7 +5,7 @@ import {
 import { renderEBookHeader, renderEBook } from './pages/eBook/view/renderBook';
 import renderMainPage from './pages/main-page/main-page';
 import renderStatisticsPage from './pages/statistics/statistics';
-import renderGameMenu from './pages/games';
+import renderGameMenu from './pages/games/index';
 
 const renderPageContent = () => {
   const currentPage = window.location.pathname;
