@@ -1,4 +1,4 @@
-import { createElement, fillElement } from '../../../../helpers';
+import createElement, { fillElement } from '../../../../helpers';
 import { SprintMenu } from '../sprint-enum';
 
 const createAllElementsSprintMenu = () => {
@@ -48,7 +48,7 @@ const createSprintMenu = (place: HTMLElement) => {
     'option',
     'menu-btn__complexity-optional',
     'value',
-    true,
+    true
   );
 
   sprintMenuTitle.textContent = SprintMenu.title;
@@ -59,7 +59,7 @@ const createSprintMenu = (place: HTMLElement) => {
   sprintMenuContainer.append(
     sprintMenuTitle,
     sprintMenuDescription,
-    sprintMenuBtnContainer,
+    sprintMenuBtnContainer
   );
   place.append(sprintMenuContainer);
 

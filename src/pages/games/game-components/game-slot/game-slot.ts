@@ -1,4 +1,4 @@
-import { createElement } from '../../../../helpers';
+import createElement from '../../../../helpers';
 import './game-slot.scss';
 
 const createGameSlot = (place: HTMLElement, gameName: string) => {

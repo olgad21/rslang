@@ -43,7 +43,7 @@ const fillElement = (
   tag: string,
   classNames: string,
   attribute: string,
-  text: boolean
+  text: boolean,
 ) => {
   for (let i = 1; i <= howManyEl; i += 1) {
     const elem = <HTMLElement>createElement(tag, classNames);

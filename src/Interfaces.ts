@@ -107,4 +107,6 @@ export interface BaseStatistics {
   };
 }
 
-export { UserData, UserCredentials, UserAuthData, UserStatistic };
+export {
+  UserData, UserCredentials, UserAuthData, UserStatistic,
+};

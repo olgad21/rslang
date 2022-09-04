@@ -13,7 +13,7 @@ const token = String(localStorage.getItem('token'));
 const renderHardLevel = () => {
   const filter = filterAggregate.hard;
   const wordsContainer = document.querySelector(
-    '.words-container'
+    '.words-container',
   ) as HTMLDivElement;
   removeAllChildNodes(wordsContainer);
 

@@ -1,4 +1,4 @@
-import { createElement } from '../../../../helpers';
+import createElement from '../../../../helpers';
 import createGameSlot from '../game-slot/game-slot';
 import './game-menu.scss';
 

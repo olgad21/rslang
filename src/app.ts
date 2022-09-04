@@ -2,7 +2,7 @@ import renderPageContent from './renderPageContent';
 import renderFooter from './components/footer';
 import renderHeader from './components/header';
 import renderSidebar from './components/sidebar';
-import { createElement } from './helpers';
+import createElement from './helpers';
 
 const renderApp = () => {
   const wrapper = document.createElement('div');

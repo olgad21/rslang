@@ -1,4 +1,4 @@
-import { createElement } from '../../../../helpers';
+import createElement from '../../../../helpers';
 import { Modal } from '../../sprint/sprint-enum';
 
 const createAllElementsModal = () => {
@@ -29,7 +29,7 @@ const findAllElemntsModal = () => {
   const wrapper = <HTMLElement>document.querySelector('.wrapper');
   const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
   const results = Number(
-    (<HTMLElement>document.querySelector('.sprint-score-num')).textContent,
+    (<HTMLElement>document.querySelector('.sprint-score-num')).textContent
   );
   const resultsTrue: number = (<NodeListOf<Element>>(
     document.querySelectorAll('.sprint-container__view-element-true')
@@ -55,7 +55,8 @@ const createModal = () => {
     modalBtnMenu,
   ] = createAllElementsModal();
 
-  const [wrapper, wrapperMain, results, resultsTrue, resultsFalse] = findAllElemntsModal();
+  const [wrapper, wrapperMain, results, resultsTrue, resultsFalse] =
+    findAllElemntsModal();
 
   modalTitle.textContent = Modal.yourResults + results;
   wordsCorrect.textContent = `${Modal.correctAnswer}${resultsTrue}`;

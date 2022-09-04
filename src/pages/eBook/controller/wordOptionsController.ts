@@ -3,7 +3,7 @@ import {
   getUserWord,
   updateUserWord,
 } from '../../../API/userWordAPI';
-import { strings, Hard, wordBase } from '../../../constants';
+import strings, { Hard, wordBase } from '../../../constants';
 
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
@@ -40,7 +40,6 @@ const wordOptions = () => {
               wordBase,
             });
           } else {
-
             userWord.json().then((data) => {
               wordBase.optional.attemp = data.optional.attemp;
               wordBase.optional.isNewWord = data.optional.isNewWord;
@@ -52,13 +51,18 @@ const wordOptions = () => {
               wordBase.optional.sprintLearned = data.optional.sprintLearned;
               wordBase.optional.audioLearned = data.optional.audioLearned;
               wordBase.optional.date = data.optional.date;
-              wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
-              wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+              wordBase.optional.dateSprintLearned =
+                data.optional.dateSprintLearn;
+              wordBase.optional.dateAudioLearned =
+                data.optional.dateAudioLearned;
               wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
               wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
               wordBase.optional.dateLearned = data.optional.dateLearned;
               updateUserWord({
-                userId, wordId, token, wordBase,
+                userId,
+                wordId,
+                token,
+                wordBase,
               });
             });
           }
@@ -93,7 +97,10 @@ const wordOptions = () => {
             wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
             wordBase.optional.dateLearned = data.optional.dateLearned;
             updateUserWord({
-              userId, wordId, token, wordBase,
+              userId,
+              wordId,
+              token,
+              wordBase,
             });
           });
         } else if (event.target.innerText === strings.learned) {
@@ -123,7 +130,6 @@ const wordOptions = () => {
               wordBase,
             });
           } else {
-
             userWord.json().then((data) => {
               wordBase.optional.attemp = data.optional.attemp;
               wordBase.optional.isNewWord = data.optional.isNewWord;
@@ -134,13 +140,18 @@ const wordOptions = () => {
               wordBase.optional.sprintLearned = data.optional.sprintLearned;
               wordBase.optional.audioLearned = data.optional.audioLearned;
               wordBase.optional.date = data.optional.date;
-              wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
-              wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+              wordBase.optional.dateSprintLearned =
+                data.optional.dateSprintLearn;
+              wordBase.optional.dateAudioLearned =
+                data.optional.dateAudioLearned;
               wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
               wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
               wordBase.optional.dateLearned = String(Date.now());
               updateUserWord({
-                userId, wordId, token, wordBase,
+                userId,
+                wordId,
+                token,
+                wordBase,
               });
             });
           }
@@ -175,7 +186,10 @@ const wordOptions = () => {
             wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
             wordBase.optional.dateLearned = data.optional.date;
             updateUserWord({
-              userId, wordId, token, wordBase,
+              userId,
+              wordId,
+              token,
+              wordBase,
             });
           });
         }

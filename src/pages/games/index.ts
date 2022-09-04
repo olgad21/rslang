@@ -90,6 +90,7 @@ const renderSprint = (group: number, page: number) => {
             const token = <string>localStorage.getItem('token');
             const wordId = response[randomNum1].id;
             const userWord = getUserWord({ userId, wordId, token });
+            console.log(response);
             if (userWord.status === 404) {
               wordBase.optional.attemp = 1;
               wordBase.optional.isNewWord = true;

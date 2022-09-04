@@ -1,7 +1,6 @@
-import { createElement, removeAllChildNodes } from '../../helpers';
+import createElement, { removeAllChildNodes } from '../../helpers';
 import './main-page.scss';
-import {
-  strings,
+import strings, {
   CreatorDescription,
   creatorsDescriptions,
   mainDescriptions,
@@ -13,19 +12,18 @@ const createMainMessage = (img: string, message: string) => {
   messageText.textContent = message;
   const messageImg = createElement(
     'img',
-    'main__message-img',
+    'main__message-img'
   ) as HTMLImageElement;
   messageImg.src = img;
   mainMessage.append(messageImg, messageText);
   return mainMessage;
 };
 
-const renderMainMessages = () => mainDescriptions.map(({ img, message }) => createMainMessage(img, message));
+const renderMainMessages = () =>
+  mainDescriptions.map(({ img, message }) => createMainMessage(img, message));
 
 const createCreatorDescription = (creator: CreatorDescription) => {
-  const {
-    img, name, role, githubLink, description,
-  } = creator;
+  const { img, name, role, githubLink, description } = creator;
   const creatorDescription = createElement('div', ['creators__item']);
   const creatorText = createElement('div', 'creator-text');
   creatorText.textContent = description;
@@ -42,12 +40,13 @@ const createCreatorDescription = (creator: CreatorDescription) => {
     creatorName,
     creatorRole,
     creatorText,
-    creatorLink,
+    creatorLink
   );
   return creatorDescription;
 };
 
-const renderCreatorDescriptions = () => creatorsDescriptions.map(createCreatorDescription);
+const renderCreatorDescriptions = () =>
+  creatorsDescriptions.map(createCreatorDescription);
 
 export const renderMainContent = () => {
   const mainPageContent = createElement('div', 'main-container');

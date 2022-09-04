@@ -2,8 +2,7 @@ import { getWords } from '../../../API/wordsAPI';
 import renderWord from './renderWord';
 import './renderWord.scss';
 import renderPagination from './pagination';
-import {
-  createElement,
+import createElement, {
   removeAllChildNodes,
   userPosition,
 } from '../../../helpers';

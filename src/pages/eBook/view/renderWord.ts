@@ -1,5 +1,5 @@
-import { strings, host } from '../../../constants';
-import { createElement } from '../../../helpers';
+import strings, { host } from '../../../constants';
+import createElement from '../../../helpers';
 import { ExtendWord, Word } from '../../../Interfaces';
 
 const renderWord = (word: Word | ExtendWord) => {
@@ -92,7 +92,7 @@ const renderWord = (word: Word | ExtendWord) => {
     wordInfo,
     wordMeaning,
     wordExamples,
-    statistic,
+    statistic
   );
 
   const wordImg = createElement('div', 'word-img');
