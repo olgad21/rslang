@@ -48,6 +48,20 @@ const createAllElementsSprint = () => {
   ];
 };
 
+const findAllElementsSprint = () => {
+  const useElem = <HTMLElement>(
+    document.querySelector('.sprint-container__view-element')
+  );
+  const useElemTrue = <NodeListOf<Element>>(
+    document.querySelectorAll('.sprint-container__view-element-true')
+  );
+  const useElemFalse = <NodeListOf<Element>>(
+    document.querySelectorAll('.sprint-container__view-element-false')
+  );
+
+  return [useElem, useElemTrue, useElemFalse];
+};
+
 const randomNumber = (num: number) => Math.floor(Math.random() * num);
 
 const createSprint = (place: HTMLElement, lev: string | null) => {
@@ -107,4 +121,26 @@ const createSprint = (place: HTMLElement, lev: string | null) => {
   ];
 };
 
-export default createSprint;
+const getResultView = (flag: boolean, useElem: HTMLElement) => {
+  if (flag) {
+    useElem.classList.remove('sprint-container__view-element');
+    useElem.classList.add('sprint-container__view-element-true');
+  } else if (!flag) {
+    useElem.classList.remove('sprint-container__view-element');
+    useElem.classList.add('sprint-container__view-element-false');
+  }
+};
+
+const getResultOfGame = () => {
+  const placeResult = <HTMLElement>document.querySelector('.sprint-score-num');
+  const results: number = Number(placeResult.textContent) + 10;
+  placeResult.textContent = `${results}`;
+};
+
+export {
+  createSprint,
+  getResultView,
+  randomNumber,
+  getResultOfGame,
+  findAllElementsSprint,
+};

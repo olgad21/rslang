@@ -87,4 +87,12 @@ export interface ExtendUserWord extends UserWordOptions {
   wordId: string;
 }
 
-export { UserData, UserCredentials, UserAuthData };
+interface UserStatistic {
+  userId: string;
+  token?: string;
+  item: string;
+}
+
+export {
+  UserData, UserCredentials, UserAuthData, UserStatistic,
+};

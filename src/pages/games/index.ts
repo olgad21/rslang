@@ -1,10 +1,18 @@
+/* eslint-disable */
+
 import { removeAllChildNodes } from '../../helpers';
 import { getWords } from '../../API/wordsAPI';
 import createGameSlot from './game-components/game-slot/game-slot';
 import createSprintMenu from './sprint/sprint-menu/sprint-menu';
 import renderGamePage from './game-components/game-menu/game-menu';
 import createModal from './game-components/modal/modal';
-import createSprint from './sprint/sprint';
+import {
+  createSprint,
+  getResultView,
+  randomNumber,
+  getResultOfGame,
+  findAllElementsSprint,
+} from './sprint/sprint';
 
 // MODAL
 const renderModal = () => {
@@ -13,7 +21,7 @@ const renderModal = () => {
   (<HTMLElement>modalBtnReapet).addEventListener('click', () => {
     removeAllChildNodes(<HTMLElement>wrapperMain);
     (<HTMLElement>wrapper).firstChild?.remove();
-    renderSprintMenu(<HTMLElement>wrapper);
+    renderSprintMenu(<HTMLElement>wrapperMain);
   });
 
   (<HTMLElement>modalBtnMenu).addEventListener('click', () => {
@@ -24,7 +32,11 @@ const renderModal = () => {
 };
 
 // SPRINT
-const renderSprint = (place: HTMLElement, lev: string | null) => {
+const renderSprint = (lev: string | null, group: number) => {
+  // все переменные
+  const place = <HTMLElement>document.querySelector('.main__wrapper');
+  removeAllChildNodes(place);
+
   const [
     sprintGameBtnTrue,
     sprintGameBtnFalse,
@@ -34,67 +46,50 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     sprintWordRu,
     sprintTimer,
   ] = createSprint(place, lev);
+  let usedWords: string[] = [];
 
-  const findAllElementsSprint = () => {
-    const useElem = <HTMLElement>(
-      document.querySelector('.sprint-container__view-element')
-    );
-    const useElemTrue = <NodeListOf<Element>>(
-      document.querySelectorAll('.sprint-container__view-element-true')
-    );
-    const useElemFalse = <NodeListOf<Element>>(
-      document.querySelectorAll('.sprint-container__view-element-false')
-    );
-
-    return [useElem, useElemTrue, useElemFalse];
-  };
-
-  const randomNumber = (num: number) => Math.floor(Math.random() * num);
-
+  // проверка правильности перевода
   async function getWordToSprint(
     page: number,
     group: number,
     enWord: HTMLElement,
-    ruWord: HTMLElement,
+    ruWord: HTMLElement
   ) {
     const randomChoise = randomNumber(2);
     const randomNum1 = randomNumber(21);
     const randomNum2 = randomNumber(21);
     const enWordParam = enWord;
     const ruWordParam = ruWord;
+    const pageParam = page;
+    const groupParam = group;
 
     if (randomChoise === 0) {
       getWords(page, group).then((response) => {
-        enWordParam.textContent = response[randomNum1].word;
-        ruWordParam.textContent = response[randomNum1].wordTranslate;
+        if (!usedWords.includes(<string>response[randomNum1].word)) {
+          enWordParam.textContent = response[randomNum1].word;
+          ruWordParam.textContent = response[randomNum1].wordTranslate;
+          usedWords.push(response[randomNum1].word);
+        } else {
+          getWordToSprint(pageParam, groupParam, enWordParam, ruWordParam);
+        }
       });
     } else if (randomChoise === 1) {
       getWords(page, group).then((response) => {
-        enWordParam.textContent = response[randomNum1].word;
-        ruWordParam.textContent = response[randomNum2].wordTranslate;
+        if (!usedWords.includes(<string>response[randomNum1].word)) {
+          enWordParam.textContent = response[randomNum1].word;
+          ruWordParam.textContent = response[randomNum2].wordTranslate;
+          usedWords.push(response[randomNum1].word);
+        } else {
+          getWordToSprint(pageParam, groupParam, enWordParam, ruWordParam);
+        }
       });
     }
   }
 
-  const getResultOfGame = () => {
-    const placeResult = <HTMLElement>(
-      document.querySelector('.sprint-score-num')
-    );
-    const results: number = Number(placeResult.textContent) + 10;
-    placeResult.textContent = `${results}`;
-  };
+  getResultOfGame();
 
-  const getResultView = (flag: boolean, useElem: HTMLElement) => {
-    if (flag) {
-      useElem.classList.remove('sprint-container__view-element');
-      useElem.classList.add('sprint-container__view-element-true');
-    } else if (!flag) {
-      useElem.classList.remove('sprint-container__view-element');
-      useElem.classList.add('sprint-container__view-element-false');
-    }
-  };
-
-  const getNewValue = (placeTimer: HTMLElement) => {
+  // таймер
+  const timer = (placeTimer: HTMLElement) => {
     const prevValue: number = parseInt(<string>placeTimer.textContent, 10);
     let nextValue: number = prevValue - 1;
     const placeTimerParam = placeTimer;
@@ -111,6 +106,7 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     }, 1000);
   };
 
+  // возврат лучшей серии ответов
   const getBestSeriesAnswer = () => {
     const allResultsContainer = <HTMLElement>(
       document.querySelector('.sprint-container__view-results')
@@ -123,22 +119,22 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     for (let i = 0; i < allResultsArray.length; i += 1) {
       if (
         allResultsArray[i].classList.contains(
-          'sprint-container__view-element-true',
-        )
-        && flag
+          'sprint-container__view-element-true'
+        ) &&
+        flag
       ) {
         count += 1;
       } else if (
         allResultsArray[i].classList.contains(
-          'sprint-container__view-element-true',
-        )
-        && !flag
+          'sprint-container__view-element-true'
+        ) &&
+        !flag
       ) {
         flag = true;
         count = 1;
       } else if (
         allResultsArray[i].classList.contains(
-          'sprint-container__view-element-false',
+          'sprint-container__view-element-false'
         )
       ) {
         bestScore = count;
@@ -149,12 +145,13 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     localStorage.setItem('bestSeriesSprint', `${bestScore}`);
   };
 
+  // вызов по нажатию кнопки
   const sprintGameBtn = (
     choise: string,
     page: number,
     group: number,
     enWord: HTMLElement,
-    ruWord: HTMLElement,
+    ruWord: HTMLElement
   ) => {
     const [useElem] = findAllElementsSprint();
 
@@ -162,18 +159,18 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
       let flag = false;
       for (let i = 0; i < response.length; i += 1) {
         if (
-          (enWord.textContent === response[i].word
-            && ruWord.textContent === response[i].wordTranslate
-            && choise === 'true')
-          || (enWord.textContent === response[i].word
-            && ruWord.textContent !== response[i].wordTranslate
-            && choise === 'false')
+          (enWord.textContent === response[i].word &&
+            ruWord.textContent === response[i].wordTranslate &&
+            choise === 'true') ||
+          (enWord.textContent === response[i].word &&
+            ruWord.textContent !== response[i].wordTranslate &&
+            choise === 'false')
         ) {
           (<HTMLElement>useElem).classList.remove(
-            'sprint-container__view-element',
+            'sprint-container__view-element'
           );
           (<HTMLElement>useElem).classList.add(
-            'sprint-container__view-element-true',
+            'sprint-container__view-element-true'
           );
           flag = true;
           getResultOfGame();
@@ -186,13 +183,14 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     getWordToSprint(page, group, enWord, ruWord);
   };
 
+  // кнопки
   (<HTMLElement>sprintGameBtnTrue).addEventListener('click', () => {
     sprintGameBtn(
       'true',
       <number>randomPage,
       <number>gameLevl,
       <HTMLElement>sprintWordEn,
-      <HTMLElement>sprintWordRu,
+      <HTMLElement>sprintWordRu
     );
   });
   (<HTMLElement>sprintGameBtnFalse).addEventListener('click', () => {
@@ -201,10 +199,11 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
       <number>randomPage,
       <number>gameLevl,
       <HTMLElement>sprintWordEn,
-      <HTMLElement>sprintWordRu,
+      <HTMLElement>sprintWordRu
     );
   });
 
+  // отслеживает, когда наьерется 20 ответов
   const observer = setInterval(() => {
     const useElemTrue = <NodeListOf<Element>>(
       document.querySelectorAll('.sprint-container__view-element-true')
@@ -214,9 +213,9 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     );
 
     if (
-      (<NodeListOf<Element>>useElemTrue).length
-        + (<NodeListOf<Element>>useElemFalse).length
-      === 20
+      (<NodeListOf<Element>>useElemTrue).length +
+        (<NodeListOf<Element>>useElemFalse).length ===
+      20
     ) {
       clearInterval(observer);
       getBestSeriesAnswer();
@@ -224,13 +223,15 @@ const renderSprint = (place: HTMLElement, lev: string | null) => {
     }
   }, 1000);
 
+  // первое слово при начале игры
   getWordToSprint(
     <number>randomPage,
     <number>gameLevl,
     <HTMLElement>sprintWordEn,
-    <HTMLElement>sprintWordRu,
+    <HTMLElement>sprintWordRu
   );
-  getNewValue(<HTMLElement>sprintTimer);
+
+  timer(<HTMLElement>sprintTimer);
 };
 
 // SPRINT-MENU
@@ -238,14 +239,13 @@ const renderSprintMenu = (place: HTMLElement) => {
   const sprintMenuBtnStart = createSprintMenu(place);
 
   sprintMenuBtnStart.addEventListener('click', () => {
-    const wrapperMain = <HTMLElement>document.querySelector('.main__wrapper');
     const choseLvl = <HTMLSelectElement>(
       document.querySelector('.menu-btn__complexity')
     );
+    const page: number = randomNumber(31);
     const levl = choseLvl.value;
 
-    removeAllChildNodes(wrapperMain);
-    renderSprint(wrapperMain, levl);
+    renderSprint(levl, page);
   });
 };
 
