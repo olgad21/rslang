@@ -50,8 +50,10 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
+    "@types/chart.js": "^2.9.37",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
+    "chart.js": "^3.9.1",
     "eslint-plugin-import": "^2.26.0",
     "location-change-event": "^1.0.2"
   }

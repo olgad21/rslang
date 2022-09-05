@@ -3,7 +3,7 @@ import { UserStatistic } from '../Interfaces';
 
 export const getUserStatistics = async ({ userId, token }: UserStatistic) => {
   const response = await fetch(
-    `${host}${path.users}/${userId}/${path.statistics}}`,
+    `${host}${path.users}/${userId}/statistics`,
     {
       method: 'GET',
       headers: {
@@ -27,7 +27,7 @@ export const updateUserStatistics = async ({
   statistics,
 }: UserStatistic) => {
   const response = await fetch(
-    `${host}${path.users}/${userId}/${path.statistics}}}`,
+    `${host}${path.users}/${userId}/statistics`,
     {
       method: 'PUT',
       headers: {

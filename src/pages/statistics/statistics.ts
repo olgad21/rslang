@@ -70,7 +70,11 @@ const renderAllStatsdata = () => {
   const allStatsTitle = createElement('h2', 'stats__subtitle');
   allStatsTitle.textContent = statsStrings.allStats;
 
-  allStatsData.append(allStatsTitle);
+  const allStatsContainer = createElement('div', 'canvas-container');
+  const allStatsGraph = createElement('canvas', 'chart');
+  allStatsContainer.append(allStatsGraph);
+
+  allStatsData.append(allStatsTitle, allStatsContainer);
   return allStatsData;
 };
 

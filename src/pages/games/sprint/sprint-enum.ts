@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const enum Sprint {
   levl = 'Уровень: ',
   title = 'Ваш результат: ',

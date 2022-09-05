@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { removeAllChildNodes } from '../../helpers';
@@ -88,7 +89,7 @@ const renderSprint = (group: number, page: number) => {
             const userId = <string>localStorage.getItem('user_id');
             const token = <string>localStorage.getItem('token');
             const wordId = response[randomNum1].id;
-            const userWord = getUserWord({
+            const userWord = await getUserWord({
               userId,
               wordId,
               token,
@@ -184,7 +185,7 @@ const renderSprint = (group: number, page: number) => {
       const userId = <string>localStorage.getItem('user_id');
       const token = <string>localStorage.getItem('token');
       getUserStatistics({ userId, token }).then((response) => {
-        if (response.optional.bestScore.ok) {
+        if (response.optional.bestScore) {
           if (response.optional.bestScore < bestScore) {
             statisticsBase.optional.sprintBestScore = bestScore;
             const statistics: BaseStatistics = statisticsBase;
