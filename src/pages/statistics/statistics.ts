@@ -7,7 +7,7 @@ const renderDailyStatsIndicator = (description: string, id: string) => {
   const stats = createElement('div', 'daily-indicator__container');
   const statsNumber = createElement('p', 'daily-indicator__number');
   statsNumber.setAttribute('data-id', id);
-  statsNumber.textContent = '0'; // Change with JS
+  statsNumber.textContent = '0';
   const statsDesc = createElement('p', 'daily-indicator__desc');
   statsDesc.textContent = `${description}`;
   stats.append(statsNumber, statsDesc);
@@ -19,8 +19,7 @@ const renderDailyStatsData = () => {
   const dayStatsTitle = createElement('h2', 'stats__subtitle');
   dayStatsTitle.textContent = statsStrings.dayStats;
 
-  const dailyIndicatorsData = dailyIndicators.map(({ description, id }) => (
-    renderDailyStatsIndicator(description, id)));
+  const dailyIndicatorsData = dailyIndicators.map(({ description, id }) => renderDailyStatsIndicator(description, id));
 
   const dailyNumbersData = createElement('div', 'daily-numbers-container');
   dailyNumbersData.append(...dailyIndicatorsData);
@@ -29,29 +28,31 @@ const renderDailyStatsData = () => {
   return dailyStatsData;
 };
 
-const renderGameDataIndicator = (iconStyle: string, description: string, id: string) => {
+const renderGameDataIndicator = (
+  iconStyle: string,
+  description: string,
+  id: string,
+) => {
   const stats = createElement('div', 'stats__game-indicator');
   const icon = createElement('i', ['stats-icon', 'bi', `${iconStyle}`]);
   const statsDesc = createElement('div', 'stats__game-indicator-desc');
   const statsNumber = createElement('span', 'stats__game-indicator-num');
   statsNumber.setAttribute('data-id', id);
   statsDesc.textContent = `${description}: `;
-  statsNumber.textContent = '0'; // Change with JS
   statsDesc.append(statsNumber);
   stats.append(icon, statsDesc);
   return stats;
 };
 
-const renderGameData = (
-  name: string,
-) => {
+const renderGameData = (name: string) => {
   const gameData = createElement('div', 'game-data');
   gameData.setAttribute('data-game', `${name}`);
   const gameName = createElement('h3', 'stats__game-name');
   gameName.textContent = name;
 
-  const gameIndicatorsData = gameIndicators.map(({ iconStyle, description, id }) => (
-    renderGameDataIndicator(iconStyle, description, id)));
+  const gameIndicatorsData = gameIndicators.map(
+    ({ iconStyle, description, id }) => renderGameDataIndicator(iconStyle, description, id),
+  );
 
   gameData.append(gameName, ...gameIndicatorsData);
   return gameData;
@@ -70,7 +71,11 @@ const renderAllStatsdata = () => {
   const allStatsTitle = createElement('h2', 'stats__subtitle');
   allStatsTitle.textContent = statsStrings.allStats;
 
-  allStatsData.append(allStatsTitle);
+  const allStatsContainer = createElement('div', 'canvas-container');
+  const allStatsGraph = createElement('canvas', 'chart');
+  allStatsContainer.append(allStatsGraph);
+
+  allStatsData.append(allStatsTitle, allStatsContainer);
   return allStatsData;
 };
 

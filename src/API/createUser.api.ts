@@ -1,7 +1,7 @@
 import { host, path } from '../constants';
-import UserData, { UserCredentials } from '../Interfaces';
+import { UserData, UserCredentials } from '../Interfaces';
 
-const createUser = async (user: UserCredentials): Promise <UserData> => {
+const createUser = async (user: UserCredentials): Promise<UserData> => {
   const response = await fetch(`${host}${path.users}`, {
     method: 'POST',
     headers: {

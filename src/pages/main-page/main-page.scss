@@ -9,6 +9,8 @@ a {
 }
 
 .main-content__wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,6 +72,10 @@ a {
   width: 30%;
 }
 
+.creators__item * {
+  margin-bottom: 0.7rem;
+}
+
 .creator-role {
   color: grey;
 }
@@ -77,6 +83,7 @@ a {
 .creator-link {
   display: block;
   width: 2rem;
+  height: 2rem;
   background: url(../../assets/GitHub-Mark-32px.png) no-repeat;
 }
 
@@ -85,7 +92,7 @@ a {
 }
 
 .creators-info__wrapper {
-  margin-top: 1.5rem;
+  margin-top: 4.5rem;
   display: flex;
   justify-content: space-between;
 }

@@ -32,7 +32,10 @@ const removeFromHard = () => {
             wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
             wordBase.optional.dateLearned = data.optional.dateLearned;
             updateUserWord({
-              userId, wordId, token, wordBase,
+              userId,
+              wordId,
+              token,
+              wordBase,
             });
           });
           renderHardLevel();

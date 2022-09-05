@@ -15,6 +15,11 @@ const renderApp = () => {
   const footer = renderFooter();
 
   wrapper.append(header, sidebar, mainWrapper, footer);
+  // const mainBtn = document.querySelector('.main__button');
+  // mainBtn?.addEventListener('click', () => {
+  //   window.history.pushState({ id: 'ebook' }, 'ebook', 'ebook');
+  //   renderPageContent();
+  // });
 
   renderPageContent();
 };
