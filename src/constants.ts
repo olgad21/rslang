@@ -22,6 +22,9 @@ export const filterAggregate = {
   isLearned: '{"$and":[{"userWord.difficulty":"easy", "userWord.optional.isLearned":true}]}',
   hard: '{"$and":[{"userWord.difficulty":"hard"}]}',
   isNewWord: '{"$and":[{"userWord.optional.isNewWord":true}]}',
+  attemp: '{"$and":[{"userWord.optional.attemp"}]}',
+  guesses: '{"$and":[{"userWord.optional.guesses"}]}',
+  error: '{"$and":[{"userWord.optional.error"}]}',
 };
 
 export const WORDS_OF_PAGE = 20;
@@ -32,7 +35,7 @@ export enum Hard {
   hard = 'hard',
 }
 
-export const wordBase : UserWordOptions = {
+export const wordBase: UserWordOptions = {
   difficulty: Hard.easy,
   optional: {
     attemp: 0,
@@ -45,6 +48,11 @@ export const wordBase : UserWordOptions = {
     sprintLearned: false,
     audioLearned: false,
     date: String(Date.now()),
+    dateSprintLearned: String(Date.now()),
+    dateAudioLearned: String(Date.now()),
+    dateSprintNew: String(Date.now()),
+    dateAudioNew: String(Date.now()),
+    dateLearned: String(Date.now()),
   },
 };
 
@@ -52,8 +60,8 @@ const strings = {
   registration: 'Начать обучение',
   creatorsTitle: 'Наша команда',
   chapterEBook: 'Электронный учебник',
-  savana: 'Саванна',
-  audioCall: 'Аудио вызов',
+  spint: 'Спринт',
+  audioCall: 'Аудиовызов',
   complicated: 'Сложное',
   deleted: 'Удалить',
   regForm: 'Регистрация',
@@ -71,6 +79,7 @@ const strings = {
   needLogin: 'Доступно только зарегистрированным пользователям.',
   guesses: 'Правильных ответов:',
   error: 'Не правильных ответов:',
+  wordList: 'Список пуст',
 };
 
 export const statsStrings = {

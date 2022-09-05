@@ -25,7 +25,7 @@ export const createUserWord = async ({
   return content;
 };
 
-export const getAllUserWords = async ({ userId, token }: UserWord): Promise<ExtendUserWord[]> => {
+export const getAllUserWords = async ({ userId, token }: UserWord) : Promise<ExtendUserWord[]> => {
   const response = await fetch(`${host}${path.users}/${userId}${path.words}`, {
     method: 'GET',
     headers: {

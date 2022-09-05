@@ -1,8 +1,8 @@
 import strings, { host } from '../../../constants';
 import createElement from '../../../helpers';
-import { Word } from '../../../Interfaces';
+import { ExtendWord, Word } from '../../../Interfaces';
 
-const renderWord = (word: Word) => {
+const renderWord = (word: (Word | ExtendWord)) => {
   const dataId = (word.id) ? word.id : word._id;
   const english = createElement('p', 'english');
   english.textContent = `${word.word}`;
@@ -59,11 +59,15 @@ const renderWord = (word: Word) => {
   const guesses = createElement('p', 'guess-text');
   guesses.textContent = strings.guesses;
   const countGuesses = createElement('span', 'guess-count');
+  countGuesses.setAttribute('data-guess', `${dataId}`);
   countGuesses.textContent = '0';
+
   const error = createElement('p', 'error-text');
   error.textContent = strings.error;
   const countError = createElement('span', 'error-count');
+  countError.setAttribute('data-error', `${dataId}`);
   countError.textContent = '0';
+
   const progress = createElement('div', 'progress-block');
   progress.append(guesses, countGuesses, error, countError);
 

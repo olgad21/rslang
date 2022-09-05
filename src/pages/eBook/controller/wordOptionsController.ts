@@ -29,8 +29,25 @@ const wordOptions = () => {
               userId, wordId, token, wordBase,
             });
           } else {
-            updateUserWord({
-              userId, wordId, token, wordBase,
+            userWord.json().then((data) => {
+              wordBase.optional.attemp = data.optional.attemp;
+              wordBase.optional.isNewWord = data.optional.isNewWord;
+              wordBase.optional.sprintNew = data.optional.sprintNew;
+              wordBase.optional.audioNew = data.optional.audioNew;
+              wordBase.optional.guesses = data.optional.guesses;
+              wordBase.optional.error = data.optional.error;
+              wordBase.optional.isLearned = data.optional.isLearned;
+              wordBase.optional.sprintLearned = data.optional.sprintLearned;
+              wordBase.optional.audioLearned = data.optional.audioLearned;
+              wordBase.optional.date = data.optional.date;
+              wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
+              wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+              wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
+              wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+              wordBase.optional.dateLearned = data.optional.dateLearned;
+              updateUserWord({
+                userId, wordId, token, wordBase,
+              });
             });
           }
         } else if (event.target.innerText === strings.easy) {
@@ -40,9 +57,27 @@ const wordOptions = () => {
           complicatedBtn.classList.remove('easy-word');
           const hardWord = <HTMLElement>document.querySelector(`[data-hard="${wordId}"]`);
           hardWord.textContent = '';
-          wordBase.difficulty = Hard.easy;
-          updateUserWord({
-            userId, wordId, token, wordBase,
+          const userWord = await getUserWord({ userId, wordId, token });
+          userWord.json().then((data) => {
+            wordBase.difficulty = Hard.easy;
+            wordBase.optional.attemp = data.optional.attemp;
+            wordBase.optional.isNewWord = data.optional.isNewWord;
+            wordBase.optional.sprintNew = data.optional.sprintNew;
+            wordBase.optional.audioNew = data.optional.audioNew;
+            wordBase.optional.guesses = data.optional.guesses;
+            wordBase.optional.error = data.optional.error;
+            wordBase.optional.isLearned = data.optional.isLearned;
+            wordBase.optional.sprintLearned = data.optional.sprintLearned;
+            wordBase.optional.audioLearned = data.optional.audioLearned;
+            wordBase.optional.date = data.optional.date;
+            wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
+            wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+            wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
+            wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+            wordBase.optional.dateLearned = data.optional.dateLearned;
+            updateUserWord({
+              userId, wordId, token, wordBase,
+            });
           });
         } else if (event.target.innerText === strings.learned) {
           const wordId = event.target.dataset.id2;
@@ -62,8 +97,24 @@ const wordOptions = () => {
               userId, wordId, token, wordBase,
             });
           } else {
-            updateUserWord({
-              userId, wordId, token, wordBase,
+            userWord.json().then((data) => {
+              wordBase.optional.attemp = data.optional.attemp;
+              wordBase.optional.isNewWord = data.optional.isNewWord;
+              wordBase.optional.sprintNew = data.optional.sprintNew;
+              wordBase.optional.audioNew = data.optional.audioNew;
+              wordBase.optional.guesses = data.optional.guesses;
+              wordBase.optional.error = data.optional.error;
+              wordBase.optional.sprintLearned = data.optional.sprintLearned;
+              wordBase.optional.audioLearned = data.optional.audioLearned;
+              wordBase.optional.date = data.optional.date;
+              wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
+              wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+              wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
+              wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+              wordBase.optional.dateLearned = String(Date.now());
+              updateUserWord({
+                userId, wordId, token, wordBase,
+              });
             });
           }
         } else if (event.target.innerText === strings.learnedWords) {
@@ -74,9 +125,26 @@ const wordOptions = () => {
           const hardWord = <HTMLElement>document.querySelector(`[data-hard="${wordId}"]`);
           hardWord.textContent = '';
           wordBase.optional.isLearned = false;
-          wordBase.difficulty = Hard.hard;
-          updateUserWord({
-            userId, wordId, token, wordBase,
+          const userWord = await getUserWord({ userId, wordId, token });
+          userWord.json().then((data) => {
+            wordBase.difficulty = Hard.hard;
+            wordBase.optional.attemp = data.optional.attemp;
+            wordBase.optional.isNewWord = data.optional.isNewWord;
+            wordBase.optional.sprintNew = data.optional.sprintNew;
+            wordBase.optional.audioNew = data.optional.audioNew;
+            wordBase.optional.guesses = data.optional.guesses;
+            wordBase.optional.error = data.optional.error;
+            wordBase.optional.sprintLearned = data.optional.sprintLearned;
+            wordBase.optional.audioLearned = data.optional.audioLearned;
+            wordBase.optional.date = data.optional.date;
+            wordBase.optional.dateSprintLearned = data.optional.dateSprintLearn;
+            wordBase.optional.dateAudioLearned = data.optional.dateAudioLearned;
+            wordBase.optional.dateSprintNew = data.optional.dateSprintLearned;
+            wordBase.optional.dateAudioNew = data.optional.dateAudioLearned;
+            wordBase.optional.dateLearned = data.optional.date;
+            updateUserWord({
+              userId, wordId, token, wordBase,
+            });
           });
         }
       }
