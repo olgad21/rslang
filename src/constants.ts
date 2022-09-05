@@ -90,7 +90,7 @@ const statsStrings = {
   percentageRightWords: '% правильных ответов',
   numberNewWords: 'Количество новых слов',
   seriesRightWords: 'Количество правильных ответов подряд',
-  dayStats: 'Статистика за сегодня',
+  dayStats: 'Статистика за последние сутки',
   allStats: 'Статистика за всё время',
 };
 

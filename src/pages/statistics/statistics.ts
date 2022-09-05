@@ -1,12 +1,13 @@
 import { dailyIndicators, gameIndicators, statsStrings } from '../../constants';
 import createElement, { removeAllChildNodes } from '../../helpers';
 import './statistics.scss';
-import updateDailyStatistics from './statisticsController';
+import updateStatistics from './statisticsController';
 
 const renderDailyStatsIndicator = (description: string, id: string) => {
   const stats = createElement('div', 'daily-indicator__container');
   const statsNumber = createElement('p', 'daily-indicator__number');
   statsNumber.setAttribute('data-id', id);
+  statsNumber.textContent = '0';
   const statsDesc = createElement('p', 'daily-indicator__desc');
   statsDesc.textContent = `${description}`;
   stats.append(statsNumber, statsDesc);
@@ -85,7 +86,7 @@ const renderStatisticsPage = () => {
   const statisticsGamesDaily = renderAllGamesData();
   removeAllChildNodes(mainWrapper);
   mainWrapper?.append(statisticsDataDaily, statisticsGamesDaily, statisticsDataAll);
-  updateDailyStatistics();
+  updateStatistics();
 };
 
 export default renderStatisticsPage;
