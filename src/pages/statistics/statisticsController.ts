@@ -1,9 +1,7 @@
-/* eslint-disable no-console */
 import { Chart, registerables } from 'chart.js';
-import { getAggregatedWords } from '../../API/aggregatedWordsAPI';
 import { getUserStatistics } from '../../API/userStatustics';
 import { getAllUserWords } from '../../API/userWordAPI';
-import strings, { filterAggregate } from '../../constants';
+import strings, { statsStrings } from '../../constants';
 import createElement, { removeAllChildNodes } from '../../helpers';
 import { ExtendUserWord } from '../../Interfaces';
 
@@ -13,39 +11,21 @@ const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
 
 const filterWordsByDate = (
-  words: { userWord: { optional: { date: string } } }[],
-) => words.filter((word) => {
-  const { date } = word.userWord.optional;
+  date: string,
+) => {
   const now = Date.now();
   const dayBefore = now - 24 * 60 * 60 * 1000;
   return dayBefore <= Number(date);
-});
+};
 
 const updateWordsStatistics = async (
   userWords: ExtendUserWord[],
 ) => {
-  let filteredNewWordsByDate = [];
-  let filteredLearnedWordsByDate = [];
-  let filter = filterAggregate.isNewWord;
-  const newWordsList = await getAggregatedWords({ userId, token, filter });
-  filter = filterAggregate.isLearned;
-  const learnedWordsList = await getAggregatedWords({ userId, token, filter });
-  console.log(newWordsList, 'learnedaggregated');
-
   const dailyNewWords = document.querySelector('[data-id="daily-new-words"]') as HTMLElement;
-  let dailyNewWordsNumber = 0;
+  const dailyNewWordsNumber = userWords.filter((word) => word.optional.isNewWord && filterWordsByDate(word.optional.date)).length;
 
-  if (newWordsList[0].paginatedResults.length > 0) {
-    filteredNewWordsByDate = filterWordsByDate(newWordsList[0].paginatedResults);
-    dailyNewWordsNumber = filteredNewWordsByDate.length;
-  }
   const dailyLearnedWords = document.querySelector('[data-id="daily-learned-words"]') as HTMLElement;
-  let dailyLearnedWordsNumber = 0;
-
-  if (learnedWordsList[0].paginatedResults.length > 0) {
-    filteredLearnedWordsByDate = filterWordsByDate(learnedWordsList[0].paginatedResults);
-    dailyLearnedWordsNumber = filteredLearnedWordsByDate.length;
-  }
+  const dailyLearnedWordsNumber = userWords.filter((word) => word.optional.isLearned && filterWordsByDate(word.optional.dateLearned)).length;
 
   const dailyRightWords = document.querySelector('[data-id="daily-right-words"]') as HTMLElement;
   let dailyRightWordsNumber = 0;
@@ -79,7 +59,6 @@ const updateGameStatistics = (userWords: ExtendUserWord[]) => {
 
     try {
       gameRightWordsNumber = await getUserStatistics({ userId, token });
-      console.log(gameRightWordsNumber, 'gameStats');
     } catch {
       gameRightWordsNumber = 0;
     }
@@ -135,18 +114,9 @@ const updateAllTimeStatistics = (userWords: ExtendUserWord[]) => {
     const month = MONTHS[date.getMonth()];
     return `${dateNum} ${month}`;
   };
-  // для проверки!
-
-  // userWords.forEach((word) => {
-  //   if (word.optional.isLearned) {
-  //     console.log('new date', new Date(Number(word.optional.date)), '|   learned date', new Date(Number(word.optional.dateLearned)));
-  //   }
-  // });
 
   const newWords = userWords.filter((word) => word.optional.isNewWord);
   const learnedWords = userWords.filter((word) => word.optional.isLearned);
-  console.log(learnedWords.length, 'learnedLong');
-  console.log(newWords.length, 'newWordsLong');
 
   const newWordsDates = newWords.map((word) => getDateLabel(word.optional.date));
   const learnedWordsDates = learnedWords.map((word) => getDateLabel(word.optional.dateLearned));
@@ -170,17 +140,15 @@ const updateAllTimeStatistics = (userWords: ExtendUserWord[]) => {
     });
   });
 
-  console.log(newWordsData, learnedWordsData, 222);
-
   const data = {
     labels: uniqueDatesLabels,
     datasets: [{
-      label: 'Новые слова',
+      label: statsStrings.new,
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: newWordsData,
     }, {
-      label: 'Изученные слова',
+      label: statsStrings.learned,
       backgroundColor: 'blue',
       borderColor: 'blue',
       data: learnedWordsData,

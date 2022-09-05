@@ -92,6 +92,8 @@ const statsStrings = {
   seriesRightWords: 'Количество правильных ответов подряд',
   dayStats: 'Статистика за последние сутки',
   allStats: 'Статистика за всё время',
+  new: 'Новые слова',
+  learned: 'Изученные слова',
 };
 
 const gameIndicators = [
