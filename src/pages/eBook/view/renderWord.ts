@@ -2,8 +2,8 @@ import strings, { host } from '../../../constants';
 import createElement from '../../../helpers';
 import { ExtendWord, Word } from '../../../Interfaces';
 
-const renderWord = (word: (Word | ExtendWord)) => {
-  const dataId = (word.id) ? word.id : word._id;
+const renderWord = (word: Word | ExtendWord) => {
+  const dataId = word.id ? word.id : word._id;
   const english = createElement('p', 'english');
   english.textContent = `${word.word}`;
   const transcription = createElement('p', 'transcription');
@@ -37,7 +37,11 @@ const renderWord = (word: (Word | ExtendWord)) => {
   wordExamples.append(textExamples, textMeaningExamples);
 
   const controlBtns = createElement('div', 'control-btns');
-  const complicatedBtn = createElement('button', ['complicated-btn', 'control-btn']) as HTMLButtonElement;
+
+  const complicatedBtn = createElement('button', [
+    'complicated-btn',
+    'control-btn',
+  ]) as HTMLButtonElement;
   complicatedBtn.setAttribute('data-id1', `${dataId}`);
   complicatedBtn.setAttribute('data-id1', `${dataId}`);
   complicatedBtn.textContent = strings.complicated;
@@ -46,7 +50,10 @@ const renderWord = (word: (Word | ExtendWord)) => {
   } else {
     complicatedBtn.disabled = true;
   }
-  const learnedBtn = createElement('button', ['learned-btn', 'control-btn']) as HTMLButtonElement;
+  const learnedBtn = createElement('button', [
+    'learned-btn',
+    'control-btn',
+  ]) as HTMLButtonElement;
   learnedBtn.setAttribute('data-id2', `${dataId}`);
   learnedBtn.textContent = strings.learned;
   if (localStorage.getItem('user_id')) {
@@ -80,7 +87,13 @@ const renderWord = (word: (Word | ExtendWord)) => {
   hardWord.textContent = '';
 
   const infoContainer = createElement('div', 'info-container');
-  infoContainer.append(hardWord, wordInfo, wordMeaning, wordExamples, statistic);
+  infoContainer.append(
+    hardWord,
+    wordInfo,
+    wordMeaning,
+    wordExamples,
+    statistic,
+  );
 
   const wordImg = createElement('div', 'word-img');
   const image = document.createElement('img');

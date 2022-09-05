@@ -4,11 +4,11 @@ import asset3 from './assets/22378293_6566143.jpg';
 import irynaAvatar from './assets/Iryna.png';
 import olgaAvatar from './assets/Olga.png';
 import alexeiAvatar from './assets/Alexei.png';
-import { UserWordOptions } from './Interfaces';
+import { BaseStatistics, UserWordOptions } from './Interfaces';
 
-export const host = 'https://rslang-team-68.herokuapp.com';
+const host = 'https://rslang-team-68.herokuapp.com';
 
-export const path = {
+const path = {
   users: '/users',
   tokens: '/tokens',
   words: '/words',
@@ -19,7 +19,8 @@ export const path = {
 };
 
 export const filterAggregate = {
-  isLearned: '{"$and":[{"userWord.difficulty":"easy", "userWord.optional.isLearned":true}]}',
+  isLearned:
+    '{"$and":[{"userWord.difficulty":"easy", "userWord.optional.isLearned":true}]}',
   hard: '{"$and":[{"userWord.difficulty":"hard"}]}',
   isNewWord: '{"$and":[{"userWord.optional.isNewWord":true}]}',
   attemp: '{"$and":[{"userWord.optional.attemp"}]}',
@@ -27,8 +28,8 @@ export const filterAggregate = {
   error: '{"$and":[{"userWord.optional.error"}]}',
 };
 
-export const WORDS_OF_PAGE = 20;
-export const PAGES_NUMBER = 30;
+const WORDS_OF_PAGE = 20;
+const PAGES_NUMBER = 30;
 
 export enum Hard {
   easy = 'easy',
@@ -82,7 +83,9 @@ const strings = {
   wordList: 'Список пуст',
 };
 
-export const statsStrings = {
+export default strings;
+
+const statsStrings = {
   numberLearnedWords: 'Количество изученных слов',
   percentageRightWords: '% правильных ответов',
   numberNewWords: 'Количество новых слов',
@@ -91,7 +94,7 @@ export const statsStrings = {
   allStats: 'Статистика за всё время',
 };
 
-export const gameIndicators = [
+const gameIndicators = [
   {
     iconStyle: 'bi-patch-check',
     description: statsStrings.numberNewWords,
@@ -109,7 +112,7 @@ export const gameIndicators = [
   },
 ];
 
-export const dailyIndicators = [
+const dailyIndicators = [
   {
     description: statsStrings.numberNewWords,
     id: 'daily-new-words',
@@ -125,18 +128,19 @@ export const dailyIndicators = [
 ];
 
 interface MainDescription {
-  img: string,
-  message: string,
+  img: string;
+  message: string;
 }
 
-export const mainDescriptions: MainDescription[] = [
+const mainDescriptions: MainDescription[] = [
   {
     img: asset1,
     message: 'Пробуй разные уровни сложности в упражнениях и ставь новые цели',
   },
   {
     img: asset2,
-    message: 'Следи за своим прогрессом в реальном времени на странице статистики',
+    message:
+      'Следи за своим прогрессом в реальном времени на странице статистики',
   },
   {
     img: asset3,
@@ -144,36 +148,59 @@ export const mainDescriptions: MainDescription[] = [
   },
 ];
 
-export interface CreatorDescription {
-  img: string,
-  name: string,
-  role: string,
-  githubLink: string,
-  description: string,
+interface CreatorDescription {
+  img: string;
+  name: string;
+  role: string;
+  githubLink: string;
+  description: string;
 }
 
-export const creatorsDescriptions: CreatorDescription[] = [
+const creatorsDescriptions: CreatorDescription[] = [
   {
     img: irynaAvatar,
     name: 'Ирина',
     role: 'Frontend Developer',
     githubLink: 'https://github.com/irynakolh',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
   },
   {
     img: olgaAvatar,
     name: 'Ольга',
     role: 'Frontend Developer',
     githubLink: 'https://github.com/olgad21',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
   },
   {
     img: alexeiAvatar,
     name: 'Алексей',
     role: 'Frontend Developer',
     githubLink: 'https://github.com/marusovalexei',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
   },
 ];
 
-export default strings;
+export const statisticsBase: BaseStatistics = {
+  learnedWords: 0,
+  optional: {
+    sprintBestScore: 0,
+    audioBestScore: 0,
+  },
+};
+
+export {
+  CreatorDescription,
+  MainDescription,
+  PAGES_NUMBER,
+  WORDS_OF_PAGE,
+  creatorsDescriptions,
+  mainDescriptions,
+  dailyIndicators,
+  gameIndicators,
+  statsStrings,
+  path,
+  host,
+};

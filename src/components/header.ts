@@ -1,11 +1,15 @@
 /* eslint-disable no-console */
-import { handleToggleForms, renderAuthorizationForm } from './authorization/authorization';
+import {
+  handleToggleForms,
+  renderAuthorizationForm,
+} from './authorization/authorization';
 import createElement from '../helpers';
 import './header.scss';
 import { handleLogoutUser } from '../API/loginUser.api';
 
 const renderHeader = () => {
   const header = createElement('header', 'header');
+
   let loginIcon: HTMLElement;
   if (localStorage.getItem('token')) {
     loginIcon = createElement('i', ['login__icon', 'bi', 'bi-box-arrow-right']);

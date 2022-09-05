@@ -1,23 +1,21 @@
-export interface UserAuthData {
-  'message': string,
-  'token': string,
-  'refreshToken': string,
-  'userId': string,
-  'name': string
+interface UserAuthData {
+  message: string;
+  token: string;
+  refreshToken: string;
+  userId: string;
+  name: string;
 }
 
-export interface UserCredentials {
-  name?: string,
-  email: string,
-  password: string,
+interface UserCredentials {
+  name?: string;
+  email: string;
+  password: string;
 }
 
 interface UserData {
-  'id': string,
-  'email': string,
+  id: string;
+  email: string;
 }
-
-export default UserData;
 
 export interface Word {
   id?: string;
@@ -38,7 +36,7 @@ export interface Word {
 }
 
 export interface Words {
-  items: Word[]
+  items: Word[];
 }
 
 export interface UserWordOptions {
@@ -59,7 +57,7 @@ export interface UserWordOptions {
     dateSprintNew: string;
     dateAudioNew: string;
     dateLearned: string;
-  }
+  };
 }
 
 export interface ExtendWord extends Word {
@@ -72,7 +70,7 @@ export interface UserWord {
   wordId?: string;
   token: string;
   wordBase?: UserWordOptions;
-  wordResult?:UserWordOptions
+  wordResult?: UserWordOptions;
 }
 
 export interface Aggregation {
@@ -94,3 +92,21 @@ export interface ExtendUserWord extends UserWordOptions {
   id: string;
   wordId: string;
 }
+
+interface UserStatistic {
+  userId: string;
+  token?: string;
+  statistics?: BaseStatistics;
+}
+
+export interface BaseStatistics {
+  learnedWords: number;
+  optional: {
+    sprintBestScore: number;
+    audioBestScore: number;
+  };
+}
+
+export {
+  UserData, UserCredentials, UserAuthData, UserStatistic,
+};

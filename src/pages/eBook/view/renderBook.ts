@@ -2,7 +2,10 @@ import { getWords } from '../../../API/wordsAPI';
 import renderWord from './renderWord';
 import './renderWord.scss';
 import renderPagination from './pagination';
-import createElement, { removeAllChildNodes, userPosition } from '../../../helpers';
+import createElement, {
+  removeAllChildNodes,
+  userPosition,
+} from '../../../helpers';
 import playSound from '../controller/musicController';
 import wordOptions from '../controller/wordOptionsController';
 import { ExtendUserWord, UserLevel, Word } from '../../../Interfaces';
@@ -11,7 +14,9 @@ import { getAllUserWords } from '../../../API/userWordAPI';
 
 export const renderEBookHeader = () => {
   const eBook = createElement('div', 'e-book-container');
-  const mainWrapper = document.querySelector('.main__wrapper') as HTMLDivElement;
+  const mainWrapper = document.querySelector(
+    '.main__wrapper',
+  ) as HTMLDivElement;
   removeAllChildNodes(mainWrapper);
   mainWrapper.appendChild(eBook);
 
@@ -61,7 +66,9 @@ export const renderEBookHeader = () => {
 };
 
 const addLevelStyle = (userLevel: UserLevel) => {
-  const wordsContainer = document.querySelector('.words-container') as HTMLDivElement;
+  const wordsContainer = document.querySelector(
+    '.words-container',
+  ) as HTMLDivElement;
   if (userLevel.group === 1) {
     wordsContainer.style.backgroundColor = 'green';
   } else if (userLevel.group === 2) {
@@ -79,7 +86,10 @@ const addLevelStyle = (userLevel: UserLevel) => {
 
 export const renderEBook = () => {
   const userLevel = userPosition();
-  const wordsContainer = document.querySelector('.words-container') as HTMLDivElement;
+
+  const wordsContainer = document.querySelector(
+    '.words-container',
+  ) as HTMLDivElement;
   wordsContainer.classList.remove('center');
   removeAllChildNodes(wordsContainer);
 
@@ -102,9 +112,15 @@ export const renderEBook = () => {
 
           userWordArray.forEach((elem: ExtendUserWord) => {
             if (word.id === elem.wordId) {
-              const hardWord = <HTMLElement>document.querySelector(`[data-hard="${word.id}"]`);
-              const complicatedBtn = <HTMLButtonElement>document.querySelector(`[data-id1="${word.id}"]`);
-              const learnedBtn = <HTMLElement>document.querySelector(`[data-id2="${word.id}"]`);
+              const hardWord = <HTMLElement>(
+                document.querySelector(`[data-hard="${word.id}"]`)
+              );
+              const complicatedBtn = <HTMLButtonElement>(
+                document.querySelector(`[data-id1="${word.id}"]`)
+              );
+              const learnedBtn = <HTMLElement>(
+                document.querySelector(`[data-id2="${word.id}"]`)
+              );
 
               if (elem.difficulty === 'hard') {
                 hardWord.textContent = String(strings.complicated);
@@ -118,13 +134,17 @@ export const renderEBook = () => {
                 learnedBtn.style.backgroundColor = 'grey';
               }
 
-              const countGuesses = <HTMLElement>document.querySelector(`[data-guess="${word.id}"]`);
+              const countGuesses = <HTMLElement>(
+                document.querySelector(`[data-guess="${word.id}"]`)
+              );
               if (elem.optional.guesses) {
                 countGuesses.textContent = String(elem.optional.guesses);
               } else {
                 countGuesses.textContent = '0';
               }
-              const countError = <HTMLElement>document.querySelector(`[data-error="${word.id}"]`);
+              const countError = <HTMLElement>(
+                document.querySelector(`[data-error="${word.id}"]`)
+              );
               if (elem.optional.error) {
                 countError.textContent = String(elem.optional.error);
               } else {

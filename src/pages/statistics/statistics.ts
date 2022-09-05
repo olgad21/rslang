@@ -18,8 +18,7 @@ const renderDailyStatsData = () => {
   const dayStatsTitle = createElement('h2', 'stats__subtitle');
   dayStatsTitle.textContent = statsStrings.dayStats;
 
-  const dailyIndicatorsData = dailyIndicators.map(({ description, id }) => (
-    renderDailyStatsIndicator(description, id)));
+  const dailyIndicatorsData = dailyIndicators.map(({ description, id }) => renderDailyStatsIndicator(description, id));
 
   const dailyNumbersData = createElement('div', 'daily-numbers-container');
   dailyNumbersData.append(...dailyIndicatorsData);
@@ -28,7 +27,11 @@ const renderDailyStatsData = () => {
   return dailyStatsData;
 };
 
-const renderGameDataIndicator = (iconStyle: string, description: string, id: string) => {
+const renderGameDataIndicator = (
+  iconStyle: string,
+  description: string,
+  id: string,
+) => {
   const stats = createElement('div', 'stats__game-indicator');
   const icon = createElement('i', ['stats-icon', 'bi', `${iconStyle}`]);
   const statsDesc = createElement('div', 'stats__game-indicator-desc');
@@ -40,16 +43,15 @@ const renderGameDataIndicator = (iconStyle: string, description: string, id: str
   return stats;
 };
 
-const renderGameData = (
-  name: string,
-) => {
+const renderGameData = (name: string) => {
   const gameData = createElement('div', 'game-data');
   gameData.setAttribute('data-game', `${name}`);
   const gameName = createElement('h3', 'stats__game-name');
   gameName.textContent = name;
 
-  const gameIndicatorsData = gameIndicators.map(({ iconStyle, description, id }) => (
-    renderGameDataIndicator(iconStyle, description, id)));
+  const gameIndicatorsData = gameIndicators.map(
+    ({ iconStyle, description, id }) => renderGameDataIndicator(iconStyle, description, id),
+  );
 
   gameData.append(gameName, ...gameIndicatorsData);
   return gameData;

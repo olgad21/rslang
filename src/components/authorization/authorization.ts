@@ -42,9 +42,7 @@ const createInput = (id: string, labelName: string) => {
   return inputWrapper;
 };
 
-const renderInputs = () => (
-  inputData.map(({ id, labelName }) => createInput(id, labelName))
-);
+const renderInputs = () => inputData.map(({ id, labelName }) => createInput(id, labelName));
 
 const renderForm = (title: string, btnName: string) => {
   const authPopup = createElement('div', ['auth__popup']);
@@ -58,14 +56,22 @@ const renderForm = (title: string, btnName: string) => {
   const inputForm = createElement('form', ['auth__form']);
   const inputs = renderInputs();
 
-  const authBtn = createElement('button', ['btn', 'btn-dark', 'auth__button']) as HTMLButtonElement;
+  const authBtn = createElement('button', [
+    'btn',
+    'btn-dark',
+    'auth__button',
+  ]) as HTMLButtonElement;
   authBtn.textContent = btnName;
   authBtn.type = 'submit';
 
   inputForm.append(...inputs, authBtn);
 
   const authAccountMsg = createElement('p', 'auth__message-text');
-  const authAccountMsgBtn = createElement('button', ['btn', 'btn-light', 'auth__message-button']);
+  const authAccountMsgBtn = createElement('button', [
+    'btn',
+    'btn-light',
+    'auth__message-button',
+  ]);
 
   const closeBtn = createElement('button', ['auth__btn-close', 'btn-close']);
 
@@ -73,7 +79,13 @@ const renderForm = (title: string, btnName: string) => {
     authPopup.classList.add('auth__popup--inactive');
   });
 
-  authPopupInner.append(closeBtn, authTitle, inputForm, authAccountMsg, authAccountMsgBtn);
+  authPopupInner.append(
+    closeBtn,
+    authTitle,
+    inputForm,
+    authAccountMsg,
+    authAccountMsgBtn,
+  );
   authPopup.append(authPopupInner);
 
   if (title === strings.loginForm) {
@@ -86,8 +98,11 @@ const renderForm = (title: string, btnName: string) => {
     }
     inputForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = (document.getElementById('email-form') as HTMLInputElement)?.value;
-      const password = (document.getElementById('password-form') as HTMLInputElement)?.value;
+      const email = (document.getElementById('email-form') as HTMLInputElement)
+        ?.value;
+      const password = (
+        document.getElementById('password-form') as HTMLInputElement
+      )?.value;
       try {
         await loginUser({ email, password });
       } catch (error) {
@@ -105,12 +120,16 @@ const renderForm = (title: string, btnName: string) => {
     authPopup.setAttribute('data-form', 'registration');
     authBtn.addEventListener('click', async (e) => {
       e.preventDefault();
-      let name = (document.getElementById('name-form') as HTMLInputElement)?.value;
+      let name = (document.getElementById('name-form') as HTMLInputElement)
+        ?.value;
       if (!name) {
         name = ' ';
       }
-      const email = (document.getElementById('email-form') as HTMLInputElement)?.value;
-      const password = (document.getElementById('password-form') as HTMLInputElement)?.value;
+      const email = (document.getElementById('email-form') as HTMLInputElement)
+        ?.value;
+      const password = (
+        document.getElementById('password-form') as HTMLInputElement
+      )?.value;
       try {
         await createUser({ name, email, password });
         await loginUser({ email, password });
