@@ -1,4 +1,5 @@
 import createElement, { removeAllChildNodes } from '../../helpers';
+// import githublogo from '../../assets/GitHub-Mark-32px.png';
 import './main-page.scss';
 import strings, {
   CreatorDescription,
@@ -36,13 +37,13 @@ const createCreatorDescription = (creator: CreatorDescription) => {
   creatorImg.src = img;
   const creatorLink = createElement('a', 'creator-link') as HTMLAnchorElement;
   creatorLink.href = githubLink;
-  creatorRole.append(creatorLink);
+  creatorLink.target = '_blank';
   creatorDescription.append(
     creatorImg,
     creatorName,
     creatorRole,
-    creatorText,
     creatorLink,
+    creatorText,
   );
   return creatorDescription;
 };

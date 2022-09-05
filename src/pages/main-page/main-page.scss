@@ -70,14 +70,18 @@ a {
   width: 30%;
 }
 
+.creators__item * {
+  margin-bottom: 0.7rem;
+}
+
 .creator-role {
   color: grey;
 }
 
 .creator-link {
-  background-color: brown;
   display: block;
   width: 2rem;
+  height: 2rem;
   background: url(../../assets/GitHub-Mark-32px.png) no-repeat;
 }
 
