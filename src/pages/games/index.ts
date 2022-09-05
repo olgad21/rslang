@@ -43,7 +43,7 @@ const renderModal = () => {
 };
 
 // SPRINT
-const renderSprint = (group: number, page: number) => {
+export const renderSprint = (group: number, page: number) => {
   // все переменные
   const place = <HTMLElement>document.querySelector('.main__wrapper');
   removeAllChildNodes(place);

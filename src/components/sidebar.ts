@@ -14,11 +14,6 @@ const navItems = [
     navId: 'ebook',
   },
   {
-    navName: 'Словарь',
-    navIcon: 'bi-journal-text',
-    navId: 'dictionary',
-  },
-  {
     navName: 'Игры',
     navIcon: 'bi-controller',
     navId: 'games',

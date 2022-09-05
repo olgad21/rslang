@@ -2,6 +2,7 @@ import { renderEBook } from '../view/renderBook';
 import strings, { PAGES_NUMBER } from '../../../constants';
 import { removeAllChildNodes, userPosition } from '../../../helpers';
 import renderHardLevel from '../view/renderHardLevel';
+import { renderSprint } from '../../games';
 
 const storage = userPosition();
 
@@ -183,5 +184,20 @@ export const choosePage = () => {
         }
       }
     });
+  });
+};
+
+export const linkToGame = () => {
+  const sprintLink = document.querySelector('.savana');
+  sprintLink?.addEventListener('click', () => {
+    const userLevel = userPosition();
+    renderSprint(userLevel.group - 1, userLevel.page - 1);
+  });
+
+  const audioLink = document.querySelector('.audio-call');
+  audioLink?.addEventListener('click', () => {
+    // const userLevel = userPosition();
+    // renderSprint(userLevel.group, userLevel.page);
+    // должна быть функция которая запускает вторую игру
   });
 };

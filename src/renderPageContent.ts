@@ -1,6 +1,7 @@
 import {
   chooseLevel,
   choosePage,
+  linkToGame,
 } from './pages/eBook/controller/listenController';
 import { renderEBookHeader, renderEBook } from './pages/eBook/view/renderBook';
 import renderMainPage from './pages/main-page/main-page';
@@ -8,7 +9,7 @@ import renderStatisticsPage from './pages/statistics/statistics';
 import renderGameMenu from './pages/games/index';
 
 const renderPageContent = async () => {
-  const currentPage = window.location.pathname;
+  const currentPage = `/${window.location.pathname.split('/').pop()}`;
   switch (currentPage) {
     case '/':
     case '/main-page':
@@ -18,6 +19,7 @@ const renderPageContent = async () => {
       renderEBookHeader();
       chooseLevel();
       choosePage();
+      linkToGame();
       renderEBook();
       break;
     case '/games':

@@ -7,6 +7,8 @@ import { getAllUserWords } from '../../API/userWordAPI';
 import { filterAggregate } from '../../constants';
 import { ExtendUserWord, UserStatistic } from '../../Interfaces';
 
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 const userId = String(localStorage.getItem('user_id'));
 const token = String(localStorage.getItem('token'));
 
@@ -53,7 +55,6 @@ const updateWordsStatistics = async (
     allAttempts += word.optional.attemp;
     allGuesses += word.optional.guesses;
     // allErrors += word.optional.error;
-    console.log(word.optional.date, 'date', word.optional.isLearned);
   });
   if (allAttempts) {
     dailyRightWordsNumber = Math.round((allGuesses / allAttempts) * 100);
@@ -133,27 +134,54 @@ const updateDailyStatistics = async () => {
   updateWordsStatistics(userWords);
   updateGameStatistics(userWords);
 
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-  ];
+  const getDateLabel = (millisec: string) => {
+    const date = new Date(Number(millisec));
+    const dateNum = date.getDate();
+    const month = MONTHS[date.getMonth()];
+    return `${dateNum} ${month}`;
+  };
+  // для проверки!
+
+  // userWords.forEach((word) => {
+  //   if (word.optional.isLearned) {
+  //     console.log('new date', new Date(Number(word.optional.date)), '|   learned date', new Date(Number(word.optional.dateLearned)));
+  //   }
+  // });
+
+  const newWords = userWords.filter((word) => word.optional.isNewWord);
+  const learnedWords = userWords.filter((word) => word.optional.isLearned);
+
+  const newWordsDates = newWords.map((word) => getDateLabel(word.optional.date));
+  const learnedWordsDates = learnedWords.map((word) => getDateLabel(word.optional.dateLearned));
+
+  const uniqueDatesLabels = [...new Set([...newWordsDates, ...learnedWordsDates])];
+  const newWordsDate = new Array<number>(uniqueDatesLabels.length).fill(0);
+  const learnedWordsDate = new Array<number>(uniqueDatesLabels.length).fill(0);
+
+  uniqueDatesLabels.forEach((label, index) => {
+    newWords.forEach((word) => {
+      if (label === getDateLabel(word.optional.date)) {
+        newWordsDate[index] += 1;
+      }
+
+      if (label === getDateLabel(word.optional.dateLearned)) {
+        learnedWordsDate[index] += 1;
+      }
+    });
+  });
 
   const data = {
-    labels,
+    labels: uniqueDatesLabels,
     datasets: [{
-      label: 'My First dataset',
+      label: 'New Words',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
-      data: [10, 20, 30, 40, 50, 60],
+      data: newWordsDate,
     }, {
-      label: 'My asdad dataset',
-      backgroundColor: 'green',
+      label: 'Learned Words',
+      backgroundColor: 'blue',
       borderColor: 'blue',
-      data: [2, 50, 20, 30, 50, 60],
+      data: learnedWordsDate,
     }],
   };
 
@@ -169,7 +197,6 @@ const updateDailyStatistics = async () => {
         data,
       },
     );
-    console.log(myChart, 3123123);
   }
 };
 

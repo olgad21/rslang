@@ -163,7 +163,7 @@ const creatorsDescriptions: CreatorDescription[] = [
     role: 'Frontend Developer',
     githubLink: 'https://github.com/irynakolh',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+      'Тимлид, занималась разработкой дизайна карточек слов и словаря, логикой их отображения. Настроила БД, организовала логику работы со сложными словами и фильтрами',
   },
   {
     img: olgaAvatar,
@@ -171,7 +171,7 @@ const creatorsDescriptions: CreatorDescription[] = [
     role: 'Frontend Developer',
     githubLink: 'https://github.com/olgad21',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+      'Настроила аутентификацию, сделала структуру приложения, главную страницу, роутинг, дизайн и логику отображения кратко- и долгосрочной статистики по учебнику и играм',
   },
   {
     img: alexeiAvatar,
@@ -179,7 +179,7 @@ const creatorsDescriptions: CreatorDescription[] = [
     role: 'Frontend Developer',
     githubLink: 'https://github.com/marusovalexei',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+      'Разработал меню игр, сделал дизайн и взаимодействие игры «Спринт» с БД, данными из учебника и статистикой',
   },
 ];
 

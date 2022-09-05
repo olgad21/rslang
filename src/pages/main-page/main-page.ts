@@ -36,6 +36,7 @@ const createCreatorDescription = (creator: CreatorDescription) => {
   creatorImg.src = img;
   const creatorLink = createElement('a', 'creator-link') as HTMLAnchorElement;
   creatorLink.href = githubLink;
+  creatorRole.append(creatorLink);
   creatorDescription.append(
     creatorImg,
     creatorName,
