@@ -98,6 +98,7 @@ export const renderSprint = (group: number, page: number) => {
             if (userWord.status === 404) {
               wordBase.optional.attemp = 1;
               wordBase.optional.isNewWord = true;
+              wordBase.optional.sprintNew = true;
               createUserWord({
                 userId,
                 wordId,
@@ -170,7 +171,7 @@ export const renderSprint = (group: number, page: number) => {
         && !flag
       ) {
         flag = true;
-        count = 1;
+        // count = 1;
       } else if (
         allResultsArray[i].classList.contains(
           'sprint-container__view-element-false',
@@ -182,6 +183,7 @@ export const renderSprint = (group: number, page: number) => {
     }
 
     if (localStorage.getItem('user_id')) {
+      localStorage.setItem('bestScore', bestScore.toString());
       const userId = <string>localStorage.getItem('user_id');
       const token = <string>localStorage.getItem('token');
       getUserStatistics({ userId, token }).then((response) => {

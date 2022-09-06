@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { host, path } from '../constants';
 import { ExtendUserWord, UserWord } from '../Interfaces';
 

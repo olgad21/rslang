@@ -29,8 +29,6 @@ const playSound = () => {
           audioArray = Object.values(audioObj) as Array<string>;
         }
         onStart();
-        // eslint-disable-next-line no-console
-        console.log(audioArray);
       }
     });
   });
