@@ -72,10 +72,22 @@ const baseConfig = {
         //assetModuleFilename: 'assets/[name][ext]',
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/index.html'),
-            filename: 'index.html',
-        }),
+      new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, './src/index.html'),
+        filename: 'index.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/ebook.html'),
+      filename: 'ebook.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/games.html'),
+      filename: 'games.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/statistics.html'),
+      filename: 'statistics.html',
+    }),
         new CleanWebpackPlugin(),
         new ESlintPlugin({ extensions: ['ts'] }),
         new MiniCssExtractPlugin({

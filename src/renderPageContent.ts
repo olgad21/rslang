@@ -13,7 +13,7 @@ const renderPageContent = async () => {
   const currentPage = `/${window.location.pathname.split('/').pop()}`;
   switch (currentPage) {
     case '/':
-    case '/main-page':
+    case '/index.html':
       renderMainPage();
       mainBtn = document.querySelector('.main__button');
       mainBtn?.addEventListener('click', () => {
@@ -22,6 +22,7 @@ const renderPageContent = async () => {
       });
       break;
     case '/ebook':
+    case '/ebook.html':
       renderEBookHeader();
       chooseLevel();
       choosePage();
@@ -29,9 +30,11 @@ const renderPageContent = async () => {
       renderEBook();
       break;
     case '/games':
+    case '/games.html':
       renderGameMenu();
       break;
     case '/statistics':
+    case '/statistics.html':
       renderStatisticsPage();
       break;
     default:
