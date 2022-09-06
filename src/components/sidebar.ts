@@ -6,22 +6,22 @@ const navItems = [
   {
     navName: 'Главная',
     navIcon: 'bi-house',
-    navId: 'main-page',
+    navId: 'index.html',
   },
   {
     navName: 'Учебник',
     navIcon: 'bi-book',
-    navId: 'ebook',
+    navId: 'ebook.html',
   },
   {
     navName: 'Игры',
     navIcon: 'bi-controller',
-    navId: 'games',
+    navId: 'games.html',
   },
   {
     navName: 'Статистика',
     navIcon: 'bi-bar-chart',
-    navId: 'statistics',
+    navId: 'statistics.html',
   },
 ];
 
