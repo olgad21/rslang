@@ -1,5 +1,5 @@
 import { Chart, registerables } from 'chart.js';
-import { getUserStatistics } from '../../API/userStatustics';
+// import { getUserStatistics } from '../../API/userStatustics';
 import { getAllUserWords } from '../../API/userWordAPI';
 import strings, { statsStrings } from '../../constants';
 import createElement, { removeAllChildNodes } from '../../helpers';
@@ -7,8 +7,8 @@ import { ExtendUserWord } from '../../Interfaces';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const userId = String(localStorage.getItem('user_id'));
-const token = String(localStorage.getItem('token'));
+const userId = localStorage.getItem('user_id');
+const token = localStorage.getItem('token');
 
 const filterWordsByDate = (
   date: string,
@@ -57,31 +57,21 @@ const updateGameStatistics = (userWords: ExtendUserWord[]) => {
     const gameRightWords = game.querySelector('[data-id="right-words"]') as HTMLElement;
     let gameRightWordsNumber = 0;
 
-    try {
-      gameRightWordsNumber = await getUserStatistics({ userId, token });
-    } catch {
-      gameRightWordsNumber = 0;
-    }
+    // try {
+    //   gameRightWordsNumber = await getUserStatistics({ userId, token });
+    // } catch {
+    //   gameRightWordsNumber = 0;
+    // }
 
     const now = Date.now();
     const dayBefore = now - 24 * 60 * 60 * 1000;
 
     if ((game as HTMLElement).dataset.game === 'Спринт') {
-      userWords.forEach((word) => {
-        if (word.optional.sprintNew) {
-          const { dateSprintNew } = word.optional;
-          if (dayBefore <= Number(dateSprintNew)) {
-            gameNewWordsNumber += 1;
-          }
-
-          if (word.optional.sprintLearned) {
-            const { dateSprintLearned } = word.optional;
-            if (dayBefore <= Number(dateSprintLearned)) {
-              gameLearnedWordsNumber += 1;
-            }
-          }
-        }
-      });
+      gameNewWordsNumber = userWords.filter((gameWord) => gameWord.optional.sprintNew && filterWordsByDate(gameWord.optional.dateSprintNew)).length;
+      gameLearnedWordsNumber = userWords.filter((gameWord) => gameWord.optional.sprintLearned && filterWordsByDate(gameWord.optional.dateSprintLearned)).length;
+      if (localStorage.getItem('bestScore')) {
+        gameRightWordsNumber = Number(localStorage.getItem('bestScore') as string);
+      }
     }
 
     if ((game as HTMLElement).dataset.game === 'Аудиовызов') {
@@ -172,20 +162,28 @@ const updateAllTimeStatistics = (userWords: ExtendUserWord[]) => {
   }
 };
 
+const showErrorMessage = () => {
+  const errorMessage = createElement('div', 'stats__error-message');
+  errorMessage.textContent = strings.needLogin;
+  const allStatsContainer = document.querySelector('.canvas-container') as HTMLElement;
+  removeAllChildNodes(allStatsContainer);
+  allStatsContainer?.append(errorMessage);
+};
+
 const updateStatistics = async () => {
   let userWords: ExtendUserWord[] = [];
-  try {
-    userWords = await getAllUserWords({ userId, token });
-  } catch (error) {
-    const errorMessage = createElement('div', 'stats__error-message');
-    errorMessage.textContent = strings.needLogin;
-    const allStatsContainer = document.querySelector('.canvas-container') as HTMLElement;
-    removeAllChildNodes(allStatsContainer);
-    allStatsContainer?.append(errorMessage);
+  if (userId && token) {
+    try {
+      userWords = await getAllUserWords({ userId, token });
+      updateWordsStatistics(userWords);
+      updateGameStatistics(userWords);
+      updateAllTimeStatistics(userWords);
+    } catch {
+      showErrorMessage();
+    }
+  } else {
+    showErrorMessage();
   }
-  updateWordsStatistics(userWords);
-  updateGameStatistics(userWords);
-  updateAllTimeStatistics(userWords);
 };
 
 export default updateStatistics;
