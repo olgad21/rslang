@@ -1,0 +1,25 @@
+.sidebar {
+  position: fixed;
+  background-color: #E1FCFD;
+  z-index: 2;
+  padding: 1rem;
+  width: 3rem;
+  height: 100vh;
+  overflow: hidden;
+  color:#4A5FC1;
+  transition: 0.5s;
+}
+
+.sidebar--active {
+  width: 10rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+}
+
+i:hover {
+  cursor: pointer;
+}

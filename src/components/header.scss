@@ -1,0 +1,16 @@
+.header {
+  position: fixed;
+  z-index: 1;
+  background-color: #4A5FC1;
+  height: 3rem;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #9CF6FB;
+}
+
+.login__icon {
+  position: absolute;
+  right: 1rem;
+}
