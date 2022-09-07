@@ -1,0 +1,115 @@
+a {
+  text-decoration: none;
+}
+
+.main__wrapper {
+  max-width: 70%;
+  margin: 0 auto;
+  padding: 7rem 0;
+}
+
+.main-content__wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.text__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__logo {
+  width: 100%;
+  max-width: 30rem;
+  font-size: 10rem;
+  line-height: 0.8em;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 2.5rem;
+} 
+
+.main__button {
+  width: 50%;
+}
+
+.main__message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.main__message-img {
+  width: 12rem;
+}
+
+.main__message-text {
+  width: 18rem;
+  margin-left: 1.5rem;
+}
+
+.creators-content__wrapper {
+  margin-top: 4.5rem;
+}
+
+.creators-content__title {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.creators__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
+.creators__item * {
+  margin-bottom: 0.7rem;
+}
+
+.creator-role {
+  color: grey;
+}
+
+.creator-link {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  background: url(../../assets/GitHub-Mark-32px.png) no-repeat;
+}
+
+.creator-img {
+  width: 10rem;
+}
+
+.creators-info__wrapper {
+  margin-top: 4.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1300px) {
+  .creators-info__wrapper,
+  .main-content__wrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .main__message {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
