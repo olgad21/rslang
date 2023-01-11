@@ -13,11 +13,11 @@ const navItems = [
     navIcon: 'bi-book',
     navId: 'ebook.html',
   },
-  {
-    navName: 'Игры',
-    navIcon: 'bi-controller',
-    navId: 'games.html',
-  },
+  // {
+  //   navName: 'Игры',
+  //   navIcon: 'bi-controller',
+  //   navId: 'games.html',
+  // },
   {
     navName: 'Статистика',
     navIcon: 'bi-bar-chart',

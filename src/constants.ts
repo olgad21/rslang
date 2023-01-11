@@ -6,7 +6,7 @@ import olgaAvatar from './assets/Olga.png';
 import alexeiAvatar from './assets/Alexei.png';
 import { BaseStatistics, UserWordOptions } from './Interfaces';
 
-const host = 'https://rslang-team-68.herokuapp.com';
+const host = 'https://olgad21-learnwords-api.herokuapp.com';
 
 const path = {
   users: '/users',
