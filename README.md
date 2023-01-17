@@ -1,6 +1,6 @@
 ## RS Lang
 
-RSLang is a group project for RSSchool (EPAM) for 3 people. This app helps Russian-speakers to learn English with playing games, exploring new words from a e-book, choosing different levels of vocabulary and games, and tracking progress on the statistics page.
+RSLang is a group project for RSSchool (EPAM) for 3 people (in progress). This app helps Russian-speakers to learn English with playing games, exploring new words from a e-book, choosing different levels of vocabulary and games, and tracking progress on the statistics page.
 
 Sign up and try it! [RSLang](https://rslang-learning.netlify.app/)
 
